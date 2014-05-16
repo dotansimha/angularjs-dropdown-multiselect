@@ -1,27 +1,27 @@
 {
-	"name": "angularjs-dropdown-multiselect-demo",
-	"version": "0.0.0",
-	"authors": [
-		"Dotan Simha <dotansimha@gmail.com>"
-	],
-	"description": "Demo",
-	"keywords": [
-	],
-	"license": "MIT",
-	"ignore": [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"test",
-		"tests"
-	],
-	"dependencies": {
-		"angular":"~1.2.0",
-		"angular-animate":"~1.2.0",
-		"angular-sanitize":"~1.2.0",
-		"angular-touch":"~1.2.0",
-		"angular-route":"~1.2.0"
-	},
-	"devDependencies": {
-	}
+  "name": "angularjs-dropdown-multiselect-demo",
+  "version": "0.0.1",
+  "authors": [
+    "Dotan Simha <dotansimha@gmail.com>"
+  ],
+  "description": "AngularJS Dropdown Multiselect directive",
+  "keywords": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.0",
+    "angular-animate": "~1.2.0",
+    "angular-sanitize": "~1.2.0",
+    "angular-touch": "~1.2.0",
+    "angular-route": "~1.2.0",
+    "lodash": "~2.4.1",
+    "bootstrap": "~3.1.1"
+  },
+  "devDependencies": {}
 }
