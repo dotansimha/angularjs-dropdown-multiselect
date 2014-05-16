@@ -1,3 +1,37 @@
-<div ng-controller='ExampleCtrl'>
-    <div ng-dropdown-multiselect options="example1data" selected-model="example1model"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8">
+            <h1 class="title">AngularJS Dropdown Multiselect</h1>
+            <h1
+                    style="margin-top: 0"><small> <a href="http://angularjs.org/">AngularJS</a> directive for
+                multiselect dropdown with Bootstrap</small></h1>
+        </div>
+        <div style="padding-top: 20px; text-align: right" class="col-xs-12 col-sm-4"> <a
+                href="js-dropdown-multiselect.js" class="btn btn-primary topbtn"><span style="margin-right:10px"
+                                                                                       class="glyphicon glyphicon-save"></span><strong>Download</strong></a><a href="https://github.com/dotansimha/angularjs-dropdown-multiselect" style="margin-left: 15px;" class="btn btn-default topbtn"><strong>View on GitHub</strong></a></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12"><h3 id="why-this-is-needed-">Why this is needed?</h3>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Basic Usage Example</h2>
+        </div>
+    </div>
+    <div ng-controller="ExampleCtrl" class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect options="example1data" selected-model="example1model"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:  </h3>
+            <pre>{{example1model|json}}</pre>
+        </div>
+    </div>
 </div>
