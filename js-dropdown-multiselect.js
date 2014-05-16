@@ -22,7 +22,7 @@ TODO
 
 'use strict';
 
-angular.module('Dotan Simha.angularjs-dropdown-multiselect', []).directive('JsDropdownMultiselect', [ function () {
+angular.module('dotansimha.angularjs-dropdown-multiselect', []).directive('JsDropdownMultiselect', [ function () {
 
 	return {
 		restrict: 'A',
