@@ -1,19 +1,11 @@
 {
-	"name": "angularjs-dropdown-multiselect",
-	"version": "1.0.0",
+	"name": "angularjs-dropdown-multiselect-demo",
+	"version": "0.0.0",
 	"authors": [
 		"Dotan Simha <dotansimha@gmail.com>"
 	],
-	"description": "AngularJS Dropdown Multiselect",
+	"description": "Demo",
 	"keywords": [
-		"angularjs",
-		"angular",
-		"dropdown",
-		"multiselect",
-		"directive",
-		"list",
-		"checklist",
-		"bootstrap"
 	],
 	"license": "MIT",
 	"ignore": [
@@ -27,7 +19,8 @@
 		"angular":"~1.2.0",
 		"angular-animate":"~1.2.0",
 		"angular-sanitize":"~1.2.0",
-		"angular-touch":"~1.2.0"
+		"angular-touch":"~1.2.0",
+		"angular-route":"~1.2.0"
 	},
 	"devDependencies": {
 	}
