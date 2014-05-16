@@ -1,9 +1,9 @@
-# AngularJS Dropdown Multiselect
+# AngularJS Dropdown Multiselect Directive
 
 [TODO - brief summary]
 
 ## Demo
-http://Dotan Simha.github.io/angularjs-dropdown-multiselect/
+http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## Dependencies
 - required:
@@ -20,14 +20,14 @@ See `bower.json` and `index.html` in the `gh-pages` branch for a full list / mor
 2. include the files in your app
 	1. `js-dropdown-multiselect.min.js`
 	2. `js-dropdown-multiselect.less` OR `js-dropdown-multiselect.min.css` OR `js-dropdown-multiselect.css`
-3. include the module in angular (i.e. in `app.js`) - `Dotan Simha.angularjs-dropdown-multiselect`
+3. include the module in angular (i.e. in `app.js`) - `dotansimha.angularjs-dropdown-multiselect`
 
 See the `gh-pages` branch, files `bower.json` and `index.html` for a full example.
 
 
 ## Documentation
 See the `js-dropdown-multiselect.js` file top comments for usage examples and documentation
-https://github.com/Dotan Simha/angularjs-dropdown-multiselect/blob/master/js-dropdown-multiselect.js
+https://github.com/dotansimha/angularjs-dropdown-multiselect/blob/master/js-dropdown-multiselect.js
 
 
 ## Development
