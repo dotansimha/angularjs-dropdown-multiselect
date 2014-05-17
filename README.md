@@ -26,3 +26,6 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 ## Usage and Documentation
 See the documentation and examples in the GitHub pages:
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
+
+## TODO:
+	- Full documentation for available features.
