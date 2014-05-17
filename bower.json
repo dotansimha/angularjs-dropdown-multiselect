@@ -7,7 +7,7 @@
   "description": "AngularJS Dropdown Multiselect directive",
   "keywords": ["angular", "angularjs", "directive", "dropdown", "multiselect", "checklist", "list", "bootstrap"],
   "license": "MIT",
-  "main": "angularjs-dropdown-multiselect",
+  "main": "angularjs-dropdown-multiselect.min.js",
   "ignore": [
     "**/.*",
     "node_modules",
