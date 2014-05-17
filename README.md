@@ -18,10 +18,9 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 	2. Manually:
 		You can download the `.js` file directly or clone this repository.
 2. Include the file in your app
-	`<script type="text/javascript" src="angularjs-dropdown-multiselect.js"></script>`
-	You can also use the minfined version (`angularjs-dropdown-multiselect.min.js`).
+	- `<script type="text/javascript" src="angularjs-dropdown-multiselect.js"></script>`.
+	- You can also use the minfined version (`angularjs-dropdown-multiselect.min.js`).
 3. Include the module in angular (i.e. in `app.js`) - `angularjs-dropdown-multiselect`
-4. 
 
 
 ## Usage and Documentation
