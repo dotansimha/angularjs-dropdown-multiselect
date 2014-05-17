@@ -5,5 +5,5 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 	$scope.example1data = [
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
-		{id: 3, label: "Test"}];
+		{id: 3, label: "Danny"}];
 }]);

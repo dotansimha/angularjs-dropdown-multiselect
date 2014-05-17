@@ -1,6 +1,23 @@
 'use strict';
 
-angular.module('angularjs-dropdown-multiselect', []).directive('ngDropdownMultiselect', ['$filter', '$document', function ($filter, $document) {
+var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
+
+directiveModule.run(['$templateCache', function($templateCache)
+{
+	var template = '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">';
+	template +='<button type="button" class="btn btn-default dropdown-toggle" data-ng-click="open=!open;">{{getButtonText()}}<span class="caret"></span></button>';
+	template += '<ul class="dropdown-menu">';
+	template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
+	template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
+	template += '<li class="divider"></li>';
+	template += '<li data-ng-repeat="option in options"><a data-ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="isChecked(getPropertyForObject(option,settings.idProp))"></span>{{getPropertyForObject(option, settings.displayProp)}}</a></li>';
+	template += '</ul>';
+	template += '</div>';
+
+	$templateCache.put('dropdown-multiselect-template.html', template);
+}]);
+
+directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', function ($filter, $document) {
 
 	return {
 		restrict: 'AE',
@@ -9,45 +26,59 @@ angular.module('angularjs-dropdown-multiselect', []).directive('ngDropdownMultis
 			options: '=',
 			extraSettings: '='
 		},
-		template: '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">'+
-			'<button class="btn btn-small">Select</button>'+
-			'<button class="btn btn-small dropdown-toggle" data-ng-click="open=!open; openDropdown()"><span class="caret"></span></button>'+
-			'<ul class="dropdown-menu" aria-labelledby="dropdownMenu">' +
-			'<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a></li>' +
-			'<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li><li class="divider"></li>' +
-			'<li data-ng-repeat="option in options"><a data-ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="isChecked(getPropertyForObject(option,settings.idProp))"></span>{{getPropertyForObject(option, settings.displayProp)}}</a></li>' +
-			'</ul>' +
-			'</div>' ,
+		templateUrl: 'dropdown-multiselect-template.html',
 		link: function($scope, $element){
-			$document.on('click', function(e){
-				var target = e.target.parentElement;
-				var parentFound = false;
+			$scope.settings = {
+				dynamicTitle: true,
+				defaultText: 'Select',
+				closeOnBlur: true,
+				displayProp: 'label',
+				idProp: 'id',
+				externalIdProp: 'id'};
 
-				while (angular.isDefined(target) && target != null && !parentFound)
-				{
-					if (_.contains(target.classList, 'multiselect-parent') && !parentFound)
-					{
-						parentFound = true;
-					}
-					target = target.parentElement;
-				}
-
-				if (!parentFound)
-				{
-					$scope.$apply(function()
-					{
-						$scope.open = false;
-					});
-				}
-			});
-
-
-			$scope.settings = {displayProp: 'label', idProp: 'id', externalIdProp: 'id'};
 			angular.extend($scope.settings, $scope.extraSettings || []);
 
-			$scope.openDropdown = function(){
-				$scope.selectedItems = [];
-			};
+			if ($scope.settings.closeOnBlur) {
+				$document.on('click', function (e) {
+					var target = e.target.parentElement;
+					var parentFound = false;
+
+					while (angular.isDefined(target) && target != null && !parentFound) {
+						if (_.contains(target.classList, 'multiselect-parent') && !parentFound) {
+							parentFound = true;
+						}
+						target = target.parentElement;
+					}
+
+					if (!parentFound) {
+						$scope.$apply(function () {
+							$scope.open = false;
+						});
+					}
+				});
+			}
+
+			$scope.getButtonText = function()
+			{
+				if ($scope.settings.dynamicTitle)
+				{
+					var totalSelected = angular.isDefined($scope.selectedModel) ? $scope.selectedModel.length : 0;
+
+					if (totalSelected === 0)
+					{
+						return $scope.settings.defaultText;
+					}
+					else
+					{
+						return totalSelected + ' selected';
+					}
+				}
+				else
+				{
+					return $scope.settings.defaultText;
+				}
+			}
+
 
 			$scope.getPropertyForObject = function(object, property)
 			{
@@ -59,18 +90,24 @@ angular.module('angularjs-dropdown-multiselect', []).directive('ngDropdownMultis
 			};
 
 			$scope.selectAll = function () {
-				$scope.selectedModel = angular.copy($scope.options);
+				$scope.deselectAll();
+
+				angular.forEach($scope.options, function(value)
+				{
+					$scope.setSelectedItem(value[$scope.settings.idProp]);
+				});
 			};
 
 			$scope.deselectAll = function() {
 				$scope.selectedModel=[];
 			};
 
-			$scope.setSelectedItem = function(id){
+			$scope.setSelectedItem = function(id, forceAdd){
+				forceAdd = forceAdd || false;
 				var findObj = {};
 				findObj[$scope.settings.externalIdProp] = id;
 
-				if (_.findIndex($scope.selectedModel, findObj) !== -1) {
+				if (!forceAdd && _.findIndex($scope.selectedModel, findObj) !== -1) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
 				} else {
 					$scope.selectedModel.push(findObj);
