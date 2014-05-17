@@ -7,7 +7,7 @@
                 multiselect dropdown with Bootstrap</small></h1>
         </div>
         <div style="padding-top: 20px; text-align: right" class="col-xs-12 col-sm-4"> <a
-                href="js-dropdown-multiselect.js" class="btn btn-primary topbtn"><span style="margin-right:10px"
+                href="angularjs-dropdown-multiselect.js" class="btn btn-primary topbtn"><span style="margin-right:10px"
                                                                                        class="glyphicon glyphicon-save"></span><strong>Download</strong></a><a href="https://github.com/dotansimha/angularjs-dropdown-multiselect" style="margin-left: 15px;" class="btn btn-default topbtn"><strong>View on GitHub</strong></a></div>
     </div>
     <div class="row">
@@ -20,18 +20,37 @@
             <h2 style="margin-bottom: 0">Basic Usage Example</h2>
         </div>
     </div>
-    <div  class="row">
+    <div class="row">
         <div class="col-xs-12 col-sm-6">
             <h3>Demo</h3>
             <div class="well">
                 <div>
-                    <div ng-dropdown-multiselect options="example1data" selected-model="example1model"></div>
+                    <div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
                 </div>
             </div>
         </div>
         <div class="col-xs-12 col-sm-6">
             <h3>The model:  </h3>
             <pre>{{example1model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
+
+// JavaScript
+$scope.example1model = [];
+$scope.example1data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Danny"}];</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -54,6 +73,27 @@
         <div class="col-xs-12 col-sm-6">
             <h3>The model:  </h3>
             <pre>{{example2model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example2data" selected-model="example2model"
+     extra-settings="example2settings"></div>
+
+// JavaScript
+$scope.example2model = [];
+$scope.example2data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example2settings = {displayProp: 'id'};</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -83,6 +123,28 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example3data" selected-model="example3model"
+     extra-settings="example3settings"></div>
+
+// JavaScript
+$scope.example3model = [];
+$scope.example3data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"},
+{id: 4, label: "Danny"}];
+$scope.example3settings = {displayProp: 'label', idProp: 'label'};</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-12">
             <h2 style="margin-bottom: 0">Model Custom Property</h2>
             By default, the model of the selected items will contain the objects with "id" property with the value of
@@ -106,6 +168,27 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example4data" selected-model="example4model"
+     extra-settings="example4settings"></div>
+
+// JavaScript
+$scope.example4model = [];
+$scope.example4data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example4settings = {displayProp: 'label', idProp: 'id', externalIdProp: 'myCustomPropertyForTheObject'};</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-12">
             <h2 style="margin-bottom: 0">Custom Button Text</h2>
             You can select your own text of the button using the "defaultText" in settings.
@@ -124,6 +207,27 @@
         <div class="col-xs-12 col-sm-6">
             <h3>The model:  </h3>
             <pre>{{example5model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example5data" selected-model="example5model"
+     extra-settings="example5settings"></div>
+
+// JavaScript
+$scope.example5model = [];
+$scope.example5data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example5settings = {defaultText: 'Select Users'};</div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -149,6 +253,27 @@
         </div>
     </div>
     <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example6data" selected-model="example6model"
+     extra-settings="example6settings"></div>
+
+// JavaScript
+$scope.example6model = [{id: 1}, {id: 3}];
+$scope.example6data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example6settings = {};</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-xs-12">
             <h2 style="margin-bottom: 0">Full Object as model</h2>
             This example shows a demostration of using full object as a model. <br />
@@ -170,6 +295,27 @@
         <div class="col-xs-12 col-sm-6">
             <h3>The model:  </h3>
             <pre>{{example7model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example7data"
+     selected-model="example7model" extra-settings="example7settings"></div>
+
+// JavaScript
+$scope.example7model = [];
+$scope.example7data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example7settings = {externalIdProp: ''};</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -1,8 +1,12 @@
 'use strict';
 
 angular.module('exampleApp', [
-'ngRoute', 'ngSanitize', 'ngTouch', 'ngAnimate',
-'angularjs-dropdown-multiselect'
+	'ngRoute',
+	'ngSanitize',
+	'ngTouch',
+	'ngAnimate',
+	'angularjs-dropdown-multiselect',
+	'hljs'
 ]).
 config(['$routeProvider', '$locationProvider', '$compileProvider', function($routeProvider, $locationProvider) {
 	$locationProvider.html5Mode(false);
