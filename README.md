@@ -1,4 +1,4 @@
-# AngularJS Dropdown Multiselect Directive
+# AngularJS Dropdown Multiselect
 
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
