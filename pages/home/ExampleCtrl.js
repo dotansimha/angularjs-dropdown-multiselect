@@ -29,7 +29,7 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
-	$scope.example4settings = {displayProp: 'label', idProp: 'label', externalIdProp: 'myCustomPropertyForTheObject'};
+	$scope.example4settings = {displayProp: 'label', idProp: 'id', externalIdProp: 'myCustomPropertyForTheObject'};
 
 	$scope.example5model = [];
 	$scope.example5data = [
@@ -37,4 +37,18 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
 	$scope.example5settings = {defaultText: 'Select Users'};
+
+	$scope.example6model = [{id: 1}, {id: 3}];
+	$scope.example6data = [
+		{id: 1, label: "David"},
+		{id: 2, label: "Jhon"},
+		{id: 3, label: "Danny"}];
+	$scope.example6settings = {};
+
+	$scope.example7model = [];
+	$scope.example7data = [
+		{id: 1, label: "David"},
+		{id: 2, label: "Jhon"},
+		{id: 3, label: "Danny"}];
+	$scope.example7settings = {externalIdProp: ''};
 }]);

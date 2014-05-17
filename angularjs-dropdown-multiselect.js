@@ -38,6 +38,21 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 
 			angular.extend($scope.settings, $scope.extraSettings || []);
 
+			function getFindObj(id)
+			{
+				var findObj = {};
+
+				if ($scope.settings.externalIdProp === '')
+				{
+					findObj[$scope.settings.idProp] = id;
+				}
+				else {
+					findObj[$scope.settings.externalIdProp] = id;
+				}
+
+				return findObj;
+			}
+
 			if ($scope.settings.closeOnBlur) {
 				$document.on('click', function (e) {
 					var target = e.target.parentElement;
@@ -77,8 +92,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 				{
 					return $scope.settings.defaultText;
 				}
-			}
-
+			};
 
 			$scope.getPropertyForObject = function(object, property)
 			{
@@ -104,25 +118,31 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 
 			$scope.setSelectedItem = function(id, dontRemove){
 				dontRemove = dontRemove || false;
-				var findObj = {};
-				findObj[$scope.settings.externalIdProp] = id;
+				var findObj = getFindObj(id);
 
 				var exists = _.findIndex($scope.selectedModel, findObj) !== -1;
 
 				if (!dontRemove && exists) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
 				} else if (!exists) {
-					$scope.selectedModel.push(findObj);
+					if ($scope.settings.externalIdProp === '')
+					{
+						var fullObjFind = getFindObj(id);
+						var fullObj = _.find($scope.options, fullObjFind);
+						$scope.selectedModel.push(fullObj);
+					}
+					else
+					{
+						$scope.selectedModel.push(findObj);
+					}
+
 				}
 
 				return false;
 			};
 
 			$scope.isChecked = function (id) {
-				var findObj = {};
-				findObj[$scope.settings.externalIdProp] = id;
-
-				if (_.findIndex($scope.selectedModel, findObj) !== -1) {
+				if (_.findIndex($scope.selectedModel, getFindObj(id)) !== -1) {
 					return 'glyphicon glyphicon-ok';
 				}
 				return '';
