@@ -94,7 +94,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 
 				angular.forEach($scope.options, function(value)
 				{
-					$scope.setSelectedItem(value[$scope.settings.idProp]);
+					$scope.setSelectedItem(value[$scope.settings.idProp], true);
 				});
 			};
 
@@ -102,14 +102,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 				$scope.selectedModel=[];
 			};
 
-			$scope.setSelectedItem = function(id, forceAdd){
-				forceAdd = forceAdd || false;
+			$scope.setSelectedItem = function(id, dontRemove){
+				dontRemove = dontRemove || false;
 				var findObj = {};
 				findObj[$scope.settings.externalIdProp] = id;
 
-				if (!forceAdd && _.findIndex($scope.selectedModel, findObj) !== -1) {
+				var exists = _.findIndex($scope.selectedModel, findObj) !== -1;
+
+				if (!dontRemove && exists) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
-				} else {
+				} else if (!exists) {
 					$scope.selectedModel.push(findObj);
 				}
 

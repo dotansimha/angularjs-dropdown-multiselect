@@ -34,4 +34,96 @@
             <pre>{{example1model|json}}</pre>
         </div>
     </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Basic Settings Example</h2>
+            This example shows the ability to select the property to display as text label.<br />
+            In this case, the property the used as label is "id".
+        </div>
+    </div>
+    <div ng-controller="ExampleCtrl" class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect options="example2data" selected-model="example2model"
+                         extra-settings="example2settings"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:  </h3>
+            <pre>{{example2model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Custom ID property</h2>
+            By default, the directive tries to find "id" property for each object to identify it as unique.<br />
+            You can change this behavior and select your own ID property.<br />
+            In this example, you can see that if the ID property is not unique - All items that match the custom ID
+            property will be selected, but the model will contain it as a unique ID (Try to select "Danny" from the
+            list to see it in action).<br /><br />
+            This feature is also useful if your objects comes from MongoDB and have a "_id" property instead of "id".
+        </div>
+    </div>
+    <div ng-controller="ExampleCtrl" class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect options="example3data" selected-model="example3model"
+                         extra-settings="example3settings"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:  </h3>
+            <pre>{{example3model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Model Custom Property</h2>
+            By default, the model of the selected items will contain the objects with "id" property with the value of
+            the idProp settings. <br />
+            You can modify this by using the externalIdProp in settings!
+        </div>
+    </div>
+    <div ng-controller="ExampleCtrl" class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect options="example4data" selected-model="example4model"
+                         extra-settings="example4settings"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:  </h3>
+            <pre>{{example4model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Custom Button Text</h2>
+            You can select your own text of the button using the "defaultText" in settings.
+        </div>
+    </div>
+    <div ng-controller="ExampleCtrl" class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect options="example5data" selected-model="example5model"
+                         extra-settings="example5settings"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:  </h3>
+            <pre>{{example5model|json}}</pre>
+        </div>
+    </div>
 </div>
