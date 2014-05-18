@@ -51,4 +51,10 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
 	$scope.example7settings = {externalIdProp: ''};
+
+	$scope.example8model = [];
+	$scope.example8data = [
+		{id: 1, label: "David"},
+		{id: 2, label: "Jhon"},
+		{id: 3, label: "Danny"}];
 }]);

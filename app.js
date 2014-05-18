@@ -2,9 +2,6 @@
 
 angular.module('exampleApp', [
 	'ngRoute',
-	'ngSanitize',
-	'ngTouch',
-	'ngAnimate',
 	'angularjs-dropdown-multiselect',
 	'hljs'
 ]).

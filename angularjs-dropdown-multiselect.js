@@ -2,22 +2,7 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
-directiveModule.run(['$templateCache', function($templateCache)
-{
-	var template = '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">';
-	template +='<button type="button" class="btn btn-default dropdown-toggle" data-ng-click="open=!open;">{{getButtonText()}}<span class="caret"></span></button>';
-	template += '<ul class="dropdown-menu">';
-	template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
-	template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
-	template += '<li class="divider"></li>';
-	template += '<li data-ng-repeat="option in options"><a data-ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="isChecked(getPropertyForObject(option,settings.idProp))"></span>{{getPropertyForObject(option, settings.displayProp)}}</a></li>';
-	template += '</ul>';
-	template += '</div>';
-
-	$templateCache.put('dropdown-multiselect-template.html', template);
-}]);
-
-directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', function ($filter, $document) {
+directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', function ($filter, $document, $compile) {
 
 	return {
 		restrict: 'AE',
@@ -26,8 +11,42 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 			options: '=',
 			extraSettings: '='
 		},
-		templateUrl: 'dropdown-multiselect-template.html',
-		link: function($scope, $element){
+		template: function(element, attrs)
+		{
+			var checkboxes = attrs.checkboxes ? true : false;
+
+			var template = '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">';
+			template +='<button type="button" class="btn btn-default dropdown-toggle" ng-click="toggleDropdown()">{{getButtonText()}}<span class="caret"></span></button>';
+			template += '<ul class="dropdown-menu dropdown-menu-form">';
+			template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
+			template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
+			template += '<li class="divider"></li>';
+
+			if(checkboxes)
+			{
+				template += '<li data-ng-repeat="option in options"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a></li>';
+			}
+			else {
+				template += '<li data-ng-repeat="option in options"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a></li>';
+			}
+
+			template += '</ul>';
+			template += '</div>';
+
+			element.html(template);
+		},
+		link: function($scope, $element, $attrs){
+			$scope.toggleDropdown = function()
+			{
+				$scope.open = !$scope.open;
+			};
+
+			$scope.checkboxClick = function($event, id)
+			{
+				$scope.setSelectedItem(id);
+				$event.stopImmediatePropagation();
+			};
+
 			$scope.settings = {
 				dynamicTitle: true,
 				defaultText: 'Select',
@@ -143,9 +162,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', func
 
 			$scope.isChecked = function (id) {
 				if (_.findIndex($scope.selectedModel, getFindObj(id)) !== -1) {
-					return 'glyphicon glyphicon-ok';
+					return true;
 				}
-				return '';
+
+				return false;
 			};
 		}
 	};
