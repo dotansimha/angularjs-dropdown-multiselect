@@ -33,5 +33,6 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 	- Load options from server.
 	- Grouping options by property.
 	- Search filter.
+	- Events callbacks for user's actions.
 
 	- You may send me more requests for features - open an issue with "feature request" tag - Thanks!
