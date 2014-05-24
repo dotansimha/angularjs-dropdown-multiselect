@@ -13,7 +13,8 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## Install
 1. Download the files
-	1. Using bower:
+	1. Using bower: <img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"> 
+	
 		Just run `bower install angularjs-dropdown-multiselect`
 	2. Manually:
 		You can download the `.js` file directly or clone this repository.
@@ -29,3 +30,8 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## TODO:
 	- Full documentation for available features.
+	- Load options from server.
+	- Grouping options by property.
+	- Search filter.
+
+	- You may send me more requests for features - open an issue with "feature request" tag - Thanks!
