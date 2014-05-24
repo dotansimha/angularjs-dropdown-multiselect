@@ -24,10 +24,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			if(checkboxes)
 			{
-				template += '<li data-ng-repeat="option in options"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a></li>';
+				template += '<li data-ng-repeat="option in watchedOptions"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a></li>';
 			}
 			else {
-				template += '<li data-ng-repeat="option in options"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a></li>';
+				template += '<li data-ng-repeat="option in watchedOptions"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a></li>';
 			}
 
 			template += '</ul>';
@@ -46,6 +46,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				$scope.setSelectedItem(id);
 				$event.stopImmediatePropagation();
 			};
+
+			$scope.$watch('options', function(newValue)
+			{
+				$scope.watchedOptions = angular.copy($scope.options);
+			}, true);
 
 			$scope.settings = {
 				dynamicTitle: true,
