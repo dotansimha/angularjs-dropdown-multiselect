@@ -34,5 +34,6 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 	- Grouping options by property.
 	- Search filter.
 	- Events callbacks for user's actions.
+	- Limit selection count (single/*)
 
 	- You may send me more requests for features - open an issue with "feature request" tag - Thanks!
