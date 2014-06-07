@@ -9,18 +9,16 @@ config(['$routeProvider', '$locationProvider', '$compileProvider',
     function($routeProvider, $locationProvider) {
         $locationProvider.html5Mode(false);
 
-        var staticPath = '/angularjs-dropdown-multiselect/';
+
         var appPathRoute = '/';
         var pagesPath = staticPath + 'javascripts/pages/';
 
 
-        $routeProvider.when(appPathRoute + 'home', {
+        $routeProvider.when('/', {
             templateUrl: pagesPath + 'home/home.html'
         });
 
-        $routeProvider.otherwise({
-            redirectTo: appPathRoute + 'home'
-        });
+        $routeProvider.otherwise('/');
 
     }
 ]);
