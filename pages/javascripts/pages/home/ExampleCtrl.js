@@ -57,4 +57,11 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
+
+	$scope.example9model = [];
+	$scope.example9data = [
+		{id: 1, label: "David"},
+		{id: 2, label: "Jhon"},
+		{id: 3, label: "Danny"}];
+	$scope.example9settings = {enableSearch: true};
 }]);
