@@ -21,14 +21,19 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
 			template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
 			template += '<li class="divider"></li>';
+			template += '<li ng-show="settings.enableSearch"><input type="text" class="form-control" ng-model="searchFilter" /></li>';
+			template += '<li ng-show="settings.enableSearch" class="divider"></li>';
+			template += '<li data-ng-repeat="option in watchedOptions | filter: searchFilter"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
 			if(checkboxes)
 			{
-				template += '<li data-ng-repeat="option in watchedOptions"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a></li>';
+				template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a>';
 			}
 			else {
-				template += '<li data-ng-repeat="option in watchedOptions"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))"><span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a></li>';
+				template += '<span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a>';
 			}
+
+			template += '</li>';
 
 			template += '</ul>';
 			template += '</div>';
@@ -52,13 +57,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				$scope.watchedOptions = angular.copy($scope.options);
 			}, true);
 
+			$scope.searchFilter = '';
+
 			$scope.settings = {
 				dynamicTitle: true,
 				defaultText: 'Select',
 				closeOnBlur: true,
 				displayProp: 'label',
 				idProp: 'id',
-				externalIdProp: 'id'};
+				externalIdProp: 'id',
+				enableSearch: false};
 
 			angular.extend($scope.settings, $scope.extraSettings || []);
 
