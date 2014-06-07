@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-build-control');
 
 	/**
 	Function that wraps everything to allow dynamically setting/changing grunt options and config later by grunt task. This init function is called once immediately (for using the default grunt options, config, and setup) and then may be called again AFTER updating grunt (command line) options.
@@ -38,6 +38,20 @@ module.exports = function(grunt) {
 				devCss: {
 					src:    [],
 					dest:   []
+				}
+			},
+			buildcontrol: {
+				options: {
+					dir: 'pages',
+					commit: true,
+					push: true,
+					message: 'Built %sourceName% from commit %sourceCommit% on branch %sourceBranch%'
+				},
+				pages: {
+					options: {
+						remote: 'git@github.com:dotansimha/angularjs-dropdown-multiselect.git',
+						branch: 'gh-pages'
+					}
 				}
 			},
 			jshint: {
