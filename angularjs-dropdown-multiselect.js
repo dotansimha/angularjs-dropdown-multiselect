@@ -21,9 +21,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
 			template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
 			template += '<li class="divider"></li>';
-			template += '<li ng-show="settings.enableSearch"><input type="text" class="form-control" ng-model="searchFilter" /></li>';
+			template += '<li ng-show="settings.enableSearch"><input type="text" class="form-control" ng-model="searchFilter" placeholder="Search..." /></li>';
 			template += '<li ng-show="settings.enableSearch" class="divider"></li>';
-			template += '<li data-ng-repeat="option in watchedOptions | filter: searchFilter"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
+			template += '<li data-ng-repeat="option in options | filter: searchFilter"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
 			if(checkboxes)
 			{
@@ -51,11 +51,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				$scope.setSelectedItem(id);
 				$event.stopImmediatePropagation();
 			};
-
-			$scope.$watch('options', function(newValue)
-			{
-				$scope.watchedOptions = angular.copy($scope.options);
-			}, true);
 
 			$scope.searchFilter = '';
 
