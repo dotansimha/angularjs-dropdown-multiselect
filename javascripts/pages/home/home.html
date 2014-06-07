@@ -93,6 +93,45 @@ $scope.example2settings = {displayProp: 'id'};
     </div>
     <div class="row">
         <div class="col-xs-12">
+            <h2 style="margin-bottom: 0">Enabling Search</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-6">
+            <h3>Demo</h3>
+            <div class="well">
+                <div>
+                    <div ng-dropdown-multiselect="" options="example9data" selected-model="example9model" extra-settings="example9settings"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+            <h3>The model:</h3>
+            <pre>{{example9model|json}}</pre>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Code</h3>
+            <div class="well">
+                <div>
+                    <div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="example9data" selected-model="example9model" extra-settings="example9settings"></div>
+
+// JavaScript
+$scope.example9model = [];
+$scope.example9data = [
+{id: 1, label: "David"},
+{id: 2, label: "Jhon"},
+{id: 3, label: "Danny"}];
+$scope.example9settings = {enableSearch: true};
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
             <h2 style="margin-bottom: 0">Custom ID property</h2>
             By default, the directive tries to find "id" property for each object to identify it as unique.
             <br />You can change this behavior and select your own ID property.
