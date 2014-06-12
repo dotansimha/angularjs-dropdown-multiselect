@@ -2,6 +2,8 @@
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
 # Features
+- Based on Bootstrap's dropdown.
+- jQuery is not necessary.
 - Seperated your data and the selection data. no modification to the data made.
 - Built-in search.
 - Complete control on the selected items model to fit it to your requirements.
