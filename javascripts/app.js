@@ -3,7 +3,8 @@
 angular.module('exampleApp', [
     'ngRoute',
     'angularjs-dropdown-multiselect',
-    'hljs'
+    'hljs',
+	'ui.bootstrap'
 ]).
 config(['$routeProvider', '$locationProvider', '$compileProvider',
     function($routeProvider, $locationProvider) {
