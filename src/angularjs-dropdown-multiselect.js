@@ -17,9 +17,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			var checkboxes = attrs.checkboxes ? true : false;
 			var groups = attrs.groupBy ? true : false;
 
-			var template = '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">';
+			var template = '<div class="multiselect-parent btn-group dropdown-multiselect">';
 			template +='<button type="button" class="btn btn-default dropdown-toggle" ng-click="toggleDropdown()">{{getButtonText()}}<span class="caret"></span></button>';
-			template += '<ul class="dropdown-menu dropdown-menu-form">';
+			template += '<ul class="dropdown-menu dropdown-menu-form" ng-style="{display: open ? \'block\' : \'none\'}">';
 			template += '<li ng-hide="settings.selectionLimit > 0"><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
 			template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
 			template += '<li class="divider"></li>';
@@ -47,8 +47,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			template += '</li>';
 
-			template += '<li class="divider" ng-show="settings.selectionLimit > 0"></li>';
-			template += '<li role="presentation" ng-show="settings.selectionLimit > 0"><a role="menuitem">{{selectedModel.length}} / {{settings.selectionLimit}} selected</a></li>';
+			template += '<li class="divider" ng-show="settings.selectionLimit > 1"></li>';
+			template += '<li role="presentation" ng-show="settings.selectionLimit > 1"><a role="menuitem">{{selectedModel.length}} / {{settings.selectionLimit}} selected</a></li>';
 
 			template += '</ul>';
 			template += '</div>';
@@ -92,6 +92,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				groupBy: $attrs.groupBy || undefined,
 				groupByTextProvider: null};
 
+
 			if (angular.isDefined($scope.settings.groupBy))
 			{
 				$scope.$watch('options', function(newValue) {
@@ -104,6 +105,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			angular.extend($scope.settings, $scope.extraSettings || []);
 			angular.extend($scope.externalEvents, $scope.events || []);
+
+			$scope.singleSelection = $scope.settings.selectionLimit === 1;
+
+			if ($scope.singleSelection)
+			{
+				if (angular.isArray($scope.selectedModel) && $scope.selectedModel.length === 0)
+				{
+					$scope.selectedModel = null;
+				}
+			}
 
 			function getFindObj(id)
 			{
@@ -154,7 +165,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			{
 				if ($scope.settings.dynamicTitle)
 				{
-					var totalSelected = angular.isDefined($scope.selectedModel) ? $scope.selectedModel.length : 0;
+					var totalSelected;
+
+					if ($scope.singleSelection)
+					{
+						totalSelected = $scope.selectedModel !== null ? 1 : 0;
+					}
+					else
+					{
+						totalSelected = angular.isDefined($scope.selectedModel) ? $scope.selectedModel.length : 0;
+					}
 
 					if (totalSelected === 0)
 					{
@@ -182,7 +202,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.selectAll = function () {
 				$scope.deselectAll(false);
-
 				$scope.externalEvents.onSelectAll();
 
 				angular.forEach($scope.options, function(value)
@@ -194,55 +213,57 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			$scope.deselectAll = function(sendEvent) {
 				sendEvent = sendEvent || true;
 
-				if (sendEvent)
-				{
+				if (sendEvent) {
 					$scope.externalEvents.onDeselectAll();
 				}
 
-				$scope.selectedModel=[];
+				if ($scope.singleSelection) {
+					$scope.selectedModel = null;
+				}
+				else {
+					$scope.selectedModel = [];
+				}
+
 			};
 
 			$scope.setSelectedItem = function(id, dontRemove){
-				dontRemove = dontRemove || false;
 				var findObj = getFindObj(id);
+				var finalObj = null;
+
+				if ($scope.settings.externalIdProp === '') {
+					finalObj = _.find($scope.options, findObj);
+				}
+				else {
+					finalObj = findObj;
+				}
+
+				if ($scope.singleSelection)
+				{
+					$scope.selectedModel = finalObj;
+					$scope.externalEvents.onItemSelect(finalObj);
+
+					return;
+				}
+
+				dontRemove = dontRemove || false;
 
 				var exists = _.findIndex($scope.selectedModel, findObj) !== -1;
 
 				if (!dontRemove && exists) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
 					$scope.externalEvents.onItemDeselect(findObj);
-				} else if (!exists) {
-					if ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit) {
-						if ($scope.settings.externalIdProp === '') {
-							var fullObjFind = getFindObj(id);
-							var fullObj = _.find($scope.options, fullObjFind);
-							$scope.selectedModel.push(fullObj);
-
-							$scope.externalEvents.onItemSelect(fullObj);
-
-							if ($scope.settings.closeOnSelect)
-							{
-								$scope.toggleDropdown();
-							}
-						}
-						else {
-							$scope.selectedModel.push(findObj);
-							$scope.externalEvents.onItemSelect(findObj);
-
-							if ($scope.settings.closeOnDeselect)
-							{
-								$scope.toggleDropdown();
-							}
-						}
-					}
-					else
-					{
-						$scope.externalEvents.onMaxSelectionReached();
-					}
+				} else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
+					$scope.selectedModel.push(finalObj);
+					$scope.externalEvents.onItemSelect(finalObj);
 				}
 			};
 
 			$scope.isChecked = function (id) {
+				if ($scope.singleSelection)
+				{
+					return $scope.selectedModel !== null && $scope.selectedModel[$scope.settings.idProp] === getFindObj(id)[$scope.settings.idProp];
+				}
+
 				return _.findIndex($scope.selectedModel, getFindObj(id)) !== -1;
 			};
 
