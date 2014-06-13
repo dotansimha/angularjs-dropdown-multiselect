@@ -9,6 +9,9 @@ This directive gives you a Bootstrap Dropdown with the power of AngularJS direct
 - Complete control on the selected items model to fit it to your requirements.
 - Two view options: normal list and checkboxes.
 - Pre-selected values.
+- Limit selection count.
+- Grouping items by property.
+- Callback events.
 
 ## Demo
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
@@ -38,9 +41,5 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## TODO:
 	- Full documentation for available features.
-	- Load options from server.
-	- Grouping options by property.
-	- Events callbacks for user's actions.
-	- Limit selection count (single/*)
 
 	- Feel free to send me more requests for features - open an issue with "feature request" tag - Thanks!
