@@ -183,7 +183,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			$scope.selectAll = function () {
 				$scope.deselectAll(false);
 
-				$scope.events.onSelectAll();
+				$scope.externalEvents.onSelectAll();
 
 				angular.forEach($scope.options, function(value)
 				{
@@ -196,7 +196,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 				if (sendEvent)
 				{
-					$scope.events.onDeselectAll();
+					$scope.externalEvents.onDeselectAll();
 				}
 
 				$scope.selectedModel=[];
@@ -210,7 +210,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 				if (!dontRemove && exists) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
-					$scope.events.onItemDeselect(findObj);
+					$scope.externalEvents.onItemDeselect(findObj);
 				} else if (!exists) {
 					if ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit) {
 						if ($scope.settings.externalIdProp === '') {
@@ -218,7 +218,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 							var fullObj = _.find($scope.options, fullObjFind);
 							$scope.selectedModel.push(fullObj);
 
-							$scope.events.onItemSelect(fullObj);
+							$scope.externalEvents.onItemSelect(fullObj);
 
 							if ($scope.settings.closeOnSelect)
 							{
@@ -227,7 +227,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						}
 						else {
 							$scope.selectedModel.push(findObj);
-							$scope.events.onItemSelect(findObj);
+							$scope.externalEvents.onItemSelect(findObj);
 
 							if ($scope.settings.closeOnDeselect)
 							{
@@ -237,7 +237,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					}
 					else
 					{
-						$scope.events.onMaxSelectionReached();
+						$scope.externalEvents.onMaxSelectionReached();
 					}
 				}
 			};
@@ -246,7 +246,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				return _.findIndex($scope.selectedModel, getFindObj(id)) !== -1;
 			};
 
-			$scope.events.onInitDone();
+			$scope.externalEvents.onInitDone();
 		}
 	};
 }]);
