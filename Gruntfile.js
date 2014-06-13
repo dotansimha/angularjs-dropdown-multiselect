@@ -99,8 +99,8 @@ module.exports = function(grunt) {
 				},
 				build: {
 					files:  {},
-					src:    'angularjs-dropdown-multiselect.js',
-					dest:   'angularjs-dropdown-multiselect.min.js'
+					src:    'src/angularjs-dropdown-multiselect.js',
+					dest:   'dist/angularjs-dropdown-multiselect.min.js'
 				}
 			}
 		});

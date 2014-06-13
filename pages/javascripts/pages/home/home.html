@@ -130,6 +130,111 @@ $scope.example9settings = {enableSearch: true};
             </div>
         </div>
     </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 style="margin-bottom: 0">Selection Limit</h2>
+                By default, there is no limit on the maximum selected items. <br />
+                You can limit the selection by providing selectionLimit using the settings attribute.<br />
+                <strong>Note: limit the selection to 0 is the default and won't limit the selection!</strong><br />
+                <strong>Note: When using this limit, the "Select All" button will not appear!</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <h3>Demo</h3>
+                <div class="well">
+                    <div>
+                        <div ng-dropdown-multiselect options="example10data" selected-model="example10model"
+                             extra-settings="example10settings"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <h3>The model:</h3>
+                <pre>{{example10model|json}}</pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Code</h3>
+                <div class="well">
+                    <div>
+                        <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example10data" selected-model="example10model"
+     extra-settings="example10settings"></div>
+
+// JavaScript
+$scope.example10model = [];
+$scope.example10data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Danny"}];
+$scope.example10settings = {selectionLimit: 2};</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 style="margin-bottom: 0">Group Items By Property</h2>
+                You can also group the items by propery that you want, in order to to that, provide the "group-by"
+                attribute. <br />
+                Also, you need to provide "groupByTextProvider" callback in the extra-settings attribute, in order to
+                provide the
+                header text for each group.<br />
+                <strong>Note: If you won't specify the "groupByTextProvider" callback in order to get the
+                    header for each group, the value of the group will be displayed!</strong>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-6">
+                <h3>Demo</h3>
+                <div class="well">
+                    <div>
+                        <div ng-dropdown-multiselect options="example11data" selected-model="example11model"
+                             extra-settings="example11settings" group-by="gender"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+                <h3>The model:</h3>
+                <pre>{{example11model|json}}</pre>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Code</h3>
+                <div class="well">
+                    <div>
+                        <div hljs>
+// HTML
+<div ng-dropdown-multiselect options="example11data"
+     selected-model="example11model" extra-settings="example11settings" group-by="gender"></div>
+
+// JavaScript
+$scope.example11model = [];
+$scope.example11data = [
+{id: 1, label: "David", gender: 'M'},
+{id: 2, label: "Jhon", gender: 'M'},
+{id: 3, label: "Lisa", gender: 'F'},
+{id: 4, label: "Nicole", gender: 'F'},
+{id: 5, label: "Danny", gender: 'M'}];
+
+$scope.example11settings = {
+    groupByTextProvider: function(groupValue) {
+        if (groupValue === 'M') {
+            return 'Male';
+        }
+        else {
+            return 'Female';
+        }
+    }
+};</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div class="row">
         <div class="col-xs-12">
             <h2 style="margin-bottom: 0">Custom ID property</h2>

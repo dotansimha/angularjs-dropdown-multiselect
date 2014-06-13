@@ -2,31 +2,43 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
-directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', function ($filter, $document, $compile) {
+directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse', function ($filter, $document, $compile, $parse) {
 
 	return {
 		restrict: 'AE',
 		scope:{
 			selectedModel: '=',
 			options: '=',
-			extraSettings: '='
+			extraSettings: '=',
+			events: '=',
+			groupBy: '@'
 		},
-		template: function(element, attrs)
-		{
+		template: function(element, attrs) {
 			var checkboxes = attrs.checkboxes ? true : false;
+			var groups = attrs.groupBy ? true : false;
 
 			var template = '<div class="multiselect-parent btn-group dropdown-multiselect" data-ng-class="{open: open}">';
 			template +='<button type="button" class="btn btn-default dropdown-toggle" ng-click="toggleDropdown()">{{getButtonText()}}<span class="caret"></span></button>';
 			template += '<ul class="dropdown-menu dropdown-menu-form">';
-			template += '<li><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
+			template += '<li ng-hide="settings.selectionLimit > 0"><a data-ng-click="selectAll()"><span class="glyphicon glyphicon-ok"></span>  Check All</a>';
 			template += '<li><a data-ng-click="deselectAll();"><span class="glyphicon glyphicon-remove"></span>  Uncheck All</a></li>';
 			template += '<li class="divider"></li>';
 			template += '<li ng-show="settings.enableSearch"><input type="text" class="form-control" ng-model="searchFilter" placeholder="Search..." /></li>';
 			template += '<li ng-show="settings.enableSearch" class="divider"></li>';
-			template += '<li data-ng-repeat="option in options | filter: searchFilter"><a ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
-			if(checkboxes)
+			if (groups)
 			{
+				template += '<li ng-repeat-start="option in orderedItems | filter: searchFilter" ng-show="getPropertyForObject(option, settings.groupBy) !== getPropertyForObject(orderedItems[$index - 1], settings.groupBy)" role="presentation" class="dropdown-header">{{ getGroupTitle(getPropertyForObject(option, settings.groupBy)) }}</li>';
+				template += '<li ng-repeat-end role="presentation">';
+			}
+			else
+			{
+				template += '<li role="presentation" ng-repeat="option in options | filter: searchFilter">';
+			}
+
+			template += '<a role="menuitem" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
+
+			if(checkboxes) {
 				template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a>';
 			}
 			else {
@@ -34,6 +46,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			}
 
 			template += '</li>';
+
+			template += '<li class="divider" ng-show="settings.selectionLimit > 0"></li>';
+			template += '<li role="presentation" ng-show="settings.selectionLimit > 0"><a role="menuitem">{{selectedModel.length}} / {{settings.selectionLimit}} selected</a></li>';
 
 			template += '</ul>';
 			template += '</div>';
@@ -54,6 +69,15 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.searchFilter = '';
 
+			$scope.externalEvents = {
+				onItemSelect: angular.noop,
+				onItemDeselect: angular.noop,
+				onSelectAll: angular.noop,
+				onDeselectAll: angular.noop,
+				onInitDone: angular.noop,
+				onMaxSelectionReached: angular.noop
+			};
+
 			$scope.settings = {
 				dynamicTitle: true,
 				defaultText: 'Select',
@@ -61,9 +85,25 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				displayProp: 'label',
 				idProp: 'id',
 				externalIdProp: 'id',
-				enableSearch: false};
+				enableSearch: false,
+				selectionLimit: 0,
+				closeOnSelect: false,
+				closeOnDeselect: false,
+				groupBy: $attrs.groupBy || undefined,
+				groupByTextProvider: null};
+
+			if (angular.isDefined($scope.settings.groupBy))
+			{
+				$scope.$watch('options', function(newValue) {
+					if (angular.isDefined(newValue))
+					{
+						$scope.orderedItems = $filter('orderBy')(newValue, $scope.settings.groupBy);
+					}
+				});
+			}
 
 			angular.extend($scope.settings, $scope.extraSettings || []);
+			angular.extend($scope.externalEvents, $scope.events || []);
 
 			function getFindObj(id)
 			{
@@ -100,6 +140,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				});
 			}
 
+			$scope.getGroupTitle = function(groupValue)
+			{
+				if ($scope.settings.groupByTextProvider !== null)
+				{
+					return $scope.settings.groupByTextProvider(groupValue);
+				}
+
+				return groupValue;
+			};
+
 			$scope.getButtonText = function()
 			{
 				if ($scope.settings.dynamicTitle)
@@ -123,7 +173,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.getPropertyForObject = function(object, property)
 			{
-				if (object.hasOwnProperty(property)) {
+				if (angular.isDefined(object) && object.hasOwnProperty(property)) {
 					return object[property];
 				}
 
@@ -131,7 +181,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			};
 
 			$scope.selectAll = function () {
-				$scope.deselectAll();
+				$scope.deselectAll(false);
+
+				$scope.events.onSelectAll();
 
 				angular.forEach($scope.options, function(value)
 				{
@@ -139,7 +191,14 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				});
 			};
 
-			$scope.deselectAll = function() {
+			$scope.deselectAll = function(sendEvent) {
+				sendEvent = sendEvent || true;
+
+				if (sendEvent)
+				{
+					$scope.events.onDeselectAll();
+				}
+
 				$scope.selectedModel=[];
 			};
 
@@ -151,30 +210,43 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 				if (!dontRemove && exists) {
 					$scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
+					$scope.events.onItemDeselect(findObj);
 				} else if (!exists) {
-					if ($scope.settings.externalIdProp === '')
-					{
-						var fullObjFind = getFindObj(id);
-						var fullObj = _.find($scope.options, fullObjFind);
-						$scope.selectedModel.push(fullObj);
+					if ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit) {
+						if ($scope.settings.externalIdProp === '') {
+							var fullObjFind = getFindObj(id);
+							var fullObj = _.find($scope.options, fullObjFind);
+							$scope.selectedModel.push(fullObj);
+
+							$scope.events.onItemSelect(fullObj);
+
+							if ($scope.settings.closeOnSelect)
+							{
+								$scope.toggleDropdown();
+							}
+						}
+						else {
+							$scope.selectedModel.push(findObj);
+							$scope.events.onItemSelect(findObj);
+
+							if ($scope.settings.closeOnDeselect)
+							{
+								$scope.toggleDropdown();
+							}
+						}
 					}
 					else
 					{
-						$scope.selectedModel.push(findObj);
+						$scope.events.onMaxSelectionReached();
 					}
-
 				}
-
-				return false;
 			};
 
 			$scope.isChecked = function (id) {
-				if (_.findIndex($scope.selectedModel, getFindObj(id)) !== -1) {
-					return true;
-				}
-
-				return false;
+				return _.findIndex($scope.selectedModel, getFindObj(id)) !== -1;
 			};
+
+			$scope.events.onInitDone();
 		}
 	};
 }]);
