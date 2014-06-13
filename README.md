@@ -1,6 +1,14 @@
 # AngularJS Dropdown Multiselect
-
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
+
+# Features
+- Based on Bootstrap's dropdown.
+- jQuery is not necessary.
+- Seperated your data and the selection data. no modification to the data made.
+- Built-in search.
+- Complete control on the selected items model to fit it to your requirements.
+- Two view options: normal list and checkboxes.
+- Pre-selected values.
 
 ## Demo
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
@@ -32,8 +40,7 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 	- Full documentation for available features.
 	- Load options from server.
 	- Grouping options by property.
-	- Search filter.
 	- Events callbacks for user's actions.
 	- Limit selection count (single/*)
 
-	- You may send me more requests for features - open an issue with "feature request" tag - Thanks!
+	- Feel free to send me more requests for features - open an issue with "feature request" tag - Thanks!
