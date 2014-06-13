@@ -64,4 +64,35 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
 	$scope.example9settings = {enableSearch: true};
+
+	$scope.example10model = [];
+	$scope.example10data = [
+		{id: 1, label: "David"},
+		{id: 2, label: "Jhon"},
+		{id: 3, label: "Danny"}];
+
+	$scope.example10settings = {selectionLimit: 2};
+
+
+	$scope.example11model = [];
+	$scope.example11data = [
+		{id: 1, label: "David", gender: 'M'},
+		{id: 2, label: "Jhon", gender: 'M'},
+		{id: 3, label: "Lisa", gender: 'F'},
+		{id: 4, label: "Nicole", gender: 'F'},
+		{id: 5, label: "Danny", gender: 'M'}];
+
+	$scope.example11settings = {
+		groupByTextProvider: function(groupValue)
+		{
+			if (groupValue === 'M')
+			{
+				return 'Male';
+			}
+			else
+			{
+				return 'Female';
+			}
+		}
+	};
 }]);
