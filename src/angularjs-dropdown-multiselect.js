@@ -221,7 +221,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					$scope.selectedModel = null;
 				}
 				else {
-					$scope.selectedModel = [];
+					$scope.selectedModel.splice(0, $scope.selectedModel.length);
 				}
 
 			};
