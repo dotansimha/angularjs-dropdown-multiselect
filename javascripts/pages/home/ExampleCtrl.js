@@ -73,7 +73,7 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 
 	$scope.example10settings = {selectionLimit: 2};
 
-	$scope.example12model = [];
+	$scope.example12model = {};
 	$scope.example12data = [
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
