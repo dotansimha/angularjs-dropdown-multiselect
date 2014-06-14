@@ -108,13 +108,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.singleSelection = $scope.settings.selectionLimit === 1;
 
-			if ($scope.singleSelection)
-			{
-				if (angular.isArray($scope.selectedModel) && $scope.selectedModel.length === 0)
-				{
-					$scope.selectedModel = null;
-				}
-			}
 
 			function getFindObj(id)
 			{
@@ -129,6 +122,21 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 
 				return findObj;
+			}
+
+			function clearObject(object)
+			{
+				for (var prop in object) {
+					delete object[prop];
+				}
+			}
+
+			if ($scope.singleSelection)
+			{
+				if (angular.isArray($scope.selectedModel) && $scope.selectedModel.length === 0)
+				{
+					clearObject($scope.selectedModel);
+				}
 			}
 
 			if ($scope.settings.closeOnBlur) {
@@ -169,7 +177,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 					if ($scope.singleSelection)
 					{
-						totalSelected = $scope.selectedModel !== null ? 1 : 0;
+						totalSelected = ($scope.selectedModel !== null && angular.isDefined($scope.selectedModel[$scope.settings.idProp])) ? 1 : 0;
 					}
 					else
 					{
@@ -218,12 +226,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 
 				if ($scope.singleSelection) {
-					$scope.selectedModel = null;
+					clearObject($scope.selectedModel);
 				}
 				else {
 					$scope.selectedModel.splice(0, $scope.selectedModel.length);
 				}
-
 			};
 
 			$scope.setSelectedItem = function(id, dontRemove){
@@ -239,7 +246,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 				if ($scope.singleSelection)
 				{
-					$scope.selectedModel = finalObj;
+					clearObject($scope.selectedModel);
+					angular.extend($scope.selectedModel, finalObj);
 					$scope.externalEvents.onItemSelect(finalObj);
 
 					return;
@@ -261,7 +269,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			$scope.isChecked = function (id) {
 				if ($scope.singleSelection)
 				{
-					return $scope.selectedModel !== null && $scope.selectedModel[$scope.settings.idProp] === getFindObj(id)[$scope.settings.idProp];
+					return $scope.selectedModel !== null && angular.isDefined($scope.selectedModel[$scope.settings.idProp]) && $scope.selectedModel[$scope.settings.idProp] === getFindObj(id)[$scope.settings.idProp];
 				}
 
 				return _.findIndex($scope.selectedModel, getFindObj(id)) !== -1;
