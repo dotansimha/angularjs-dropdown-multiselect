@@ -36,7 +36,8 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
-	$scope.example5settings = {defaultText: 'Select Users'};
+	$scope.example5settings = {};
+    $scope.example5customTexts = {buttonDefaultText: 'Select Users'};
 
 	$scope.example6model = [{id: 1}, {id: 3}];
 	$scope.example6data = [
