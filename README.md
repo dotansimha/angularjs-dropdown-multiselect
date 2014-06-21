@@ -12,6 +12,7 @@ This directive gives you a Bootstrap Dropdown with the power of AngularJS direct
 - Limit selection count.
 - Grouping items by property.
 - Callback events.
+- Translation texts.
 
 ## Demo
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
@@ -40,6 +41,4 @@ See the documentation and examples in the GitHub pages:
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## TODO:
-	- Full documentation for available features.
-
 	- Feel free to send me more requests for features - open an issue with "feature request" tag - Thanks!
