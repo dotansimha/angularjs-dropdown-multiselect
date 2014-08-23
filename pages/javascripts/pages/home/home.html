@@ -88,6 +88,116 @@
                 </div>
             </div>
         </accordion-group>
+        <accordion-group heading="Smart Button Text">
+            <div class="row">
+                <div class="col-xs-12">
+                    You can use the feature in order to show which items are selected instead the items count.<br />
+                    In order to use this feature, set the "smartButtonMaxItems" settings parameter to a number bigger than 0.<br />
+                    You can also provide "smartButtonTextConverter" parameter in order to add smart logic and convert the text.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Demo</h3>
+                    <div class="well">
+                        <div>
+                            <div ng-dropdown-multiselect options="example13data" selected-model="example13model" extra-settings="example13settings"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>The model:</h3>
+                    <pre>{{example13model|json}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Code</h3>
+                    <div class="well">
+                        <div>
+                            <div hljs>
+//HTML
+<div ng-dropdown-multiselect options="example13data" selected-model="example13model" extra-settings="example13settings"></div>
+
+//JS
+$scope.example13model = [];
+$scope.example13data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Lisa"},
+    {id: 4, label: "Nicole"},
+    {id: 5, label: "Danny"}];
+
+$scope.example13settings = {
+    smartButtonMaxItems: 3,
+    smartButtonTextConverter: function(itemText, originalItem) {
+        if (itemText === 'Jhon') {
+        return 'Jhonny!';
+        }
+
+        return itemText;
+    }
+};
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
+        <accordion-group heading="Scrollable List">
+            <div class="row">
+                <div class="col-xs-12">
+                    You can use the feature in order to make the list of items scrollable. Useful when you deal with a lot of items.
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Demo</h3>
+                    <div class="well">
+                        <div>
+                            <div ng-dropdown-multiselect options="example14data" selected-model="example14model" extra-settings="example14settings"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>The model:</h3>
+                    <pre>{{example14model|json}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Code</h3>
+                    <div class="well">
+                        <div>
+                            <div hljs>
+//HTML
+<div ng-dropdown-multiselect options="example14data" selected-model="example14model" extra-settings="example14settings"></div>
+
+//JS
+$scope.example14model = [];
+$scope.example14data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Lisa"},
+    {id: 4, label: "Nicole"},
+    {id: 5, label: "Danny"},
+    {id: 6, label: "Dan"},
+    {id: 7, label: "Dean"},
+    {id: 8, label: "Adam"},
+    {id: 9, label: "Uri"},
+    {id: 10, label: "Phil"}
+];
+
+$scope.example14settings = {
+    scrollableHeight: '100px',
+    scrollable: true
+};
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
         <accordion-group heading="Enabling Search">
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
@@ -620,6 +730,18 @@
                 <td>Number</td>
                 <td>300px</td>
                 <td>Indicates the height of the drop down if the dropdown is scrollable.</td>
+            </tr>
+            <tr>
+                <td>smartButtonMaxItems</td>
+                <td>Number</td>
+                <td>0</td>
+                <td>Manages the "Smart Button Text" feature, defines the maximum amount of items to on the button.</td>
+            </tr>
+            <tr>
+                <td>smartButtonTextConverter</td>
+                <td>Function</td>
+                <td>angular.noop</td>
+                <td>Related the "Smart Button Text" feature, if a function provided - it will called with two paramters: The item's text and the original item, the return value will displayed instead of the item's display property. This feature is useful when you want to convert the displayed text into something else.</td>
             </tr>
         </tbody>
     </table>

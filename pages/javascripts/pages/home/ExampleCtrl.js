@@ -80,7 +80,7 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
 
-	$scope.example12settings = {selectionLimit: 1};
+    $scope.example12settings = {selectionLimit: 1};
 
 
 	$scope.example11model = [];
@@ -104,4 +104,41 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 			}
 		}
 	};
+
+    $scope.example13model = [];
+    $scope.example13data = [
+        {id: 1, label: "David"},
+        {id: 2, label: "Jhon"},
+        {id: 3, label: "Lisa"},
+        {id: 4, label: "Nicole"},
+        {id: 5, label: "Danny"}];
+
+    $scope.example13settings = {
+        smartButtonMaxItems: 3,
+        smartButtonTextConverter: function(itemText, originalItem) {
+            if (itemText === 'Jhon') {
+                return 'Jhonny!';
+            }
+
+            return itemText;
+        }
+    };
+
+    $scope.example14model = [];
+    $scope.example14data = [
+        {id: 1, label: "David"},
+        {id: 2, label: "Jhon"},
+        {id: 3, label: "Lisa"},
+        {id: 4, label: "Nicole"},
+        {id: 5, label: "Danny"},
+        {id: 6, label: "Dan"},
+        {id: 7, label: "Dean"},
+        {id: 8, label: "Adam"},
+        {id: 9, label: "Uri"},
+        {id: 10, label: "Phil"}];
+
+    $scope.example14settings = {
+        scrollableHeight: '100px',
+        scrollable: true
+    };
 }]);
