@@ -12,6 +12,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 options: '=',
                 extraSettings: '=',
                 events: '=',
+                searchFilter: '=?',
                 translationTexts: '=',
                 groupBy: '@'
             },
@@ -65,8 +66,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     $event.stopImmediatePropagation();
                 };
 
-                $scope.searchFilter = '';
-
                 $scope.externalEvents = {
                     onItemSelect: angular.noop,
                     onItemDeselect: angular.noop,
@@ -106,6 +105,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     buttonDefaultText: 'Select',
                     dynamicButtonTextSuffix: 'checked'
                 };
+
+                $scope.searchFilter = $scope.searchFilter || '';
 
                 if (angular.isDefined($scope.settings.groupBy)) {
                     $scope.$watch('options', function (newValue) {
