@@ -536,6 +536,58 @@ $scope.example14settings = {
                 </div>
             </div>
         </accordion-group>
+        <accordion-group heading="External Search Filter">
+            <div class="row">
+                <div class="col-xs-12">
+                    This example shows a demostration of access and set the search filter from outside the directive.
+                    <br />This can be done by settings the "search-filter" attribute.
+                    <br />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <h3>Demo</h3>
+                    <div class="well">
+                        <div>
+                            <div ng-dropdown-multiselect search-filter="customFilter" options="example15data" selected-model="example15model" extra-settings="example15settings"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <h3>The model:</h3>
+                    <pre>{{example7model|json}}</pre>
+                    <h3>Search Filter:</h3>
+                    <pre>{{customFilter|json}}</pre>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Code</h3>
+                    <div class="well">
+                        <div>
+                            <div hljs>
+// HTML
+<div ng-dropdown-multiselect search-filter="customFilter" options="example15data" selected-model="example15model" extra-settings="example15settings"></div>
+
+// JavaScript
+
+$scope.example15model = [];
+$scope.example15data = [
+    {id: 1, label: "David"},
+    {id: 2, label: "Jhon"},
+    {id: 3, label: "Lisa"},
+    {id: 4, label: "Nicole"},
+    {id: 5, label: "Danny"}];
+
+$scope.example15settings = {enableSearch: true};
+
+$scope.customFilter = 'a';
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </accordion-group>
         <accordion-group heading="Checkboxes List">
             <div class="row">
                 <div class="col-xs-12">
@@ -625,6 +677,12 @@ $scope.example14settings = {
                 </td>
                 <td>Boolean</td>
                 <td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
+            </tr>
+            <tr>
+                <td><strong>search-filter</strong>
+                </td>
+                <td>String</td>
+                <td>Uses for settings the search filter from outside the direcrtive.</td>
             </tr>
         </tbody>
     </table>
