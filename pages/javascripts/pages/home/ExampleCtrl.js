@@ -141,4 +141,18 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
         scrollableHeight: '100px',
         scrollable: true
     };
+
+    $scope.example15model = [];
+    $scope.example15data = [
+        {id: 1, label: "David"},
+        {id: 2, label: "Jhon"},
+        {id: 3, label: "Lisa"},
+        {id: 4, label: "Nicole"},
+        {id: 5, label: "Danny"}];
+
+    $scope.example15settings = {
+        enableSearch: true
+    };
+
+    $scope.customFilter = 'a';
 }]);

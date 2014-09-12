@@ -12,6 +12,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 options: '=',
                 extraSettings: '=',
                 events: '=',
+                searchFilter: '=?',
                 translationTexts: '=',
                 groupBy: '@'
             },
@@ -54,6 +55,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 element.html(template);
             },
             link: function ($scope, $element, $attrs) {
+                var $dropdownTrigger = $element.children()[0];
+                
                 $scope.toggleDropdown = function () {
                     $scope.open = !$scope.open;
                 };
@@ -62,8 +65,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     $scope.setSelectedItem(id);
                     $event.stopImmediatePropagation();
                 };
-
-                $scope.searchFilter = '';
 
                 $scope.externalEvents = {
                     onItemSelect: angular.noop,
@@ -104,6 +105,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     buttonDefaultText: 'Select',
                     dynamicButtonTextSuffix: 'checked'
                 };
+
+                $scope.searchFilter = $scope.searchFilter || '';
 
                 if (angular.isDefined($scope.settings.groupBy)) {
                     $scope.$watch('options', function (newValue) {
@@ -150,7 +153,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                         while (angular.isDefined(target) && target !== null && !parentFound) {
                             if (_.contains(target.className.split(' '), 'multiselect-parent') && !parentFound) {
-                                parentFound = true;
+                                if(target === $dropdownTrigger) {
+                                    parentFound = true;
+                                }
                             }
                             target = target.parentElement;
                         }
