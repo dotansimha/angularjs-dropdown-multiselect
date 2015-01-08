@@ -1,6 +1,8 @@
 # AngularJS Dropdown Multiselect
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
+NOTE: I am currently working on a v2 of this directive with performance imporovments and removing the need for lodash. ETA: February 2015
+
 # Features
 - Based on Bootstrap's dropdown.
 - jQuery is not necessary.
