@@ -177,7 +177,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 };
 
                 $scope.getButtonText = function () {
-                    if ($scope.settings.dynamicTitle && ($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) && _.keys($scope.selectedModel).length > 0))) {
+                    if ($scope.settings.dynamicTitle && $scope.selectedModel && ($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) && _.keys($scope.selectedModel).length > 0))) {
                         if ($scope.settings.smartButtonMaxItems > 0) {
                             var itemsText = [];
 
