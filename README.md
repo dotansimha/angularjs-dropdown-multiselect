@@ -1,7 +1,7 @@
 # AngularJS Dropdown Multiselect
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
-NOTE: I am currently working on a v2 of this directive with performance imporovments, removing the lodash dependency and add support for themes (bootstrap2, bootstrap3, angular-material). ETA was April 2015 but in the last month I  did not have time to develop this module. *New ETA is July 2015.*
+NOTE: I am currently working on a v2 of this directive with performance imporovments, removing the lodash dependency and add support for themes (bootstrap2, bootstrap3, angular-material). *ETA is July 2015.*
 
 # Features
 - Based on Bootstrap's dropdown.
