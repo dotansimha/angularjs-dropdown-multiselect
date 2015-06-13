@@ -3,7 +3,7 @@
 import MainCtrl from './main/main.controller';
 import NavbarCtrl from '../app/components/navbar/navbar.controller';
 
-angular.module('angularjsDropdownMultiselectExamples', ['ngSanitize', 'ui.router'])
+angular.module('angularjsDropdownMultiselectExamples', ['ngSanitize', 'ui.router', 'angularjs-dropdown-multiselect'])
   .controller('MainCtrl', MainCtrl)
   .controller('NavbarCtrl', NavbarCtrl)
 

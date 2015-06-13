@@ -1,1 +1,2 @@
-angular.module('angularjs-dropdown-multiselect', []);
+angular
+  .module('angularjs-dropdown-multiselect', []);
