@@ -10,6 +10,7 @@ module.exports = function(options) {
   gulp.task('partials', function () {
     return gulp.src([
       options.src + '/app/**/*.html',
+      'src/**/*.html',
       options.tmp + '/serve/app/**/*.html'
     ])
       .pipe($.minifyHtml({
