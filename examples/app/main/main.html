@@ -1,7 +1,7 @@
 <div class="container">
   <div ng-include="'app/components/navbar/navbar.html'"></div>
   <div class="container">
-    <div dropdown-multiselect></div>
+    <div dropdown-multiselect dropdown-options="item.title for item in awesomeThings"></div>
   </div>
   <hr>
   <div class="footer">
