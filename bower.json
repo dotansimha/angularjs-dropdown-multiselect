@@ -1,6 +1,6 @@
 {
   "name": "angularjs-dropdown-multiselect",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "authors": [
 		"Dotan Simha <dotansimha@gmail.com>",
 		"Pieter Kempenaers"
@@ -18,7 +18,7 @@
     "checkbox"
   ],
   "license": "MIT",
-  "main": "src/angularjs-dropdown-multiselect.js",
+  "main": "dist/angularjs-dropdown-multiselect.min.js",
   "ignore": [
     "**/.*",
     "node_modules",
