@@ -152,7 +152,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                         var parentFound = false;
 
                         while (angular.isDefined(target) && target !== null && !parentFound) {
-                            if (_.contains(target.className.split(' '), 'multiselect-parent') && !parentFound) {
+                            if (contains(target.className.split(' '), 'multiselect-parent') && !parentFound) {
                                 if(target === $dropdownTrigger) {
                                     parentFound = true;
                                 }
@@ -177,7 +177,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 };
 
                 $scope.getButtonText = function () {
-                    if ($scope.settings.dynamicTitle && ($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) && _.keys($scope.selectedModel).length > 0))) {
+                    if ($scope.settings.dynamicTitle && ($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) && Object.keys($scope.selectedModel).length > 0))) {
                         if ($scope.settings.smartButtonMaxItems > 0) {
                             var itemsText = [];
 
@@ -252,7 +252,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     var finalObj = null;
 
                     if ($scope.settings.externalIdProp === '') {
-                        finalObj = _.find($scope.options, findObj);
+                        finalObj = find($scope.options, findObj);
                     } else {
                         finalObj = findObj;
                     }
@@ -268,10 +268,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                     dontRemove = dontRemove || false;
 
-                    var exists = _.findIndex($scope.selectedModel, findObj) !== -1;
+                    var exists = findIndex($scope.selectedModel, findObj) !== -1;
 
                     if (!dontRemove && exists) {
-                        $scope.selectedModel.splice(_.findIndex($scope.selectedModel, findObj), 1);
+                        $scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
                         $scope.externalEvents.onItemDeselect(findObj);
                     } else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
                         $scope.selectedModel.push(finalObj);
@@ -285,10 +285,61 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                         return $scope.selectedModel !== null && angular.isDefined($scope.selectedModel[$scope.settings.idProp]) && $scope.selectedModel[$scope.settings.idProp] === getFindObj(id)[$scope.settings.idProp];
                     }
 
-                    return _.findIndex($scope.selectedModel, getFindObj(id)) !== -1;
+                    return findIndex($scope.selectedModel, getFindObj(id)) !== -1;
                 };
 
                 $scope.externalEvents.onInitDone();
             }
         };
 }]);
+
+function contains(collection, target) {
+	var containsTarget = false;
+	collection.some(function(object) {
+		if (object === target) {
+			containsTarget = true;
+			return true;
+		}
+	});
+	return containsTarget;
+}
+
+function find(collection, properties) {
+	var target;
+
+	collection.some(function(object) {
+		var hasAllSameProperties = true;
+		Object.keys(properties).forEach(function(key) {
+			if (object[key] !== properties[key]) {
+				hasAllSameProperties = false;
+			}
+		});
+		if (hasAllSameProperties) {
+			target = object;
+			return true
+		}
+	});
+
+	return target;
+}
+
+function findIndex(collection, properties) {
+	var index = -1;
+	var counter = -1;
+
+	collection.some(function(object) {
+		var hasAllSameProperties = true;
+		counter += 1;
+		Object.keys(properties).forEach(function(key) {
+			if (object[key] !== properties[key]) {
+				hasAllSameProperties = false;
+			}
+		});
+		if (hasAllSameProperties) {
+			index = counter;
+			return true
+		}
+	});
+
+	return index;
+}
