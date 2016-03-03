@@ -1,8 +1,6 @@
 # AngularJS Dropdown Multiselect
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
-NOTE: I am currently working on a v2 of this directive with performance imporovments, removing the lodash dependency and add support for themes (bootstrap2, bootstrap3, angular-material). *ETA is July 2015.*
-
 # Features
 - Based on Bootstrap's dropdown.
 - jQuery is not necessary.
@@ -21,11 +19,10 @@ NOTE: I am currently working on a v2 of this directive with performance imporovm
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## Dependencies
-- required: AngularJS >= 1.2, Lodash >= 2, Bootstrap >= 3.0
+- required: AngularJS >= 1.2, Bootstrap >= 3.0
 
 - Make sure to add the dependencies before the directive's js file. 
-- Note: Bootstrap JS file is not needed for the directive, it just uses the CSS file.
-- **Note: Make sure to add lodash.js to your project, and make sure you use the regulate version of Lodash (NOT lodash.underscore or lodash.compat**
+- Note: Bootstrap JS file is not needed for the directive, it just uses the CSS file
 
 ## Install
 1. Download the files
@@ -33,13 +30,11 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 	
 		Just run `bower install angularjs-dropdown-multiselect`
 	2. Manually:
-		You can download the `.js` file directly or clone this repository.
-2. **Include lodash.js in your project.**
-	- `<script type="text/javascript" src="lodash.js"></script>`.
-3. Include the file in your app
+		You can download the `.js` file directly or clone this repository
+2. Include the file in your app
 	- `<script type="text/javascript" src="angularjs-dropdown-multiselect.js"></script>`.
 	- You can also use the minfined version (`angularjs-dropdown-multiselect.min.js`).
-4. Include the module in angular (i.e. in `app.js`) - `angularjs-dropdown-multiselect`
+3. Include the module in angular (i.e. in `app.js`) - `angularjs-dropdown-multiselect`
 
 
 ## Usage and Documentation
