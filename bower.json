@@ -1,11 +1,22 @@
 {
   "name": "angularjs-dropdown-multiselect",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "authors": [
-    "Dotan Simha <dotansimha@gmail.com>"
+		"Dotan Simha <dotansimha@gmail.com>",
+		"Pieter Kempenaers"
   ],
   "description": "AngularJS Dropdown Multiselect directive",
-  "keywords": ["angular", "angularjs", "directive", "dropdown", "multiselect", "checklist", "list", "bootstrap", "checkbox"],
+  "keywords": [
+    "angular",
+    "angularjs",
+    "directive",
+    "dropdown",
+    "multiselect",
+    "checklist",
+    "list",
+    "bootstrap",
+    "checkbox"
+  ],
   "license": "MIT",
   "main": "src/angularjs-dropdown-multiselect.js",
   "ignore": [
@@ -16,11 +27,11 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.0",
+    "angular": ">=1.2.0 <2.0.0"
     "lodash": "~2.4.1"
   },
   "devDependencies": {
-    "angular": "~1.2.0",
+    "angular": ">=1.2.0 <2.0.0",
     "angular-animate": "~1.2.0",
     "angular-sanitize": "~1.2.0",
     "angular-touch": "~1.2.0",
