@@ -116,6 +116,14 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     });
                 }
 
+                $scope.$watch('selectedModel', function(newValue) {
+                	if (!Array.isArray(newValue)) {
+                		   $scope.singleSelection = true;
+                	} else {
+                		   $scope.singleSelection = false;
+                	}
+                });
+
                 angular.extend($scope.settings, $scope.extraSettings || []);
                 angular.extend($scope.externalEvents, $scope.events || []);
                 angular.extend($scope.texts, $scope.translationTexts);
