@@ -1,9 +1,9 @@
 {
-  "name": "angularjs-dropdown-multiselect",
-  "version": "1.6.2",
+  "name": "myforce-angularjs-dropdown-multiselect",
+  "version": "1.0.0",
   "authors": [
 		"Dotan Simha <dotansimha@gmail.com>",
-		"Pieter Kempenaers"
+		"Pieter Kempenaers <pkempenaers@myforce.be>"
   ],
   "description": "AngularJS Dropdown Multiselect directive",
   "keywords": [
