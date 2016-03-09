@@ -26,7 +26,7 @@ http://myforce.github.io/angularjs-dropdown-multiselect/
 
 ## Install
 1. Download the files
-	1. Using bower: <img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30"> 
+	1. Using bower: <img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30">
 	
 		Just run `bower install myforce-angularjs-dropdown-multiselect`
 	2. Manually:
@@ -40,7 +40,3 @@ http://myforce.github.io/angularjs-dropdown-multiselect/
 ## Usage and Documentation
 See the documentation and examples in the GitHub pages:
 http://myforce.github.io/angularjs-dropdown-multiselect/
-
-## TODO:
-	- Feel free to send me more requests for features - open an issue with "feature request" tag - Thanks!
-	- Keyboard support.
