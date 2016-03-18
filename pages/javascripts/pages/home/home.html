@@ -586,6 +586,35 @@ $scope.customFilter = 'a';
 				</div>
 			</div>
 		</accordion-group>
+		<accordion-group heading="Style active items">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					You can also aplly the active class to the selected list items. This can be done by setting the styleActive setting to true
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example16data" selected-model="example16model" extra-settings="example16settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example16model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+							<div hljs>
+// HTML
+<div ng-dropdown-multiselect="" options="example16data" selected-model="example16model"></div>
+
+// JavaScript 
+$scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example16settings = {styleActive: true};
+							</div>
+				</div>
+			</div>
+		</accordion-group>
 	</accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
@@ -773,6 +802,12 @@ $scope.customFilter = 'a';
 				<td>Function</td>
 				<td>angular.noop</td>
 				<td>Related the "Smart Button Text" feature, if a function provided - it will called with two paramters: The item's text and the original item, the return value will displayed instead of the item's display property. This feature is useful when you want to convert the displayed text into something else.</td>
+			</tr>
+			<tr>
+				<td>styleActive</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>Indicates if the list items should get a class active applied when they are selected.</td>
 			</tr>
 		</tbody>
 	</table>
