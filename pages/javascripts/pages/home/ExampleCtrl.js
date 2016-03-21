@@ -165,5 +165,29 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     	styleActive: true
     };
 
+    $scope.example17model = [];
+    $scope.example17data = [
+        { id: 1, label: "David" },
+        { id: 2, label: "Jhon" },
+        { id: 3, label: "Lisa" },
+        { id: 4, label: "Nicole" },
+        { id: 5, label: "Danny" }];
+    $scope.example17settings = {
+    	keyboardControls: true,
+    };
+
+    $scope.example18model = {};
+    $scope.example18data = [
+        { id: 1, label: "David" },
+        { id: 2, label: "Jhon" },
+        { id: 3, label: "Lisa" },
+        { id: 4, label: "Nicole" },
+        { id: 5, label: "Danny" }];
+    $scope.example18settings = {
+    	keyboardControls: true,
+    	enableSearch: true,
+    	selectionLimit: 1
+    };
+
     $scope.customFilter = 'a';
 }]);

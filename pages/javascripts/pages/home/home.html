@@ -607,10 +607,80 @@ $scope.customFilter = 'a';
 					<h3>Code</h3>
 							<div hljs>
 // HTML
-<div ng-dropdown-multiselect="" options="example16data" selected-model="example16model"></div>
+<div ng-dropdown-multiselect="" options="example16data" selected-model="example16model" extra-settings="example16settings"></div>
 
 // JavaScript 
 $scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example16settings = {styleActive: true};
+							</div>
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group heading="Keyboard controls">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					When activated the dropdown can be used with the keyboard instead of with the mouse. Up, down arrow change focused element, escape closes the dropdown, enter and space activate focused element.
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example17data" selected-model="example17model" extra-settings="example17settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example17model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+							<div hljs>
+// HTML
+<div ng-dropdown-multiselect="" options="example17data" selected-model="example17model" extra-settings="example17settings"></div>
+
+// JavaScript 
+$scope.example17model = []; $scope.example17data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example17settings = {keyboardControls: true};
+							</div>
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group heading="Keyboard controls with single selection and search">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					When search is enabled and a single selection is active, wehn search returns a single match pressing enter in the search box will activate the matched option.
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example18data" selected-model="example18model" extra-settings="example18settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example17model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+							<div hljs>
+// HTML 
+<div ng-dropdown-multiselect="" options="example18data" selected-model="example18model" extra-settings="example18settings"></div>
+
+// JavaScript 
+$scope.example18model = {};
+$scope.example18data = [
+    { id: 1, label: "David" },
+    { id: 2, label: "Jhon" },
+    { id: 3, label: "Lisa" },
+    { id: 4, label: "Nicole" },
+    { id: 5, label: "Danny" }
+];
+$scope.example18settings = {
+  keyboardControls: true,
+  enableSearch: true,
+  selectionLimit: 1
+};
 							</div>
 				</div>
 			</div>
@@ -808,6 +878,12 @@ $scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {i
 				<td>Boolean</td>
 				<td>false</td>
 				<td>Indicates if the list items should get a class active applied when they are selected.</td>
+			</tr>
+			<tr>
+				<td>keyboardControl</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>When activated the dropdown can be used with the keyboard instead of with the mouse.</td>
 			</tr>
 		</tbody>
 	</table>
