@@ -189,5 +189,16 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     	selectionLimit: 1
     };
 
+    $scope.example19model = {};
+    $scope.example19data = [
+        { id: 1, name: "David" },
+        { id: 2, name: "Jhon" },
+        { id: 3, name: "Lisa" },
+        { id: 4, name: "Nicole" },
+        { id: 5, name: "Danny" }];
+    $scope.example19settings = {
+    	template: '<b>{{option.name}}</b>'
+    };
+
     $scope.customFilter = 'a';
 }]);

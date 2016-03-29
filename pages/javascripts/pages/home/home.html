@@ -657,7 +657,7 @@ $scope.example17model = []; $scope.example17data = [ {id: 1, label: "David"}, {i
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<h3>The model:</h3>
-					<pre>{{example17model|json}}</pre>
+					<pre>{{example18model|json}}</pre>
 				</div>
 			</div>
 			<div class="row">
@@ -680,6 +680,45 @@ $scope.example18settings = {
   keyboardControls: true,
   enableSearch: true,
   selectionLimit: 1
+};
+							</div>
+				</div>
+			</div>
+		</accordion-group>
+		<accordion-group heading="Custom template per option">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					Instead of using the default template you can use an own custom temlpate.
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example19data" selected-model="example19model" extra-settings="example19settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example19model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+							<div hljs>
+// HTML 
+<div ng-dropdown-multiselect="" options="example19data" selected-model="example19model" extra-settings="example19settings"></div>
+
+// JavaScript 
+$scope.example19model = {};
+$scope.example19data = [
+    { id: 1, name: "David" },
+    { id: 2, name: "Jhon" },
+    { id: 3, name: "Lisa" },
+    { id: 4, name: "Nicole" },
+    { id: 5, name: "Danny" }
+];
+$scope.example19settings = {
+  template: '<b>{{option.name}}</b>'
 };
 							</div>
 				</div>
@@ -884,6 +923,12 @@ $scope.example18settings = {
 				<td>Boolean</td>
 				<td>false</td>
 				<td>When activated the dropdown can be used with the keyboard instead of with the mouse.</td>
+			</tr>
+			<tr>
+				<td>template</td>
+				<td>String</td>
+				<td>{{getPropertyForObject(option, settings.displayProp)} }</td>
+				<td>Can be used to modify the appearance of an option in the list, each option is accessible as option.</td>
 			</tr>
 		</tbody>
 	</table>

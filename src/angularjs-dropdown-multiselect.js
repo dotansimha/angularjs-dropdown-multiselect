@@ -2,6 +2,14 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
+directiveModule.directive('staticInclude', function ($compile) {
+    return function (scope, element, attrs) {
+        var template = attrs.staticInclude;
+        var contents = element.html(template).contents();
+        $compile(contents)(scope);
+    };
+});
+
 directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse',
     function ($filter, $document, $compile, $parse) {
 
@@ -39,9 +47,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<a role="menuitem" class="option" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
                 if (checkboxes) {
-                    template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> {{getPropertyForObject(option, settings.displayProp)}}</label></div></a>';
+                    template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /><div static-include="{{settings.template}}"></div></label></div></a>';
                 } else {
-                    template += '<span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span> {{getPropertyForObject(option, settings.displayProp)}}</a>';
+                    template += '<span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"></span><div static-include="{{settings.template}}"></div></a>';
                 }
 
                 template += '</li>';
@@ -123,7 +131,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     smartButtonMaxItems: 0,
                     smartButtonTextConverter: angular.noop,
                     styleActive: false,
-										keyboardControls: false
+                    keyboardControls: false,
+                    template: '{{getPropertyForObject(option, settings.displayProp)}}'
                 };
 
                 $scope.texts = {
