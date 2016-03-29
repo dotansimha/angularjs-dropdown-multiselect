@@ -190,7 +190,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                         var parentFound = false;
 
                         while (angular.isDefined(target) && target !== null && !parentFound) {
-                            if (contains(target.className.split(' '), 'multiselect-parent') && !parentFound) {
+                            if (!!target.className.split && contains(target.className.split(' '), 'multiselect-parent') && !parentFound) {
                                 if(target === $dropdownTrigger) {
                                     parentFound = true;
                                 }
