@@ -270,7 +270,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                         clearObject($scope.selectedModel);
                         angular.extend($scope.selectedModel, finalObj);
                         $scope.externalEvents.onItemSelect(finalObj);
-                        if ($scope.settings.closeOnSelect) $scope.open = false;
+                        if ($scope.settings.closeOnSelect || $scope.settings.closeOnDeselect) $scope.open = false;
 
                         return;
                     }
@@ -282,11 +282,12 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     if (!dontRemove && exists) {
                         $scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
                         $scope.externalEvents.onItemDeselect(findObj);
+                        if ($scope.settings.closeOnDeselect) $scope.open = false;
                     } else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
                         $scope.selectedModel.push(finalObj);
                         $scope.externalEvents.onItemSelect(finalObj);
+                        if ($scope.settings.closeOnSelect) $scope.open = false;
                     }
-                    if ($scope.settings.closeOnSelect) $scope.open = false;
                 };
 
                 $scope.isChecked = function (id) {
