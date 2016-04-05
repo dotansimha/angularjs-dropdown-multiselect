@@ -2,9 +2,9 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
-directiveModule.directive('staticInclude', function ($compile) {
+directiveModule.directive('mfDropdownStaticInclude', function ($compile) {
     return function (scope, element, attrs) {
-        var template = attrs.staticInclude;
+        var template = attrs.mfDropdownStaticInclude;
         var contents = element.html(template).contents();
         $compile(contents)(scope);
     };
@@ -47,9 +47,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<a role="menuitem" class="option" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
                 if (checkboxes) {
-                    template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> <span static-include="{{settings.template}}"></div></label></span></a>';
+                    template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> <span mf-dropdown-static-include="{{settings.template}}"></div></label></span></a>';
                 } else {
-                    template += '<span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"> </span> <span static-include="{{settings.template}}"></span></a>';
+                    template += '<span data-ng-class="{\'glyphicon glyphicon-ok\': isChecked(getPropertyForObject(option,settings.idProp))}"> </span> <span mf-dropdown-static-include="{{settings.template}}"></span></a>';
                 }
 
                 template += '</li>';
