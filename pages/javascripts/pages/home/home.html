@@ -22,8 +22,29 @@
 			</ol>
 		</div>
 	</div>
-	<accordion close-others="true">
-		<accordion-group heading="Basic Usage Example" is-open="true">
+	<uib-accordion close-others="true">
+		<!--<uib-accordion-group heading="test Settings Example">
+			<div class="row">
+				<div class="col-xs-12">
+					test
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect options="testdata" selected-model="testmodel" extra-settings="testsettings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{testmodel|json}}</pre>
+				</div>
+			</div>
+		</uib-accordion-group>-->
+		<uib-accordion-group heading="Basic Usage Example" is-open="true">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -49,8 +70,8 @@
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Basic Settings Example">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Basic Settings Example">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows the ability to select the property to display as text label.
@@ -82,8 +103,8 @@
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Smart Button Text">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Smart Button Text">
 			<div class="row">
 				<div class="col-xs-12">
 					You can use the feature in order to show which items are selected instead the items count.<br />
@@ -135,8 +156,8 @@ $scope.example13settings = {
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Scrollable List">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Scrollable List">
 			<div class="row">
 				<div class="col-xs-12">
 					You can use the feature in order to make the list of items scrollable. Useful when you deal with a lot of items.
@@ -185,8 +206,8 @@ $scope.example14settings = {
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Enabling Search">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Enabling Search">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -212,8 +233,8 @@ $scope.example14settings = {
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Selection Limit">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, there is no limit on the maximum selected items.
@@ -257,8 +278,8 @@ $scope.example14settings = {
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Single Selection Limit">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Single Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">
 					Please read the notes in the "Selection Limit" example.
@@ -297,8 +318,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Group Items By Property">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Group Items By Property">
 			<div class="row">
 				<div class="col-xs-12">
 					You can also group the items by propery that you want, in order to to that, provide the "group-by" attribute.
@@ -335,8 +356,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Custom ID property">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Custom ID property">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, the directive tries to find "id" property for each object to identify it as unique.
@@ -371,8 +392,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Model Custom Property">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Model Custom Property">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, the model of the selected items will contain the objects with "id" property with the value of the idProp settings.
@@ -404,8 +425,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Custom Button Text">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Custom Button Text">
 			<div class="row">
 				<div class="col-xs-12">
 					You can select your own text of the button using the "defaultText" in settings.
@@ -436,8 +457,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Pre-selected Values">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Pre-selected Values">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of using a pre-setted model.
@@ -470,8 +491,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Full Object as model">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Full Object as model">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of using full object as a model.
@@ -505,8 +526,8 @@ $scope.example12settings = {selectionLimit: 1};
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="External Search Filter">
+		</uib-accordion-group>
+		<uib-accordion-group heading="External Search Filter">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of access and set the search filter from outside the directive.
@@ -553,8 +574,8 @@ $scope.customFilter = 'a';
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Checkboxes List">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Checkboxes List">
 			<div class="row">
 				<div class="col-xs-12">
 					You can also use a checkboxes list by adding "checkboxes" attribute to your element!
@@ -585,8 +606,8 @@ $scope.customFilter = 'a';
 						</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Style active items">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Style active items">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -614,8 +635,8 @@ $scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {i
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Keyboard controls">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Keyboard controls">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -643,8 +664,8 @@ $scope.example17model = []; $scope.example17data = [ {id: 1, label: "David"}, {i
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-		<accordion-group heading="Keyboard controls with single selection and search">
+		</uib-accordion-group>
+		<uib-accordion-group heading="Keyboard controls with single selection and search">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -684,8 +705,8 @@ $scope.example18settings = {
 							</div>
 				</div>
 			</div>
-		</accordion-group>
-	</accordion>
+		</uib-accordion-group>
+	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
 	<p>List of allowed attributes, you can find more information about them in the usage examples above.</p>
@@ -835,7 +856,7 @@ $scope.example18settings = {
 				<td>closeOnDeselect</td>
 				<td>Boolean</td>
 				<td>false</td>
-				<td>Indicates if to close the dropdown after unchecking an item on the list.</td>
+				<td>Indicates if to close the dropdown after unchecking an item on the list. With selectionLimit = 1 setting this to true does the same as setting closeOnSelect to true.</td>
 			</tr>
 			<tr>
 				<td>buttonClasses</td>
