@@ -2,13 +2,13 @@
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
 
-directiveModule.directive('mfDropdownStaticInclude', function ($compile) {
+directiveModule.directive('mfDropdownStaticInclude', ['$compile', function ($compile) {
     return function (scope, element, attrs) {
         var template = attrs.mfDropdownStaticInclude;
         var contents = element.html(template).contents();
         $compile(contents)(scope);
     };
-});
+}]);
 
 directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$compile', '$parse',
     function ($filter, $document, $compile, $parse) {
@@ -64,7 +64,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
             },
             link: function ($scope, $element, $attrs) {
             	var $dropdownTrigger = $element.children()[0];
-                
+
             	$scope.toggleDropdown = function() {
                 	$scope.open = !$scope.open;
                 	if ($scope.settings.keyboardControls) {
