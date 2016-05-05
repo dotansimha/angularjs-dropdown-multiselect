@@ -410,7 +410,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	var searchResult;
 									if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
 										if (event.keyCode === 13) {
-											searchResult = $filter('filter')($scope.options, searchFilter);
+											searchResult = $filter('filter')($scope.options, $scope.getFilter(searchFilter));
 											if (searchResult.length === 1) {
 												$scope.setSelectedItem($scope.getPropertyForObject(searchResult[0], $scope.settings.idProp));
 											}
