@@ -31,10 +31,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 var template = '<div class="multiselect-parent btn-group dropdown-multiselect">';
                 template += '<button type="button" class="dropdown-toggle" ng-class="settings.buttonClasses" ng-click="toggleDropdown()">{{getButtonText()}}&nbsp;<span class="caret"></span></button>';
                 template += '<ul class="dropdown-menu dropdown-menu-form" ng-if="open" ng-style="{display: open ? \'block\' : \'none\', height : settings.scrollable ? settings.scrollableHeight : \'auto\' }" style="overflow: auto" >';
-                template += '<li ng-hide="!settings.showCheckAll || settings.selectionLimit > 0"><a data-ng-click="selectAll()" tabindex="-1" id="selectAll"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
-                template += '<li ng-show="settings.showUncheckAll"><a data-ng-click="deselectAll();" tabindex="-1" id="deselectAll"><span class="glyphicon glyphicon-remove"></span>   {{texts.uncheckAll}}</a></li>';
+                template += '<li ng-hide="!settings.showCheckAll || settings.selectionLimit > 0"><a ng-keydown="keyDownLink($event)" data-ng-click="selectAll()" tabindex="-1" id="selectAll"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
+                template += '<li ng-show="settings.showUncheckAll"><a ng-keydown="keyDownLink($event)" data-ng-click="deselectAll();" tabindex="-1" id="deselectAll"><span class="glyphicon glyphicon-remove"></span>   {{texts.uncheckAll}}</a></li>';
                 template += '<li ng-hide="(!settings.showCheckAll || settings.selectionLimit > 0) && !settings.showUncheckAll" class="divider"></li>';
-                template += '<li ng-show="settings.enableSearch"><div class="dropdown-header"><input type="text" class="form-control searchField" style="width: 100%;" ng-model="searchFilter" placeholder="{{texts.searchPlaceholder}}" /></li>';
+                template += '<li ng-show="settings.enableSearch"><div class="dropdown-header"><input type="text" class="form-control searchField" ng-keydown="keyDownSearchDefault($event); keyDownSearchSingle($event, searchFilter);" style="width: 100%;" ng-model="searchFilter" placeholder="{{texts.searchPlaceholder}}" /></li>';
                 template += '<li ng-show="settings.enableSearch" class="divider"></li>';
 
                 if (groups) {
@@ -44,7 +44,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	template += '<li ng-class="{\'active\': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}" role="presentation" ng-repeat="option in options | filter:getFilter(searchFilter)">';
                 }
 
-                template += '<a role="menuitem" class="option" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
+                template += '<a ng-keydown="keyDownLink($event)" role="menuitem" class="option" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
 
                 if (checkboxes) {
                     template += '<div class="checkbox"><label><input class="checkboxInput" type="checkbox" ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))" ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" /> <span mf-dropdown-static-include="{{settings.template}}"></div></label></span></a>';
@@ -69,13 +69,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	$scope.open = !$scope.open;
                 	if ($scope.settings.keyboardControls) {
                 		if ($scope.open) {
-                			Array.prototype.slice.call(angular.element($element)[0].querySelectorAll('a'))
-											.forEach(function(optionElement) {
-												optionElement.addEventListener('keydown', keyDownLink);
-											});
-                			angular.element($element)[0].querySelector('.searchField').addEventListener('keydown', keyDownSearchDefault);
                 			if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
-                				angular.element($element)[0].querySelector('.searchField').addEventListener('keydown', keyDownSearchSingle);
                 				setTimeout(function() {
                 					angular.element($element)[0].querySelector('.searchField').focus();
                 				}, 0);
@@ -84,16 +78,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 					angular.element($element)[0].querySelector('.option').focus();
                 				}, 0);
 											}
-                		} else {
-                			Array.prototype.slice.call(angular.element($element)[0].querySelectorAll('a'))
-											.forEach(function(optionElement) {
-												optionElement.removeEventListener('keydown', keyDownLink);
-											});
-                			angular.element($element)[0].querySelector('.searchField').removeEventListener('keydown', keyDownSearchDefault);
-                			if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
-                				angular.element($element)[0].querySelector('.searchField').removeEventListener('keydown', keyDownSearchSingle);
-                			}
-                		}
+                		} 
                 	}
                 };
 
@@ -344,18 +329,21 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                 $scope.externalEvents.onInitDone();
 
-                function keyDownLink(event) {
+                $scope.keyDownLink = function(event) {
                 	var sourceScope = angular.element(event.target).scope();
                 	var nextOption;
                 	var parent = event.srcElement.parentNode;
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
                 	if (event.keyCode === 13 || event.keyCode === 32) { // enter
                 		event.preventDefault();
                 		if (!!sourceScope.option) {
-                			$scope.$apply($scope.setSelectedItem($scope.getPropertyForObject(sourceScope.option, $scope.settings.idProp)));
+                			$scope.setSelectedItem($scope.getPropertyForObject(sourceScope.option, $scope.settings.idProp));
                 		} else if (event.srcElement.id === 'deselectAll') {
-                			$scope.$apply($scope.deselectAll());
+                			$scope.deselectAll();
                 		} else if (event.srcElement.id === 'selectAll') {
-                			$scope.$apply($scope.selectAll());
+                			$scope.selectAll();
                 		}
                 	} else if (event.keyCode === 38) { // up arrow
                 		event.preventDefault();
@@ -388,13 +376,16 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	} else if (event.keyCode === 27) {
                 		event.preventDefault();
 
-                		$scope.$apply($scope.toggleDropdown());
+                		$scope.toggleDropdown();
                 	}
                 }
 
-                function keyDownSearchDefault(event) {
+                $scope.keyDownSearchDefault = function(event) {
                 	var parent = event.srcElement.parentNode.parentNode;
                 	var nextOption;
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
                 	if (event.keyCode === 9 || event.keyCode === 40) { //tab
                 		event.preventDefault();
                 		setTimeout(function() {
@@ -417,18 +408,23 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	} else if (event.keyCode === 27) {
                 		event.preventDefault();
 
-                		$scope.$apply($scope.toggleDropdown());
+                		$scope.toggleDropdown();
                 	}
                 }
 
-                function keyDownSearchSingle(event) {
+                $scope.keyDownSearchSingle = function(event, searchFilter) {
                 	var searchResult;
-                	if (event.keyCode === 13) {
-                		searchResult = $filter('filter')($scope.options, $scope.searchFilter);
-                		if (searchResult.length === 1) {
-                			$scope.$apply($scope.setSelectedItem($scope.getPropertyForObject(searchResult[0], $scope.settings.idProp)));
-                		}
-                	}
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
+									if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
+										if (event.keyCode === 13) {
+											searchResult = $filter('filter')($scope.options, $scope.getFilter(searchFilter));
+											if (searchResult.length === 1) {
+												$scope.setSelectedItem($scope.getPropertyForObject(searchResult[0], $scope.settings.idProp));
+											}
+										}
+									}
                 }
 								
                 $scope.getFilter = function(searchFilter) {
