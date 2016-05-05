@@ -38,10 +38,10 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<li ng-show="settings.enableSearch" class="divider"></li>';
 
                 if (groups) {
-                	template += '<li ng-repeat-start="option in orderedItems | filter: searchFilter" ng-show="getPropertyForObject(option, settings.groupBy) !== getPropertyForObject(orderedItems[$index - 1], settings.groupBy)" role="presentation" class="dropdown-header">{{ getGroupTitle(getPropertyForObject(option, settings.groupBy)) }}</li>';
+                	template += '<li ng-repeat-start="option in orderedItems | filter:getFilter(searchFilter)" ng-show="getPropertyForObject(option, settings.groupBy) !== getPropertyForObject(orderedItems[$index - 1], settings.groupBy)" role="presentation" class="dropdown-header">{{ getGroupTitle(getPropertyForObject(option, settings.groupBy)) }}</li>';
                 	template += '<li ng-class="{\'active\': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}" ng-repeat-end role="presentation">';
                 } else {
-                	template += '<li ng-class="{\'active\': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}" role="presentation" ng-repeat="option in options | filter: searchFilter">';
+                	template += '<li ng-class="{\'active\': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}" role="presentation" ng-repeat="option in options | filter:getFilter(searchFilter)">';
                 }
 
                 template += '<a role="menuitem" class="option" tabindex="-1" ng-click="setSelectedItem(getPropertyForObject(option,settings.idProp))">';
@@ -132,7 +132,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     smartButtonTextConverter: angular.noop,
                     styleActive: false,
                     keyboardControls: false,
-                    template: '{{getPropertyForObject(option, settings.displayProp)}}'
+                    template: '{{getPropertyForObject(option, settings.displayProp)}}',
+                    searchField: '$'
                 };
 
                 $scope.texts = {
@@ -428,6 +429,12 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 			$scope.$apply($scope.setSelectedItem($scope.getPropertyForObject(searchResult[0], $scope.settings.idProp)));
                 		}
                 	}
+                }
+								
+                $scope.getFilter = function(searchFilter) {
+                	var filter = {};
+                	filter[$scope.settings.searchField] = searchFilter;
+                	return filter;
                 }
             }
         };

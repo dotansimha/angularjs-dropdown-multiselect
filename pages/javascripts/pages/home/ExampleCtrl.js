@@ -1,15 +1,21 @@
 'use strict';
 
 angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scope) {
-    $scope.testmodel = {};
+    $scope.testmodel = [];
     $scope.testdata = [
-		{ id: 1, label: "David" },
-		{ id: 2, label: "Jhon" },
-		{ id: 3, label: "Danny" }];
+		{ id: 1, label: "David", age: 23 },
+		{ id: 2, label: "Jhon", age: 24 },
+		{ id: 3, label: "Danny", age: 26 }];
     $scope.testsettings = {
-        closeOnDeselect: true,
-        selectionLimit: 1
+      searchField: 'age',
+      enableSearch: true
     };
+
+    $scope.testevents = {
+      'onMaxSelectionReached': function () { // This event is not firing on selection of max limit
+        alert("you can not select more than 2 contacts");
+      }
+    }
 
     $scope.example1model = [];
 	$scope.example1data = [
@@ -61,7 +67,8 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
-	$scope.example7settings = {externalIdProp: ''};
+	$scope.example7settings = { externalIdProp: '' };
+	$scope.customFilter = 'a';
 
 	$scope.example8model = [];
 	$scope.example8data = [
@@ -210,5 +217,13 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     	template: '<b>{{option.name}}</b>'
     };
 
-    $scope.customFilter = 'a';
+    $scope.example20model = [];
+    $scope.example20data = [
+		{ id: 1, label: "David", age: 23 },
+		{ id: 2, label: "Jhon", age: 24 },
+		{ id: 3, label: "Danny", age: 26 }];
+    $scope.example20settings = {
+    	searchField: 'age',
+    	enableSearch: true
+    };
 }]);

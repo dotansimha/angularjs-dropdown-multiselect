@@ -23,7 +23,7 @@
 		</div>
 	</div>
 	<uib-accordion close-others="true">
-		<!--<uib-accordion-group heading="test Settings Example">
+		<!--<uib-accordion-group heading="test Settings Example" is-open="true" style="height: 500px">
 			<div class="row">
 				<div class="col-xs-12">
 					test
@@ -34,7 +34,7 @@
 					<h3>Demo</h3>
 					<div class="well">
 						<div>
-							<div ng-dropdown-multiselect options="testdata" selected-model="testmodel" extra-settings="testsettings"></div>
+							<div ng-dropdown-multiselect options="testdata" selected-model="testmodel" extra-settings="testsettings" events="testevents"></div>
 						</div>
 					</div>
 				</div>
@@ -231,6 +231,48 @@ $scope.example14settings = {
 
 // JavaScript $scope.example9model = []; $scope.example9data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example9settings = {enableSearch: true};
 							</div>
+				</div>
+			</div>
+		</uib-accordion-group>
+		<uib-accordion-group heading="Specifying Search field">
+			<div class="row">
+				<div class="col-xs-12">
+					By default, search is done on all items, by specifying the searchField in the settings object one can specify on which field of the objects the filtering should be done.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example20data" selected-model="example20model" extra-settings="example20settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example20model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="example20data" selected-model="example20model" extra-settings="example20settings"></div>
+
+// JavaScript
+$scope.example20model = [];
+$scope.example20data = [
+	{ id: 1, label: "David", age: 23 },
+	{ id: 2, label: "Jhon", age: 24 },
+	{ id: 3, label: "Danny", age: 26 }
+];
+$scope.example20settings = {
+	searchField: 'age',
+	enableSearch: true
+};
+					</div>
 				</div>
 			</div>
 		</uib-accordion-group>
@@ -866,6 +908,12 @@ $scope.example19settings = {
 				<td>Boolean</td>
 				<td>false</td>
 				<td>Indicated if to show the search input or not.</td>
+			</tr>
+			<tr>
+				<td>searchField</td>
+				<td>String</td>
+				<td>"$"</td>
+				<td>Indicates on which field the search should be done</td>
 			</tr>
 			<tr>
 				<td>selectionLimit</td>
