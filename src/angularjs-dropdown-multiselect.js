@@ -333,6 +333,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	var sourceScope = angular.element(event.target).scope();
                 	var nextOption;
                 	var parent = event.srcElement.parentNode;
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
                 	if (event.keyCode === 13 || event.keyCode === 32) { // enter
                 		event.preventDefault();
                 		if (!!sourceScope.option) {
@@ -380,6 +383,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 $scope.keyDownSearchDefault = function(event) {
                 	var parent = event.srcElement.parentNode.parentNode;
                 	var nextOption;
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
                 	if (event.keyCode === 9 || event.keyCode === 40) { //tab
                 		event.preventDefault();
                 		setTimeout(function() {
@@ -408,6 +414,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
                 $scope.keyDownSearchSingle = function(event, searchFilter) {
                 	var searchResult;
+									if (!$scope.settings.keyboardControls) {
+										return;
+									}
 									if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
 										if (event.keyCode === 13) {
 											searchResult = $filter('filter')($scope.options, $scope.getFilter(searchFilter));
