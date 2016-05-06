@@ -276,6 +276,46 @@ $scope.example20settings = {
 				</div>
 			</div>
 		</uib-accordion-group>
+		<uib-accordion-group heading="Enable / Disable search button">
+			<div class="row">
+				<div class="col-xs-12">
+					Setting showEnableSearchButton to true will add the enable/disable search button under the Select all / Deselect all buttons
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="example21data" selected-model="example21model" extra-settings="example21settings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{example21model|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="example21data" selected-model="example21model" extra-settings="example21settings"></div>
+
+// JavaScript
+$scope.example21model = [];
+$scope.example21data = [
+	{ id: 1, label: "David"},
+	{ id: 2, label: "Jhon"},
+	{ id: 3, label: "Danny"}];
+$scope.example21settings = {
+	showEnableSearchButton: true
+};
+					</div>
+				</div>
+			</div>
+		</uib-accordion-group>
 		<uib-accordion-group heading="Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">
@@ -934,6 +974,12 @@ $scope.example19settings = {
 				<td>Indicates if to show the "Uncheck All" item.</td>
 			</tr>
 			<tr>
+				<td>showEnableSearchButton</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>Indicates if to show the "Enable search / Disable search" item.</td>
+			</tr>
+			<tr>
 				<td>closeOnSelect</td>
 				<td>Boolean</td>
 				<td>false</td>
@@ -1064,6 +1110,16 @@ $scope.example19settings = {
 				<td>uncheckAll</td>
 				<td>Uncheck All</td>
 				<td>"Uncheck All" item's text.</td>
+			</tr>
+			<tr>
+				<td>enableSearch</td>
+				<td>Enable search</td>
+				<td>"enable search" item's text.</td>
+			</tr>
+			<tr>
+				<td>disableSearch</td>
+				<td>Disable search</td>
+				<td>"disable search" item's text.</td>
 			</tr>
 			<tr>
 				<td>selectionCount</td>

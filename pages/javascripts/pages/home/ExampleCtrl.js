@@ -3,12 +3,12 @@
 angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scope) {
     $scope.testmodel = [];
     $scope.testdata = [
-		{ id: 1, label: "David", age: 23 },
-		{ id: 2, label: "Jhon", age: 24 },
-		{ id: 3, label: "Danny", age: 26 }];
+		{ id: 1, label: "David"},
+		{ id: 2, label: "Jhon"},
+		{ id: 3, label: "Danny"}];
     $scope.testsettings = {
-      searchField: 'age',
-      enableSearch: true
+     showEnableSearchButton: true,
+		 keyboardControls: true
     };
 
     $scope.testevents = {
@@ -219,11 +219,20 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 
     $scope.example20model = [];
     $scope.example20data = [
-		{ id: 1, label: "David", age: 23 },
-		{ id: 2, label: "Jhon", age: 24 },
-		{ id: 3, label: "Danny", age: 26 }];
+			{ id: 1, label: "David", age: 23 },
+			{ id: 2, label: "Jhon", age: 24 },
+			{ id: 3, label: "Danny", age: 26 }];
     $scope.example20settings = {
     	searchField: 'age',
     	enableSearch: true
+    };
+		
+		$scope.example21model = [];
+    $scope.example21data = [
+			{ id: 1, label: "David"},
+			{ id: 2, label: "Jhon"},
+			{ id: 3, label: "Danny"}];
+    $scope.example21settings = {
+    	showEnableSearchButton: true
     };
 }]);
