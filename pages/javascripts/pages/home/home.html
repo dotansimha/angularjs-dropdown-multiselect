@@ -316,6 +316,43 @@ $scope.example21settings = {
 				</div>
 			</div>
 		</uib-accordion-group>
+		<uib-accordion-group heading="Search with select all and keyboard controls">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="searchSelectAllData" selected-model="searchSelectAllModel" extra-settings="searchSelectAllSettings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{searchSelectAllModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="searchSelectAllData" selected-model="searchSelectAllModel" extra-settings="searchSelectAllSettings"></div>
+// JavaScript 
+$scope.searchSelectAllModel = []; 
+$scope.searchSelectAllData = [ 
+	{id: 1, label: "David"},
+	{id: 2, label: "Jhon"},
+	{id: 3, label: "Danny"}
+];
+$scope.searchSelectAllSettings = {
+	enableSearch: true,
+	showSelectAll: true,
+	keyboardControls: true
+};
+					</div>
+				</div>
+			</div>
+		</uib-accordion-group>
 		<uib-accordion-group heading="Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">

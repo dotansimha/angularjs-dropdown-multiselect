@@ -227,12 +227,23 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     	enableSearch: true
     };
 		
-		$scope.example21model = [];
+	$scope.example21model = [];
     $scope.example21data = [
 			{ id: 1, label: "David"},
 			{ id: 2, label: "Jhon"},
 			{ id: 3, label: "Danny"}];
     $scope.example21settings = {
     	showEnableSearchButton: true
+    };
+
+    $scope.searchSelectAllModel = [];
+    $scope.searchSelectAllData = [
+		{ id: 1, label: "David" },
+		{ id: 2, label: "Jhon" },
+		{ id: 3, label: "Danny" }
+    ];
+    $scope.searchSelectAllSettings = {
+    	enableSearch: true,
+		keyboardControls: true
     };
 }]);
