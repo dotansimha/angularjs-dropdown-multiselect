@@ -864,6 +864,45 @@ $scope.example19settings = {
 				</div>
 			</div>
 		</uib-accordion-group>
+		<uib-accordion-group heading="Disable Option">
+			<div class="row">
+				<div class="col-xs-12">
+					Setting the field disabled of an option to true will disable that option, if the option was previously
+					checked it will still stay checked and will not be able to be unchecked.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="disabledData" selected-model="disabledModel"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{disabledModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="disabledData" selected-model="disabledModel"></div>
+
+// JavaScript
+$scope.disabledModel = [];
+$scope.disabledData = [
+	{ id: 1, label: "David", disabled: true},
+	{ id: 2, label: "Jhon"},
+	{ id: 3, label: "Danny"}
+];
+					</div>
+				</div>
+			</div>
+		</uib-accordion-group>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>

@@ -3,7 +3,7 @@
 angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scope) {
     $scope.testmodel = [];
     $scope.testdata = [
-		{ id: 1, label: "David"},
+		{ id: 1, label: "David", disabled: true},
 		{ id: 2, label: "Jhon"},
 		{ id: 3, label: "Danny"}];
     $scope.testsettings = {
@@ -246,4 +246,11 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     	enableSearch: true,
 		keyboardControls: true
     };
+		
+		$scope.disabledModel = [];
+    $scope.disabledData = [
+			{ id: 1, label: "David", disabled: true},
+			{ id: 2, label: "Jhon"},
+			{ id: 3, label: "Danny"}
+		];
 }]);

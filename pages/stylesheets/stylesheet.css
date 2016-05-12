@@ -402,6 +402,10 @@ footer a:hover {
         padding-right: 0;
         margin-left: 0;
     }
+		
+		a.option[disabled] {
+    	opacity: 0.5;
+		}
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
  @media only screen and (min-width: 480px) and (max-width: 767px) {
