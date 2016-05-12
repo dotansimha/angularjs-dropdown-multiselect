@@ -95,7 +95,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                     onSelectAll: angular.noop,
                     onDeselectAll: angular.noop,
                     onInitDone: angular.noop,
-                    onMaxSelectionReached: angular.noop
+                    onMaxSelectionReached: angular.noop,
+										onSelectionChanged: angular.noop
                 };
 
                 $scope.settings = {
