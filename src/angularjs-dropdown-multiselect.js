@@ -306,26 +306,25 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                         angular.extend($scope.selectedModel, finalObj);
                         $scope.externalEvents.onItemSelect(finalObj);
                         if ($scope.settings.closeOnSelect || $scope.settings.closeOnDeselect) $scope.open = false;
+                    } else {
+                    	dontRemove = dontRemove || false;
 
-                        return;
+                    	var exists = findIndex($scope.selectedModel, findObj) !== -1;
+
+                    	if (!dontRemove && exists) {
+                    		$scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
+                    		$scope.externalEvents.onItemDeselect(findObj);
+                    		if ($scope.settings.closeOnDeselect) $scope.open = false;
+                    	} else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
+                    		$scope.selectedModel.push(finalObj);
+                    		$scope.externalEvents.onItemSelect(finalObj);
+                    		if ($scope.settings.closeOnSelect) $scope.open = false;
+                    		if ($scope.settings.selectionLimit > 0 && $scope.selectedModel.length === $scope.settings.selectionLimit) {
+                    			$scope.externalEvents.onMaxSelectionReached();
+                    		}
+                    	}
                     }
-
-                    dontRemove = dontRemove || false;
-
-                    var exists = findIndex($scope.selectedModel, findObj) !== -1;
-
-                    if (!dontRemove && exists) {
-                        $scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
-                        $scope.externalEvents.onItemDeselect(findObj);
-                        if ($scope.settings.closeOnDeselect) $scope.open = false;
-                    } else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
-                        $scope.selectedModel.push(finalObj);
-                        $scope.externalEvents.onItemSelect(finalObj);
-                        if ($scope.settings.closeOnSelect) $scope.open = false;
-                        if ($scope.settings.selectionLimit > 0 && $scope.selectedModel.length === $scope.settings.selectionLimit) {
-                          $scope.externalEvents.onMaxSelectionReached();
-                        }
-                    }
+                    $scope.externalEvents.onSelectionChanged();
                 };
 
                 $scope.isChecked = function (id) {

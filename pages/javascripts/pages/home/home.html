@@ -1079,7 +1079,7 @@ $scope.example19settings = {
 			<tr>
 				<td>template</td>
 				<td>String</td>
-				<td>{{getPropertyForObject(option, settings.displayProp)} }</td>
+				<td>					{ {getPropertyForObject(option, settings.displayProp)} }</td>
 				<td>Can be used to modify the appearance of an option in the list, each option is accessible as option.</td>
 			</tr>
 		</tbody>
@@ -1124,6 +1124,11 @@ $scope.example19settings = {
 				<td>onMaxSelectionReached</td>
 				<td></td>
 				<td>Fired when the user reaches the max allowed selected items.</td>
+			</tr>
+			<tr>
+				<td>onSelectionChanged</td>
+				<td></td>
+				<td>Fired when the selection changes.</td>
 			</tr>
 		</tbody>
 	</table>
@@ -1186,3 +1191,4 @@ $scope.example19settings = {
 		</tbody>
 	</table>
 </div>
+					

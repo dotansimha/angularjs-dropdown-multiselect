@@ -12,8 +12,8 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
     };
 
     $scope.testevents = {
-      'onMaxSelectionReached': function () { // This event is not firing on selection of max limit
-        alert("you can not select more than 2 contacts");
+      'onSelectionChanged': function () { // This event is not firing on selection of max limit
+        alert("you changed selection");
       }
     }
 
