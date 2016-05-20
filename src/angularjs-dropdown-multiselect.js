@@ -23,7 +23,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 searchFilter: '=?',
                 translationTexts: '=',
                 groupBy: '@',
-                groups: '='
+                currentGroups: '=selectByGroups'
             },
             template: function (element, attrs) {
                 var checkboxes = attrs.checkboxes ? true : false;
@@ -34,11 +34,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 template += '<ul class="dropdown-menu dropdown-menu-form" ng-if="open" ng-style="{display: open ? \'block\' : \'none\', height : settings.scrollable ? settings.scrollableHeight : \'auto\', overflow: \'auto\' }" >';
                 template += '<li ng-if="settings.showCheckAll && settings.selectionLimit !== 1"><a ng-keydown="keyDownLink($event)" data-ng-click="selectAll()" tabindex="-1" id="selectAll"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
                 template += '<li ng-if="settings.showUncheckAll"><a ng-keydown="keyDownLink($event)" data-ng-click="deselectAll();" tabindex="-1" id="deselectAll"><span class="glyphicon glyphicon-remove"></span>   {{texts.uncheckAll}}</a></li>';
-                template += '<li ng-if="currentGroups" class="divider"></li>';
+                template += '<li ng-if="currentGroups && ((settings.showCheckAll && settings.selectionLimit > 0) || settings.showUncheckAll)" class="divider"></li>';
                 template += '<li ng-repeat="currentGroup in currentGroups track by $index"><a ng-bind="::currentGroup.title" ng-click="selectCurrentGroup(currentGroup)" ng-class="{\'dropdown-selected-group\': selectedGroup == currentGroup.value}" tabindex="-1"></a></li>';
                 template += '<li ng-if="settings.showEnableSearchButton && settings.enableSearch"><a ng-keydown="keyDownLink($event); keyDownToggleSearch();" ng-click="toggleSearch($event);" tabindex="-1">{{texts.disableSearch}}</a></li>';
 		template += '<li ng-if="settings.showEnableSearchButton && !settings.enableSearch"><a ng-keydown="keyDownLink($event); keyDownToggleSearch();" ng-click="toggleSearch($event);" tabindex="-1">{{texts.enableSearch}}</a></li>';
-		template += '<li ng-if="(settings.showCheckAll && settings.selectionLimit > 0) || settings.showUncheckAll || settings.showEnableSearchButton" class="divider"></li>';
+		template += '<li ng-if="(settings.showCheckAll && settings.selectionLimit > 0) || settings.showUncheckAll || settings.showEnableSearchButton || currentGroups" class="divider"></li>';
                 template += '<li ng-if="settings.enableSearch"><div class="dropdown-header"><input type="text" class="form-control searchField" ng-keydown="keyDownSearchDefault($event); keyDownSearch($event, input.searchFilter);" ng-style="{width: \'100%\'}" ng-model="input.searchFilter" placeholder="{{texts.searchPlaceholder}}" /></li>';
                 template += '<li ng-if="settings.enableSearch" class="divider"></li>';
 
@@ -158,15 +158,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
                 	} else {
                 		   $scope.singleSelection = false;
                 	}
-                });
-
-                $scope.$watch('groups', function (newVal) {
-                    if (newVal) {
-                        $scope.currentGroups = [];
-                        for (var i = 0; i < $scope.groups.length; ++i) {
-                            $scope.currentGroups.push({ value: $scope.groups[i], title: 'All ' + $scope.groups[i] });
-                        }
-                    }
                 });
 
                 $scope.selectCurrentGroup = function (currentGroup) {
