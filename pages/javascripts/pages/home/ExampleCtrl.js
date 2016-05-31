@@ -122,6 +122,29 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		}
 	};
 
+	$scope.selectByGroupModel = [];
+	$scope.selectByGroupData = [
+		{ id: 1, label: "David", gender: 'M' },
+		{ id: 2, label: "Jhon", gender: 'M' },
+		{ id: 3, label: "Lisa", gender: 'F' },
+		{ id: 4, label: "Nicole", gender: 'F' },
+		{ id: 5, label: "Danny", gender: 'M' },
+		{	id: 6, label: "Unknown", gender: 'O' }];
+
+	$scope.selectByGroupSettings = {
+		selectByGroups: ['F', 'M'],
+		groupByTextProvider: function(groupValue) {
+			switch (groupValue) {
+				case 'M':
+					return 'Male';
+				case 'F':
+					return 'Female';
+				case 'O':
+					return 'Other';
+			}
+		}
+	};
+
     $scope.example13model = [];
     $scope.example13data = [
         {id: 1, label: "David"},

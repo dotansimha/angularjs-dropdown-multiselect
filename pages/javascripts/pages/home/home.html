@@ -476,6 +476,62 @@ $scope.example12settings = {selectionLimit: 1};
 				</div>
 			</div>
 		</uib-accordion-group>
+		<uib-accordion-group heading="Select Items by Group">
+			<div class="row">
+				<div class="col-xs-12">
+					When items are grouped by property you can also specify an array of groups that you can use to select the items by.
+					The extra-settings property selectByGroups accepts an array of the values of the groups that you want to be selectable.
+					The naming will use the groupByTextProvider function to give them an actual label.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings" group-by="gender"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{selectByGroupModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+							<div hljs>
+// HTML
+<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings" group-by="gender"></div>
+
+// JavaScript
+$scope.selectByGroupModel = [];
+$scope.selectByGroupData = [
+	{ id: 1, label: "David", gender: 'M' },
+	{ id: 2, label: "Jhon", gender: 'M' },
+	{ id: 3, label: "Lisa", gender: 'F' },
+	{ id: 4, label: "Nicole", gender: 'F' },
+	{ id: 5, label: "Danny", gender: 'M' },
+	{	id: 6, label: "Unknown", gender: 'O' }];
+
+$scope.selectByGroupSettings = {
+	selectByGroups: ['F', 'M'],
+	groupByTextProvider: function(groupValue) {
+		switch (groupValue) {
+			case 'M':
+				return 'Male';
+			case 'F':
+				return 'Female';
+			case 'O':
+				return 'Other';
+		}
+	}
+};
+							</div>
+				</div>
+			</div>
+		</uib-accordion-group>
 		<uib-accordion-group heading="Custom ID property">
 			<div class="row">
 				<div class="col-xs-12">
@@ -1121,6 +1177,12 @@ $scope.disabledData = [
 				<td>					{ {getPropertyForObject(option, settings.displayProp)} }</td>
 				<td>Can be used to modify the appearance of an option in the list, each option is accessible as option.</td>
 			</tr>
+			<tr>
+				<td>selectByGroups</td>
+				<td>Array</td>
+				<td>undefined</td>
+				<td>Values of the groupby property that you want to be selectable as group</td>
+			</tr>
 		</tbody>
 	</table>
 	<h2>Events</h2>
@@ -1226,6 +1288,11 @@ $scope.disabledData = [
 				<td>dynamicButtonTextSuffix</td>
 				<td>checked</td>
 				<td>The suffix for the button that used when using "dynamicText".</td>
+			</tr>
+			<tr>
+				<td>selectGroup</td>
+				<td>Select All:</td>
+				<td>The prefix of the group selection.</td>
 			</tr>
 		</tbody>
 	</table>
