@@ -366,7 +366,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			$scope.keyDownLink = function(event) {
 				var sourceScope = angular.element(event.target).scope();
 				var nextOption;
-				var parent = event.srcElement.parentNode;
+				var parent = event.target.parentNode;
 				if (!$scope.settings.keyboardControls) {
 					return;
 				}
@@ -374,9 +374,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					event.preventDefault();
 					if (!!sourceScope.option) {
 						$scope.setSelectedItem($scope.getPropertyForObject(sourceScope.option, $scope.settings.idProp), false, true);
-					} else if (event.srcElement.id === 'deselectAll') {
+					} else if (event.target.id === 'deselectAll') {
 						$scope.deselectAll();
-					} else if (event.srcElement.id === 'selectAll') {
+					} else if (event.target.id === 'selectAll') {
 						$scope.selectAll();
 					}
 				} else if (event.keyCode === 38) { // up arrow
@@ -415,7 +415,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			};
 
 			$scope.keyDownSearchDefault = function(event) {
-				var parent = event.srcElement.parentNode.parentNode;
+				var parent = event.target.parentNode.parentNode;
 				var nextOption;
 				if (!$scope.settings.keyboardControls) {
 					return;
