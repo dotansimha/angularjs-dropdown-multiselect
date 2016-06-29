@@ -27,7 +27,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			var checkboxes = attrs.checkboxes ? true : false;
 			var groups = attrs.groupBy ? true : false;
 
-			var template = '<div class="multiselect-parent btn-group dropdown-multiselect">';
+			var template = '<div class="multiselect-parent btn-group dropdown-multiselect" ng-class="{open: open}">';
 			template += '<button ng-disabled="disabled" type="button" class="dropdown-toggle" ng-class="settings.buttonClasses" ng-click="toggleDropdown()">{{getButtonText()}}&nbsp;<span class="caret"></span></button>';
 			template += '<ul class="dropdown-menu dropdown-menu-form" ng-if="open" ng-style="{display: open ? \'block\' : \'none\', height : settings.scrollable ? settings.scrollableHeight : \'auto\', overflow: \'auto\' }" >';
 			template += '<li ng-if="settings.showCheckAll && settings.selectionLimit !== 1"><a ng-keydown="keyDownLink($event)" data-ng-click="selectAll()" tabindex="-1" id="selectAll"><span class="glyphicon glyphicon-ok"></span>  {{texts.checkAll}}</a>';
