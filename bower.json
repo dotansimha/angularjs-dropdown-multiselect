@@ -18,7 +18,7 @@
     "checkbox"
   ],
   "license": "MIT",
-  "main": "dist/angularjs-dropdown-multiselect.min.js",
+  "main": "src/angularjs-dropdown-multiselect.js",
   "ignore": [
     "**/.*",
     "node_modules",
