@@ -99,7 +99,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				onDeselectAll: angular.noop,
 				onInitDone: angular.noop,
 				onMaxSelectionReached: angular.noop,
-				onSelectionChanged: angular.noop
+				onSelectionChanged: angular.noop,
+				onClose: angular.noop
 			};
 
 			$scope.settings = {
@@ -221,6 +222,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						if (!parentFound) {
 							$scope.$apply(function() {
 								$scope.open = false;
+								$scope.externalEvents.onClose();
 							});
 						}
 					}
