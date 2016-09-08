@@ -71,7 +71,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			var $dropdownTrigger = $element.children()[0];
 
 			$scope.toggleDropdown = function() {
-				$scope.open = !$scope.open;
+        if ($scope.open) {
+          $scope.close()
+        } else { $scope.open = true }
 				if ($scope.settings.keyboardControls) {
 					if ($scope.open) {
 						if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
