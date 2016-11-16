@@ -1,4 +1,6 @@
 # AngularJS Dropdown Multiselect
+[![CDNJS](https://img.shields.io/cdnjs/v/myforce-angularjs-dropdown-multiselect.svg)](https://cdnjs.com/libraries/myforce-angularjs-dropdown-multiselect)
+
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
 # Features
