@@ -71,7 +71,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			var $dropdownTrigger = $element.children()[0];
 
 			$scope.toggleDropdown = function() {
-				$scope.open = !$scope.open;
+        if ($scope.open) {
+          $scope.close()
+        } else { $scope.open = true }
 				if ($scope.settings.keyboardControls) {
 					if ($scope.open) {
 						if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
@@ -99,7 +101,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				onDeselectAll: angular.noop,
 				onInitDone: angular.noop,
 				onMaxSelectionReached: angular.noop,
-				onSelectionChanged: angular.noop
+				onSelectionChanged: angular.noop,
+				onClose: angular.noop
 			};
 
 			$scope.settings = {
@@ -161,6 +164,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 			});
 
+			$scope.close = function(){
+				$scope.open = false;
+				$scope.externalEvents.onClose();
+			}
+
 			$scope.selectCurrentGroup = function(currentGroup) {
 				$scope.selectedModel.splice(0, $scope.selectedModel.length);
 				if ($scope.orderedItems) {
@@ -220,7 +228,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 						if (!parentFound) {
 							$scope.$apply(function() {
-								$scope.open = false;
+								$scope.close();
 							});
 						}
 					}
@@ -328,7 +336,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					clearObject($scope.selectedModel);
 					angular.extend($scope.selectedModel, finalObj);
 					$scope.externalEvents.onItemSelect(finalObj);
-					if ($scope.settings.closeOnSelect || $scope.settings.closeOnDeselect) $scope.open = false;
+					if ($scope.settings.closeOnSelect || $scope.settings.closeOnDeselect) $scope.close();
 				} else {
 					dontRemove = dontRemove || false;
 
@@ -337,11 +345,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					if (!dontRemove && exists) {
 						$scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
 						$scope.externalEvents.onItemDeselect(findObj);
-						if ($scope.settings.closeOnDeselect) $scope.open = false;
+						if ($scope.settings.closeOnDeselect) $scope.close();
 					} else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
 						$scope.selectedModel.push(finalObj);
 						$scope.externalEvents.onItemSelect(finalObj);
-						if ($scope.settings.closeOnSelect) $scope.open = false;
+						if ($scope.settings.closeOnSelect) $scope.close();
 						if ($scope.settings.selectionLimit > 0 && $scope.selectedModel.length === $scope.settings.selectionLimit) {
 							$scope.externalEvents.onMaxSelectionReached();
 						}
