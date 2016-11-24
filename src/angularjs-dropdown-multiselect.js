@@ -335,7 +335,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				if ($scope.singleSelection) {
 					clearObject($scope.selectedModel);
 					angular.extend($scope.selectedModel, finalObj);
-					$scope.externalEvents.onItemSelect(finalObj);
+					if (fireSelectionChange) {
+						$scope.externalEvents.onItemSelect(finalObj);
+					}
 					if ($scope.settings.closeOnSelect || $scope.settings.closeOnDeselect) $scope.close();
 				} else {
 					dontRemove = dontRemove || false;
@@ -348,7 +350,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						if ($scope.settings.closeOnDeselect) $scope.close();
 					} else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
 						$scope.selectedModel.push(finalObj);
-						$scope.externalEvents.onItemSelect(finalObj);
+						if (fireSelectionChange) {
+							$scope.externalEvents.onItemSelect(finalObj);
+						}
 						if ($scope.settings.closeOnSelect) $scope.close();
 						if ($scope.settings.selectionLimit > 0 && $scope.selectedModel.length === $scope.settings.selectionLimit) {
 							$scope.externalEvents.onMaxSelectionReached();
