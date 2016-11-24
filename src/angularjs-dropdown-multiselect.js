@@ -288,7 +288,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					return object[property];
 				}
 
-				return '';
+				return undefined;
 			};
 
 			$scope.selectAll = function() {
@@ -367,7 +367,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.isChecked = function(id) {
 				if ($scope.singleSelection) {
-					return $scope.selectedModel !== null && angular.isDefined($scope.selectedModel[$scope.settings.idProp]) && $scope.selectedModel[$scope.settings.idProp] === getFindObj(id)[$scope.settings.idProp];
+					return $scope.selectedModel !== null && angular.isDefined($scope.selectedModel[$scope.settings.externalIdProp]) && $scope.selectedModel[$scope.settings.externalIdProp] === getFindObj(id)[$scope.settings.externalIdProp];
 				}
 
 				return findIndex($scope.selectedModel, getFindObj(id)) !== -1;
