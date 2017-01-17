@@ -59,7 +59,7 @@ header h1 {
     color: #fff;
     line-height: 1;
     margin-bottom: 0.2em;
-    width: 540px;
+    width: auto;
 }
 header h2 {
     font-size: 26px;
@@ -71,8 +71,10 @@ header h2 {
 }
 .inner {
     position: relative;
-    width: 940px;
+    width: 1170px;
     margin: 0 auto;
+		padding-left: 30px;
+		padding-right: 30px;
 }
 #content-wrapper {
     border-top: solid 1px #fff;
@@ -230,7 +232,6 @@ h4:before {
     content:"////";
     color: #9ddcff;
     padding-right: 0.3em;
-    margin-left: -2.8em;
 }
 #main-content h5 {
     font-family:'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif;
@@ -285,7 +286,7 @@ footer {
     background: transparent url('../images/hr.png') 0 0 no-repeat;
     margin-top: 40px;
     padding-top: 20px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
     font-size: 13px;
     color: #aaa;
 }
@@ -324,7 +325,7 @@ footer a:hover {
         width: 740px;
     }
     header h1, header h2 {
-        width: 340px;
+        width: 740px;
     }
     header h1 {
         font-size: 60px;
@@ -401,6 +402,10 @@ footer a:hover {
         padding-right: 0;
         margin-left: 0;
     }
+		
+		a.option[disabled] {
+    	opacity: 0.5;
+		}
 }
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
  @media only screen and (min-width: 480px) and (max-width: 767px) {

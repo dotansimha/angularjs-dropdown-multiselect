@@ -1,7 +1,23 @@
 'use strict';
 
 angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scope) {
-	$scope.example1model = [];
+    $scope.testmodel = [];
+    $scope.testdata = [
+		{ id: 1, label: "David", disabled: true},
+		{ id: 2, label: "Jhon"},
+		{ id: 3, label: "Danny"}];
+    $scope.testsettings = {
+     showEnableSearchButton: true,
+		 keyboardControls: true
+    };
+
+    $scope.testevents = {
+      'onSelectionChanged': function () { // This event is not firing on selection of max limit
+        alert("you changed selection");
+      }
+    }
+
+    $scope.example1model = [];
 	$scope.example1data = [
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
@@ -51,7 +67,8 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		{id: 1, label: "David"},
 		{id: 2, label: "Jhon"},
 		{id: 3, label: "Danny"}];
-	$scope.example7settings = {externalIdProp: ''};
+	$scope.example7settings = { externalIdProp: '' };
+	$scope.customFilter = 'a';
 
 	$scope.example8model = [];
 	$scope.example8data = [
@@ -105,6 +122,29 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
 		}
 	};
 
+	$scope.selectByGroupModel = [];
+	$scope.selectByGroupData = [
+		{ id: 1, label: "David", gender: 'M' },
+		{ id: 2, label: "Jhon", gender: 'M' },
+		{ id: 3, label: "Lisa", gender: 'F' },
+		{ id: 4, label: "Nicole", gender: 'F' },
+		{ id: 5, label: "Danny", gender: 'M' },
+		{	id: 6, label: "Unknown", gender: 'O' }];
+
+	$scope.selectByGroupSettings = {
+		selectByGroups: ['F', 'M'],
+		groupByTextProvider: function(groupValue) {
+			switch (groupValue) {
+				case 'M':
+					return 'Male';
+				case 'F':
+					return 'Female';
+				case 'O':
+					return 'Other';
+			}
+		}
+	};
+
     $scope.example13model = [];
     $scope.example13data = [
         {id: 1, label: "David"},
@@ -154,5 +194,86 @@ angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scop
         enableSearch: true
     };
 
-    $scope.customFilter = 'a';
+    $scope.example16model = [];
+    $scope.example16data = [
+        { id: 1, label: "David" },
+        { id: 2, label: "Jhon" },
+        { id: 3, label: "Lisa" },
+        { id: 4, label: "Nicole" },
+        { id: 5, label: "Danny" }];
+    $scope.example16settings = {
+    	styleActive: true
+    };
+
+    $scope.example17model = [];
+    $scope.example17data = [
+        { id: 1, label: "David" },
+        { id: 2, label: "Jhon" },
+        { id: 3, label: "Lisa" },
+        { id: 4, label: "Nicole" },
+        { id: 5, label: "Danny" }];
+    $scope.example17settings = {
+    	keyboardControls: true,
+    };
+
+    $scope.example18model = {};
+    $scope.example18data = [
+        { id: 1, label: "David" },
+        { id: 2, label: "Jhon" },
+        { id: 3, label: "Lisa" },
+        { id: 4, label: "Nicole" },
+        { id: 5, label: "Danny" }];
+    $scope.example18settings = {
+    	keyboardControls: true,
+    	enableSearch: true,
+    	selectionLimit: 1
+    };
+
+    $scope.example19model = {};
+    $scope.example19data = [
+        { id: 1, name: "David" },
+        { id: 2, name: "Jhon" },
+        { id: 3, name: "Lisa" },
+        { id: 4, name: "Nicole" },
+        { id: 5, name: "Danny" }];
+    $scope.example19settings = {
+    	template: '<b>{{option.name}}</b>'
+    };
+
+    $scope.example20model = [];
+    $scope.example20data = [
+			{ id: 1, label: "David", age: 23 },
+			{ id: 2, label: "Jhon", age: 24 },
+			{ id: 3, label: "Danny", age: 26 }];
+    $scope.example20settings = {
+    	searchField: 'age',
+    	enableSearch: true
+    };
+		
+	$scope.example21model = [];
+    $scope.example21data = [
+			{ id: 1, label: "David"},
+			{ id: 2, label: "Jhon"},
+			{ id: 3, label: "Danny"}];
+    $scope.example21settings = {
+    	showEnableSearchButton: true
+    };
+
+    $scope.searchSelectAllModel = [];
+    $scope.searchSelectAllData = [
+		{ id: 1, label: "David" },
+		{ id: 2, label: "Jhon" },
+		{ id: 3, label: "Danny" }
+    ];
+    $scope.searchSelectAllSettings = {
+    	enableSearch: true,
+		keyboardControls: true
+    };
+		
+		$scope.disabledModel = [];
+    $scope.disabledData = [
+			{ id: 1, label: "David", disabled: true},
+			{ id: 2, label: "Jhon"},
+			{ id: 3, label: "Danny"}
+		];
 }]);
