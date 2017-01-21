@@ -65,7 +65,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			template += '</ul>';
 			template += '</div>';
 
-			element.html(template);
+                return template;
 		},
 		link: function($scope, $element, $attrs) {
 			var $dropdownTrigger = $element.children()[0];
