@@ -128,7 +128,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				styleActive: false,
 				keyboardControls: false,
 				template: '{{getPropertyForObject(option, settings.displayProp)}}',
-				searchField: '$'
+				searchField: '$',
+				showAllSelectedText: false
 			};
 
 			$scope.texts = {
@@ -141,7 +142,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				dynamicButtonTextSuffix: 'checked',
 				disableSearch: 'Disable search',
 				enableSearch: 'Enable search',
-				selectGroup: 'Select all:'
+				selectGroup: 'Select all:',
+				allSelectedText: 'All'
 			};
 
 			$scope.input = {
@@ -274,9 +276,13 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 						if (totalSelected === 0) {
 							return $scope.texts.buttonDefaultText;
-						} else {
-							return totalSelected + ' ' + $scope.texts.dynamicButtonTextSuffix;
 						}
+
+						if ($scope.settings.showAllSelectedText && totalSelected === $scope.options.length) {
+							return $scope.texts.allSelectedText;
+						}
+
+						return totalSelected + ' ' + $scope.texts.dynamicButtonTextSuffix;
 					}
 				} else {
 					return $scope.texts.buttonDefaultText;
