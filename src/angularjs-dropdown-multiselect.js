@@ -1,3 +1,5 @@
+(function (angular) {
+
 'use strict';
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
@@ -568,3 +570,5 @@ function findIndex(collection, properties) {
 
 	return index;
 }
+
+})(angular);
