@@ -1,7 +1,7 @@
 {
 	"author": "pkempenaers@myforce.be",
 	"name": "angularjs-dropdown-multiselect",
-	"version": "0.0.0",
+	"version": "1.10.2",
 	"description": "This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.",
 	"homepage": "http://myforce.github.io/angularjs-dropdown-multiselect/#/",
 	"dependencies": {

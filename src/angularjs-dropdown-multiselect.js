@@ -247,9 +247,27 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				return groupValue;
 			};
 
+			function textWidth(text) {
+				var $btn = $element.find('button');
+				var canvas = document.createElement('canvas');
+				var ctx = canvas.getContext('2d');
+				ctx.font = $btn.css('font-size') + $btn.css('font-family');
+				// http://stackoverflow.com/questions/38823353/chrome-canvas-2d-context-measuretext-giving-me-weird-results
+				ctx.originalFont = $btn.css('font-size') + $btn.css('font-family');
+				ctx.fillStyle = '#000000';
+				return ctx.measureText(text).width;
+			}
+
 			$scope.getButtonText = function() {
 				if ($scope.settings.dynamicTitle && ($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) && Object.keys($scope.selectedModel).length > 0))) {
 					if ($scope.settings.smartButtonMaxItems > 0) {
+
+						var paddingWidth = 12 * 2,
+						    borderWidth = 1 * 2,
+						    dropdownIconWidth = 8;
+						var ellipsisWidth = textWidth("...");
+						var widthLimit = $element[0].offsetWidth - paddingWidth - borderWidth - dropdownIconWidth;
+
 						var itemsText = [];
 
 						angular.forEach($scope.options, function(optionItem) {
@@ -266,7 +284,19 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 							itemsText.push('...');
 						}
 
-						return itemsText.join(', ');
+						var result = itemsText.join(', ');
+						var index = result.length - 4;
+						var countLimit = 100;
+						while (textWidth(result) > widthLimit) {
+							if (itemsText[itemsText.length - 1] !== "...") {
+								itemsText.push('...');
+								result = result + "...";
+							}
+							result = result.slice(0, index) + result.slice(index + 1);
+							index--;
+						}
+
+						return result;
 					} else {
 						var totalSelected;
 
