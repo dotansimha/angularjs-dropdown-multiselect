@@ -41,7 +41,7 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## Contributing
 Issues and PR's are much appreciated. We're currently working on reducing them.
-When you create a new PR please make it against the fix branch instead of master.
+When you create a new PR please make it against the develop branch when adding new features and to the fix branch when fixing small issues instead of master.
 
 ## Usage and Documentation
 See the documentation and examples in the GitHub pages:
