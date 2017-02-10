@@ -1,6 +1,3 @@
-# AngularJS Dropdown Multiselect
-[![CDNJS](https://img.shields.io/cdnjs/v/myforce-angularjs-dropdown-multiselect.svg)](https://cdnjs.com/libraries/myforce-angularjs-dropdown-multiselect)
-
 This directive gives you a Bootstrap Dropdown with the power of AngularJS directives.
 
 # Features
@@ -16,9 +13,10 @@ This directive gives you a Bootstrap Dropdown with the power of AngularJS direct
 - Callback events.
 - Translation texts.
 - Scrollable list (useful for big lists)
+- Keyboard controls
 
 ## Demo
-http://myforce.github.io/angularjs-dropdown-multiselect/
+http://dotansimha.github.io/angularjs-dropdown-multiselect/
 
 ## Dependencies
 - required: AngularJS >= 1.2, Bootstrap >= 3.0
@@ -30,7 +28,7 @@ http://myforce.github.io/angularjs-dropdown-multiselect/
 1. Download the files
 	1. Using bower: <img src="http://benschwarz.github.io/bower-badges/badge@2x.png" width="130" height="30">
 	
-		Just run `bower install myforce-angularjs-dropdown-multiselect`
+		Just run `bower install angularjs-dropdown-multiselect`
 	2. Using npm : 
 		Just run `npm install angularjs-dropdown-multiselect`
 	3. Manually:
@@ -43,4 +41,4 @@ http://myforce.github.io/angularjs-dropdown-multiselect/
 
 ## Usage and Documentation
 See the documentation and examples in the GitHub pages:
-http://myforce.github.io/angularjs-dropdown-multiselect/
+http://dotansimha.github.io/angularjs-dropdown-multiselect/
