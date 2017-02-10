@@ -39,6 +39,10 @@ http://dotansimha.github.io/angularjs-dropdown-multiselect/
 3. Include the module in angular (i.e. in `app.js`) - `angularjs-dropdown-multiselect`
 
 
+## Contributing
+Issues and PR's are much appreciated. We're currently working on reducing them.
+When you create a new PR please make it against the fix branch instead of master.
+
 ## Usage and Documentation
 See the documentation and examples in the GitHub pages:
 http://dotansimha.github.io/angularjs-dropdown-multiselect/
