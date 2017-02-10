@@ -1,5 +1,4 @@
-(function (angular) {
-
+(function(angular) {
 'use strict';
 
 var directiveModule = angular.module('angularjs-dropdown-multiselect', []);
@@ -67,15 +66,15 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 			template += '</ul>';
 			template += '</div>';
 
-                return template;
+			return template;
 		},
 		link: function($scope, $element, $attrs) {
 			var $dropdownTrigger = $element.children()[0];
 
 			$scope.toggleDropdown = function() {
-        if ($scope.open) {
-          $scope.close()
-        } else { $scope.open = true }
+				if ($scope.open) {
+					$scope.close()
+				} else { $scope.open = true }
 				if ($scope.settings.keyboardControls) {
 					if ($scope.open) {
 						if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
@@ -83,9 +82,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 								angular.element($element)[0].querySelector('.searchField').focus();
 							}, 0);
 						} else {
-							setTimeout(function() {
-								angular.element($element)[0].querySelector('.option').focus();
-							}, 0);
+							focusFirstOption();
 						}
 					}
 				}
@@ -168,7 +165,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 			});
 
-			$scope.close = function(){
+			$scope.close = function() {
 				$scope.open = false;
 				$scope.externalEvents.onClose();
 			}
@@ -263,8 +260,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					if ($scope.settings.smartButtonMaxItems > 0) {
 
 						var paddingWidth = 12 * 2,
-						    borderWidth = 1 * 2,
-						    dropdownIconWidth = 8;
+								borderWidth = 1 * 2,
+								dropdownIconWidth = 8;
 						var ellipsisWidth = textWidth("...");
 						var widthLimit = $element[0].offsetWidth - paddingWidth - borderWidth - dropdownIconWidth;
 
@@ -472,9 +469,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 				if (event.keyCode === 9 || event.keyCode === 40) { //tab
 					event.preventDefault();
-					setTimeout(function() {
-						angular.element($element)[0].querySelector('.option').focus();
-					}, 0);
+					focusFirstOption();
 				} else if (event.keyCode === 38) {
 					event.preventDefault();
 					if (!!parent.previousElementSibling) {
@@ -542,10 +537,19 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 							}, 0
 						);
 					} else {
-						angular.element($element)[0].querySelector('.option').focus();
+						focusFirstOption();
 					}
 				}
 			};
+
+			function focusFirstOption() {
+				setTimeout(function() {
+					var elementToFocus = angular.element($element)[0].querySelector('.option');
+					if (angular.isDefined(elementToFocus) && elementToFocus != null) {
+						elementToFocus.focus();
+					}
+				}, 0);
+			}
 		}
 	};
 }]);
@@ -600,5 +604,4 @@ function findIndex(collection, properties) {
 
 	return index;
 }
-
 })(angular);
