@@ -1,19 +1,21 @@
 'use strict';
 
 angular.module('exampleApp').controller('ExampleCtrl', ['$scope', function($scope) {
-    $scope.testmodel = [];
+	$scope.testmodel = {};
     $scope.testdata = [
-		{ id: 1, label: "David", disabled: true},
+		{ id: 1, label: "David"},
 		{ id: 2, label: "Jhon"},
-		{ id: 3, label: "Danny"}];
+		{ id: 3, label: "Danny" }
+   ];
     $scope.testsettings = {
-     showEnableSearchButton: true,
-		 keyboardControls: true
+    	externalIdProp: '',
+    	selectionLimit: 1,
+    	smartButtonMaxItems: 1,
     };
 
     $scope.testevents = {
       'onSelectionChanged': function () { // This event is not firing on selection of max limit
-        alert("you changed selection");
+        console.log("you changed selection");
       }
     }
 
