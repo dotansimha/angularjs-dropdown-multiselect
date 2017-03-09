@@ -120,6 +120,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				idProp: 'id',
 				externalIdProp: 'id',
 				enableSearch: false,
+				clearSearchOnClose: false,
 				selectionLimit: 0,
 				showCheckAll: true,
 				showUncheckAll: true,
@@ -174,6 +175,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 			$scope.close = function() {
 				$scope.open = false;
+				$scope.input.searchFilter = $scope.settings.clearSearchOnClose ? '' : $scope.input.searchFilter;
 				$scope.externalEvents.onClose();
 			}
 
