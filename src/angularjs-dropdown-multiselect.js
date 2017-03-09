@@ -86,6 +86,13 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						}
 					}
 				}
+				if ($scope.settings.enableSearch) {
+					if ($scope.open) {
+						setTimeout(function () {
+							angular.element($element)[0].querySelector('.searchField').focus();
+						}, 0);
+					}
+				}
 			};
 
 			$scope.checkboxClick = function($event, id) {
@@ -284,6 +291,8 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						var result = itemsText.join(', ');
 						var index = result.length - 4;
 						var countLimit = 100;
+						if ($element[0].offsetWidth === 0)
+							return result;
 						while (textWidth(result) > widthLimit) {
 							if (itemsText[itemsText.length - 1] !== "...") {
 								itemsText.push('...');
