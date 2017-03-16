@@ -209,15 +209,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				return findObj;
 			}
 
-			function clearObject(object) {
-				for (var prop in object) {
-					delete object[prop];
-				}
-			}
-
 			if ($scope.singleSelection) {
 				if (angular.isArray($scope.selectedModel) && $scope.selectedModel.length === 0) {
-					clearObject($scope.selectedModel);
+					$scope.selectedModel = {};
 				}
 			}
 
@@ -358,7 +352,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 
 				if ($scope.singleSelection) {
-					clearObject($scope.selectedModel);
+					$scope.selectedModel = {};
 				} else {
 					$scope.selectedModel.splice(0, $scope.selectedModel.length);
 				}
@@ -379,8 +373,11 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				}
 
 				if ($scope.singleSelection) {
-					clearObject($scope.selectedModel);
-					angular.extend($scope.selectedModel, finalObj);
+					if (find($scope.options, $scope.selectedModel) === find($scope.options, findObj)) {
+						$scope.selectedModel = {};
+					} else {
+						$scope.selectedModel = finalObj;
+					}
 					if (fireSelectionChange) {
 						$scope.externalEvents.onItemSelect(finalObj);
 					}
@@ -581,6 +578,10 @@ function contains(collection, target) {
 
 function find(collection, properties) {
 	var target;
+
+	if (Object.keys(properties).length === 0) {
+		return undefined;
+	}
 
 	collection.some(function(object) {
 		var hasAllSameProperties = true;
