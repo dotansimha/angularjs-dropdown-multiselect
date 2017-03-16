@@ -175,7 +175,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
  					var selected = $scope.selectedModel.map(function(model) {
             return model.id;
           });
-      		$scope.options = selectToTop($scope.options, _.pluck($scope.selectedModel, 'id'), $scope.settings.displayProp);
+      		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
 				}
 			});
 
@@ -417,7 +417,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
  					var selected = $scope.selectedModel.map(function(model) {
             return model.id;
           });
-      		$scope.options = selectToTop($scope.options, _.pluck($scope.selectedModel, 'id'), $scope.settings.displayProp);
+      		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
 				}
 				$scope.selectedGroup = null;
 			};
