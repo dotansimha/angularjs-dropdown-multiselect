@@ -133,6 +133,7 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				smartButtonMaxItems: 0,
 				smartButtonTextConverter: angular.noop,
 				styleActive: false,
+				selectedToTop: false,
 				keyboardControls: false,
 				template: '{{getPropertyForObject(option, settings.displayProp)}}',
 				searchField: '$',
@@ -170,6 +171,12 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 					$scope.singleSelection = true;
 				} else {
 					$scope.singleSelection = false;
+				}
+				if ($scope.extraSettings.selectedToTop) {
+ 					var selected = $scope.selectedModel.map(function(model) {
+            return model.id;
+          });
+      		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
 				}
 			});
 
@@ -405,6 +412,12 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 				if (fireSelectionChange) {
 					$scope.externalEvents.onSelectionChanged();
 				}
+				if ($scope.extraSettings.selectedToTop) {
+ 					var selected = $scope.selectedModel.map(function(model) {
+            return model.id;
+          });
+      		$scope.options = selectToTop($scope.options, selected, $scope.settings.displayProp);
+				}
 				$scope.selectedGroup = null;
 			};
 
@@ -618,5 +631,21 @@ function findIndex(collection, properties) {
 	});
 
 	return index;
+}
+	function selectToTop(list, checkedId, displayProp) {
+  list.sort(function(a, b) {
+    var textA = a[displayProp].toUpperCase();
+    var textB = b[displayProp].toUpperCase();
+    if (textA < textB) {
+      return checkedId.includes(b.id) && !checkedId.includes(a.id) ? 1 : -1
+    } else {
+      if (textA > textB) {
+        return checkedId.includes(a.id) && !checkedId.includes(b.id) ? -1: 1
+      } else {
+        return 0
+      }
+    }
+  });
+  return list;
 }
 })(angular);
