@@ -1,6 +1,6 @@
 {
   "name": "angularjs-dropdown-multiselect",
-  "version": "1.11.0",
+  "version": "2.0.0-beta.1",
   "authors": [
     "Dotan Simha <dotansimha@gmail.com>",
     "Pieter Kempenaers <pkempenaers@myforce.be>"
@@ -18,7 +18,7 @@
     "checkbox"
   ],
   "license": "MIT",
-  "main": "src/angularjs-dropdown-multiselect.js",
+  "main": "component/component.js",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -30,16 +30,21 @@
     "angular": "~1.5"
   },
   "devDependencies": {
-    "angular": "~1.5",
-    "angular-animate": "~1.5",
-    "angular-sanitize": "~1.5",
-    "angular-touch": "~1.5",
-    "angular-route": "~1.5",
-    "bootstrap": "~3.1.1",
-    "angular-highlightjs": "~0.2.7",
-    "angular-bootstrap": "^1.3.1"
+    "angular-highlightjs": "^0.7.1",
+    "bootstrap-sass": "~3.3.5",
+    "angular-mocks": "~1.5.3",
+    "angular-bootstrap": "~2.1.4",
+    "angular-ui-router": "~0.4.2"
   },
   "resolutions": {
     "angular": ">=1.4.0"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/**/*"
+      ]
+    }
   }
 }

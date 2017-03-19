@@ -1,9 +1,18 @@
 Version numbers correspond to `bower.json` version
 
-# 1.0.0
+# 2.0.0-beta.1
 
-## Features
-
-## Bug Fixes
+We've started a rework of the component and are planning to resolve as many issues as possible, this however means that some breaking changes are needed. We've decided to release some beta versions first in which we'll have the freedom to add more breaking changes.
 
 ## Breaking Changes
+- extraSettings.selectionLimit = 1 is now treated the same as all other values, so selected-model doesn't have to be an object anymore (it should always be an array)
+- removed attribute group-by, replaced by setting groupBy
+- removed attribute checkboxes, replaced by setting checkBoxes
+
+## Features
+- Development wise the module has got a makeover which should make it easier to be maintained, before we release 2.0.1 we'll try to make the development experience as nice as possible
+- We've also started a refactoring of the component that should make it easier to use and to add new features
+- Added the selectedToTop setting.
+
+## Bug Fixes
+- Fixes #317: Single selection can remove properties from preselected object
