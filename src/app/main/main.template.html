@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ExampleCtrl">
+<div class="container">
 	<div class="row">
 		<div class="col-xs-12">
 			<h2 style="margin-bottom: 0">What is AngularJS Dropdown Multiselect?</h2>
@@ -20,10 +20,13 @@
 					Using it from GitHub raw using <a href="https://rawgit.com/dotansimha/angularjs-dropdown-multiselect/master/src/angularjs-dropdown-multiselect.js">this link</a>
 				</li>
 			</ol>
+      This is documentation for the currently still in beta v2.0.0, the documentation for v1 can be found here:
+      <a ui-sref="v1" ui-sref-active="active">V1 docs</a>
 		</div>
 	</div>
 	<uib-accordion close-others="true">
-		<!--<uib-accordion-group heading="test Settings Example" is-open="true" style="height: 500px">
+		<div uib-accordion-group heading="test Settings Example" is-open="true" style="height: 500px"
+         ng-if="testing">
 			<div class="row">
 				<div class="col-xs-12">
 					test
@@ -43,8 +46,8 @@
 					<pre>{{testmodel|json}}</pre>
 				</div>
 			</div>
-		</uib-accordion-group>-->
-		<uib-accordion-group heading="Basic Usage Example" is-open="true">
+		</div>
+		<div uib-accordion-group heading="Basic Usage Example" is-open="true">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -62,16 +65,21 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect="" options="example1data" selected-model="example1model"></div>
 
-// JavaScript $scope.example1model = []; $scope.example1data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}];
-							</div>
+// JavaScript $scope.example1model = [];
+$scope.example1data = [
+  {id: 1, label: "David"},
+  {id: 2, label: "Jhon"},
+  {id: 3, label: "Danny"}
+];
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Basic Settings Example">
+		</div>
+		<div uib-accordion-group heading="Basic Settings Example">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows the ability to select the property to display as text label.
@@ -95,16 +103,16 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example2data" selected-model="example2model" extra-settings="example2settings"></div>
 
 // JavaScript $scope.example2model = []; $scope.example2data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example2settings = {displayProp: 'id'};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Smart Button Text">
+		</div>
+		<div uib-accordion-group heading="Smart Button Text">
 			<div class="row">
 				<div class="col-xs-12">
 					You can use the feature in order to show which items are selected instead the items count.<br />
@@ -129,7 +137,7 @@
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 //HTML
 <div ng-dropdown-multiselect options="example13data" selected-model="example13model" extra-settings="example13settings"></div>
 
@@ -147,17 +155,17 @@ $scope.example13settings = {
 	smartButtonMaxItems: 3,
 	smartButtonTextConverter: function(itemText, originalItem) {
 		if (itemText === 'Jhon') {
-		return 'Jhonny!';
+			return 'Jhonny!';
 		}
 
 		return itemText;
 	}
 };
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Scrollable List">
+		</div>
+		<div uib-accordion-group heading="Scrollable List">
 			<div class="row">
 				<div class="col-xs-12">
 					You can use the feature in order to make the list of items scrollable. Useful when you deal with a lot of items.
@@ -180,7 +188,7 @@ $scope.example13settings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 //HTML
 <div ng-dropdown-multiselect options="example14data" selected-model="example14model" extra-settings="example14settings"></div>
 
@@ -203,11 +211,11 @@ $scope.example14settings = {
 	scrollableHeight: '100px',
 	scrollable: true
 };
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Enabling Search">
+		</div>
+		<div uib-accordion-group heading="Enabling Search">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -225,16 +233,16 @@ $scope.example14settings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs language="javascript">
+					<div hljs language="javascript">
 // HTML
 <div ng-dropdown-multiselect="" options="example9data" selected-model="example9model" extra-settings="example9settings"></div>
 
 // JavaScript $scope.example9model = []; $scope.example9data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example9settings = {enableSearch: true};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Specifying Search field">
+		</div>
+		<div uib-accordion-group heading="Specifying Search field">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, search is done on all items, by specifying the searchField in the settings object one can specify on which field of the objects the filtering should be done.
@@ -275,8 +283,8 @@ $scope.example20settings = {
 					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Enable / Disable search button">
+		</div>
+		<div uib-accordion-group heading="Enable / Disable search button">
 			<div class="row">
 				<div class="col-xs-12">
 					Setting showEnableSearchButton to true will add the enable/disable search button under the Select all / Deselect all buttons
@@ -308,15 +316,16 @@ $scope.example21model = [];
 $scope.example21data = [
 	{ id: 1, label: "David"},
 	{ id: 2, label: "Jhon"},
-	{ id: 3, label: "Danny"}];
+	{ id: 3, label: "Danny"}
+];
 $scope.example21settings = {
 	showEnableSearchButton: true
 };
 					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Search with select all and keyboard controls">
+		</div>
+		<div uib-accordion-group heading="Search with select all and keyboard controls">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -337,9 +346,9 @@ $scope.example21settings = {
 					<div hljs language="javascript">
 // HTML
 <div ng-dropdown-multiselect="" options="searchSelectAllData" selected-model="searchSelectAllModel" extra-settings="searchSelectAllSettings"></div>
-// JavaScript 
-$scope.searchSelectAllModel = []; 
-$scope.searchSelectAllData = [ 
+// JavaScript
+$scope.searchSelectAllModel = [];
+$scope.searchSelectAllData = [
 	{id: 1, label: "David"},
 	{id: 2, label: "Jhon"},
 	{id: 3, label: "Danny"}
@@ -352,8 +361,8 @@ $scope.searchSelectAllSettings = {
 					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Selection Limit">
+		</div>
+		<div uib-accordion-group heading="Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, there is no limit on the maximum selected items.
@@ -377,9 +386,9 @@ $scope.searchSelectAllSettings = {
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
-						<div>
-							<div ng-dropdown-multiselect options="example10data" selected-model="example10model" extra-settings="example10settings"></div>
-						</div>
+					<div>
+						<div ng-dropdown-multiselect options="example10data" selected-model="example10model" extra-settings="example10settings"></div>
+					</div>
 				</div>
 				<div class="col-xs-12 col-sm-6">
 					<h3>The model:</h3>
@@ -389,16 +398,16 @@ $scope.searchSelectAllSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example10data" selected-model="example10model" extra-settings="example10settings"></div>
 
 // JavaScript $scope.example10model = []; $scope.example10data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example10settings = {selectionLimit: 2};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Single Selection Limit">
+		</div>
+		<div uib-accordion-group heading="Single Selection Limit">
 			<div class="row">
 				<div class="col-xs-12">
 					Please read the notes in the "Selection Limit" example.
@@ -422,26 +431,28 @@ $scope.searchSelectAllSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example10data" selected-model="example10model" extra-settings="example10settings"></div>
 
-// JavaScript 
-$scope.example12model = {}; // ! IMPORTANT ! 
+// JavaScript
+$scope.example12model = {}; // ! IMPORTANT !
 $scope.example12data = [
 	{id: 1, label: "David"},
-	{id: 2, label: "Jhon"}, 
+	{id: 2, label: "Jhon"},
 	{id: 3, label: "Danny"}
 ];
-$scope.example12settings = {selectionLimit: 1};
-							</div>
+$scope.example12settings = {
+	selectionLimit: 1,
+};
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Group Items By Property">
+		</div>
+		<div uib-accordion-group heading="Group Items By Property">
 			<div class="row">
 				<div class="col-xs-12">
-					You can also group the items by propery that you want, in order to to that, provide the "group-by" attribute.
+					You can also group the items by propery that you want, in order to to that, provide the groupBy setting.
 					<br />Also, you need to provide "groupByTextProvider" callback in the extra-settings attribute, in order to provide the header text for each group.
 					<br />
 					<strong>
@@ -455,7 +466,7 @@ $scope.example12settings = {selectionLimit: 1};
 					<h3>Demo</h3>
 					<div class="well">
 						<div>
-							<div ng-dropdown-multiselect options="example11data" selected-model="example11model" extra-settings="example11settings" group-by="gender"></div>
+							<div ng-dropdown-multiselect options="example11data" selected-model="example11model" extra-settings="example11settings"></div>
 						</div>
 					</div>
 				</div>
@@ -467,16 +478,34 @@ $scope.example12settings = {selectionLimit: 1};
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
-<div ng-dropdown-multiselect options="example11data" selected-model="example11model" extra-settings="example11settings" group-by="gender"></div>
+<div ng-dropdown-multiselect options="example11data" selected-model="example11model" extra-settings="example11settings"></div>
 
-// JavaScript $scope.example11model = []; $scope.example11data = [ {id: 1, label: "David", gender: 'M'}, {id: 2, label: "Jhon", gender: 'M'}, {id: 3, label: "Lisa", gender: 'F'}, {id: 4, label: "Nicole", gender: 'F'}, {id: 5, label: "Danny", gender: 'M'}]; $scope.example11settings = { groupByTextProvider: function(groupValue) { if (groupValue === 'M') { return 'Male'; } else { return 'Female'; } } };
-							</div>
+// JavaScript
+$scope.example11model = [];
+$scope.example11data = [
+  {id: 1, label: "David", gender: 'M'},
+  {id: 2, label: "Jhon", gender: 'M'},
+  {id: 3, label: "Lisa", gender: 'F'},
+  {id: 4, label: "Nicole", gender: 'F'},
+  {id: 5, label: "Danny", gender: 'M'}
+];
+$scope.example11settings = { 
+  groupByTextProvider: function(groupValue) {
+    if (groupValue === 'M') {
+      return 'Male';
+    } else {
+      return 'Female'; 
+    }
+  },
+  groupBy: 'gender',
+};
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Select Items by Group">
+		</div>
+		<div uib-accordion-group heading="Select Items by Group">
 			<div class="row">
 				<div class="col-xs-12">
 					When items are grouped by property you can also specify an array of groups that you can use to select the items by.
@@ -489,7 +518,7 @@ $scope.example12settings = {selectionLimit: 1};
 					<h3>Demo</h3>
 					<div class="well">
 						<div>
-							<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings" group-by="gender"></div>
+							<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings"></div>
 						</div>
 					</div>
 				</div>
@@ -501,9 +530,9 @@ $scope.example12settings = {selectionLimit: 1};
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
-<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings" group-by="gender"></div>
+<div ng-dropdown-multiselect options="selectByGroupData" selected-model="selectByGroupModel" extra-settings="selectByGroupSettings"></div>
 
 // JavaScript
 $scope.selectByGroupModel = [];
@@ -513,26 +542,28 @@ $scope.selectByGroupData = [
 	{ id: 3, label: "Lisa", gender: 'F' },
 	{ id: 4, label: "Nicole", gender: 'F' },
 	{ id: 5, label: "Danny", gender: 'M' },
-	{	id: 6, label: "Unknown", gender: 'O' }];
+	{	id: 6, label: "Unknown", gender: 'O' }
+];
 
 $scope.selectByGroupSettings = {
 	selectByGroups: ['F', 'M'],
 	groupByTextProvider: function(groupValue) {
 		switch (groupValue) {
-			case 'M':
-				return 'Male';
-			case 'F':
-				return 'Female';
-			case 'O':
-				return 'Other';
+		case 'M':
+			return 'Male';
+		case 'F':
+			return 'Female';
+		case 'O':
+			return 'Other';
 		}
-	}
+	},
+  groupBy: 'gender',
 };
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Custom ID property">
+		</div>
+		<div uib-accordion-group heading="Custom ID property">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, the directive tries to find "id" property for each object to identify it as unique.
@@ -559,16 +590,16 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example3data" selected-model="example3model" extra-settings="example3settings"></div>
 
 // JavaScript $scope.example3model = []; $scope.example3data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}, {id: 4, label: "Danny"}]; $scope.example3settings = {displayProp: 'label', idProp: 'label'};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Model Custom Property">
+		</div>
+		<div uib-accordion-group heading="Model Custom Property">
 			<div class="row">
 				<div class="col-xs-12">
 					By default, the model of the selected items will contain the objects with "id" property with the value of the idProp settings.
@@ -592,16 +623,16 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example4data" selected-model="example4model" extra-settings="example4settings"></div>
 
 // JavaScript $scope.example4model = []; $scope.example4data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example4settings = {displayProp: 'label', idProp: 'id', externalIdProp: 'myCustomPropertyForTheObject'};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Custom Button Text">
+		</div>
+		<div uib-accordion-group heading="Custom Button Text">
 			<div class="row">
 				<div class="col-xs-12">
 					You can select your own text of the button using the "defaultText" in settings.
@@ -624,16 +655,16 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example5data" selected-model="example5model" extra-settings="example5settings" translation-texts="example5customTexts"></div>
 
 // JavaScript $scope.example5model = []; $scope.example5data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example5settings = {}; $scope.example5customTexts = {buttonDefaultText: 'Select Users'};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Pre-selected Values">
+		</div>
+		<div uib-accordion-group heading="Pre-selected Values">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of using a pre-setted model.
@@ -658,16 +689,16 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example6data" selected-model="example6model" extra-settings="example6settings"></div>
 
 // JavaScript $scope.example6model = [{id: 1}, {id: 3}]; $scope.example6data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example6settings = {};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Full Object as model">
+		</div>
+		<div uib-accordion-group heading="Full Object as model">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of using full object as a model.
@@ -693,16 +724,16 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect options="example7data" selected-model="example7model" extra-settings="example7settings"></div>
 
 // JavaScript $scope.example7model = []; $scope.example7data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example7settings = {externalIdProp: ''};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="External Search Filter">
+		</div>
+		<div uib-accordion-group heading="External Search Filter">
 			<div class="row">
 				<div class="col-xs-12">
 					This example shows a demostration of access and set the search filter from outside the directive.
@@ -729,7 +760,7 @@ $scope.selectByGroupSettings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect search-filter="customFilter" options="example15data" selected-model="example15model" extra-settings="example15settings"></div>
 
@@ -741,19 +772,22 @@ $scope.example15data = [
 	{id: 2, label: "Jhon"},
 	{id: 3, label: "Lisa"},
 	{id: 4, label: "Nicole"},
-	{id: 5, label: "Danny"}];
+	{id: 5, label: "Danny"}
+];
 
-$scope.example15settings = {enableSearch: true};
+$scope.example15settings = {
+	enableSearch: true
+};
 
 $scope.customFilter = 'a';
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Checkboxes List">
+		</div>
+		<div uib-accordion-group heading="Checkboxes List">
 			<div class="row">
 				<div class="col-xs-12">
-					You can also use a checkboxes list by adding "checkboxes" attribute to your element!
+					You can also use a checkboxes list by setting checkBoxes setting to true!
 				</div>
 			</div>
 			<div class="row">
@@ -761,7 +795,7 @@ $scope.customFilter = 'a';
 					<h3>Demo</h3>
 					<div class="well">
 						<div>
-							<div ng-dropdown-multiselect options="example8data" selected-model="example8model" checkboxes="true"></div>
+							<div ng-dropdown-multiselect options="example8data" selected-model="example8model" extra-settings="example8settings"></div>
 						</div>
 					</div>
 				</div>
@@ -773,16 +807,24 @@ $scope.customFilter = 'a';
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-						<div hljs>
+					<div hljs>
 // HTML
-<div ng-dropdown-multiselect options="example8data" selected-model="example8model" checkboxes="true"></div>
+<div ng-dropdown-multiselect options="example8data" selected-model="example8model" extra-settings="example8settings"></div>
 
-// JavaScript $scope.example8model = []; $scope.example8data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}];
-						</div>
+// JavaScript $scope.example8model = [];
+$scope.example8data = [
+  {id: 1, label: "David"},
+  {id: 2, label: "Jhon"},
+  {id: 3, label: "Danny"}
+];
+$scope.example8settings = {
+  checkBoxes: true,
+};
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Style active items">
+		</div>
+		<div uib-accordion-group heading="Style active items">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -801,17 +843,17 @@ $scope.customFilter = 'a';
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect="" options="example16data" selected-model="example16model" extra-settings="example16settings"></div>
 
-// JavaScript 
+// JavaScript
 $scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example16settings = {styleActive: true};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Keyboard controls">
+		</div>
+		<div uib-accordion-group heading="Keyboard controls">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -830,17 +872,17 @@ $scope.example16model = []; $scope.example16data = [ {id: 1, label: "David"}, {i
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
+					<div hljs>
 // HTML
 <div ng-dropdown-multiselect="" options="example17data" selected-model="example17model" extra-settings="example17settings"></div>
 
-// JavaScript 
+// JavaScript
 $scope.example17model = []; $scope.example17data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example17settings = {keyboardControls: true};
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Keyboard controls with single selection and search">
+		</div>
+		<div uib-accordion-group heading="Keyboard controls with single selection and search">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -859,29 +901,29 @@ $scope.example17model = []; $scope.example17data = [ {id: 1, label: "David"}, {i
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
-// HTML 
+					<div hljs>
+// HTML
 <div ng-dropdown-multiselect="" options="example18data" selected-model="example18model" extra-settings="example18settings"></div>
 
-// JavaScript 
+// JavaScript
 $scope.example18model = {};
 $scope.example18data = [
-    { id: 1, label: "David" },
-    { id: 2, label: "Jhon" },
-    { id: 3, label: "Lisa" },
-    { id: 4, label: "Nicole" },
-    { id: 5, label: "Danny" }
+	{ id: 1, label: "David" },
+	{ id: 2, label: "Jhon" },
+	{ id: 3, label: "Lisa" },
+	{ id: 4, label: "Nicole" },
+	{ id: 5, label: "Danny" }
 ];
 $scope.example18settings = {
-  keyboardControls: true,
-  enableSearch: true,
-  selectionLimit: 1
+	keyboardControls: true,
+	enableSearch: true,
+	selectionLimit: 1
 };
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Custom template per option">
+		</div>
+		<div uib-accordion-group heading="Custom template per option">
 			<div class="row">
 				<div class="col-xs-12 col-sm-6">
 					<h3>Demo</h3>
@@ -900,27 +942,27 @@ $scope.example18settings = {
 			<div class="row">
 				<div class="col-md-12">
 					<h3>Code</h3>
-							<div hljs>
-// HTML 
+					<div hljs>
+// HTML
 <div ng-dropdown-multiselect="" options="example19data" selected-model="example19model" extra-settings="example19settings"></div>
 
-// JavaScript 
+// JavaScript
 $scope.example19model = {};
 $scope.example19data = [
-    { id: 1, name: "David" },
-    { id: 2, name: "Jhon" },
-    { id: 3, name: "Lisa" },
-    { id: 4, name: "Nicole" },
-    { id: 5, name: "Danny" }
+	{ id: 1, name: "David" },
+	{ id: 2, name: "Jhon" },
+	{ id: 3, name: "Lisa" },
+	{ id: 4, name: "Nicole" },
+	{ id: 5, name: "Danny" }
 ];
 $scope.example19settings = {
-  template: '<b>{{option.name}}</b>'
+	template: '<b>{{option.name}}</b>'
 };
-							</div>
+					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
-		<uib-accordion-group heading="Disable Option">
+		</div>
+		<div uib-accordion-group heading="Disable Option">
 			<div class="row">
 				<div class="col-xs-12">
 					Setting the field disabled of an option to true will disable that option, if the option was previously
@@ -958,7 +1000,49 @@ $scope.disabledData = [
 					</div>
 				</div>
 			</div>
-		</uib-accordion-group>
+		</div>
+    <div uib-accordion-group heading="Selected to top of list">
+      <div class="row">
+        <div class="col-xs-12">
+          When setting "selectedToTop" to true, selected items will be ordered to the top. When group by is active, the selected items will be at the top of their group.
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <h3>Demo</h3>
+          <div class="well">
+            <div>
+              <div ng-dropdown-multiselect="" options="selectedToTopData" selected-model="selectedToTopModel" extra-settings="selectedToTopSettings"></div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <h3>The model:</h3>
+          <pre>{{selectedToTopModel|json}}</pre>
+          {{selectedToTopSettings}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Code</h3>
+          <div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="selectedToTopData" selected-model="selectedToTopModel" extra-settings="selectedToTopSettings"></div>
+
+// JavaScript
+$scope.selectedToTopModel = [];
+$scope.selectedToTopData = [
+  { id: 1, label: 'David' },
+  { id: 2, label: 'Jhon' },
+  { id: 3, label: 'Danny' },
+];
+$scope.selectedToTopSettings = {
+  selectedToTop: true,
+};
+          </div>
+        </div>
+      </div>
+    </div>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
@@ -1006,20 +1090,6 @@ $scope.disabledData = [
 				</td>
 				<td>Object</td>
 				<td>Gives the ability to modify the default texts in the directive. More information below.</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>group-by</strong>
-				</td>
-				<td>String</td>
-				<td>The name of the property which you like to group by your options. See grouping example.</td>
-			</tr>
-			<tr>
-				<td>
-					<strong>checkboxes</strong>
-				</td>
-				<td>Boolean</td>
-				<td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
 			</tr>
 			<tr>
 				<td>
@@ -1089,6 +1159,12 @@ $scope.disabledData = [
 				<td>Indicated if to show the search input or not.</td>
 			</tr>
 			<tr>
+				<td>clearSearchOnClose</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>Indicated if to clear the search field when the dropdown has closed.</td>
+			</tr>
+			<tr>
 				<td>searchField</td>
 				<td>String</td>
 				<td>"$"</td>
@@ -1136,11 +1212,19 @@ $scope.disabledData = [
 				<td>btn btn-default</td>
 				<td>The CSS classes that used for setting the style of the button.</td>
 			</tr>
+      <tr>
+        <td>
+          groupBy
+        </td>
+        <td>String</td>
+        <td>undefined</td>
+        <td>The name of the property which you like to group by your options. See grouping example.</td>
+      </tr>
 			<tr>
 				<td>groupByTextProvider</td>
 				<td>Function</td>
 				<td>angular.noop</td>
-				<td>A callback to a function that provide that name for each group when using group-by attribute. The parameter for the function will be the value of the group-by property.</td>
+				<td>A callback to a function that provide that name for each group when using groupBy setting. The parameter for the function will be the value of the groupBy property.</td>
 			</tr>
 			<tr>
 				<td>scrollable</td>
@@ -1190,6 +1274,14 @@ $scope.disabledData = [
 				<td>undefined</td>
 				<td>Values of the groupby property that you want to be selectable as group</td>
 			</tr>
+      <tr>
+        <td>
+          checkBoxes
+        </td>
+        <td>Boolean</td>
+        <td>false</td>
+        <td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
+      </tr>
 		</tbody>
 	</table>
 	<h2>Events</h2>
@@ -1304,4 +1396,3 @@ $scope.disabledData = [
 		</tbody>
 	</table>
 </div>
-					
