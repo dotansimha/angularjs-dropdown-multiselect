@@ -372,13 +372,9 @@ $scope.searchSelectAllSettings = {
 					<br />
 					<strong>Note 2: When using this limit, the "Select All" button will not appear!</strong>
 					<br />
-					<strong>
-						Note 3: When using the limit and setting it to "1", the model will contain a
-						single object instead of array.
-					</strong>
 					<br />
 					<strong>
-						Note 4: When using single selection (limit to 1) the selection will change
+						Note 3: When using single selection (limit to 1) the selection will change
 						automaticlly if another item is clicked!
 					</strong>
 				</div>
@@ -563,75 +559,6 @@ $scope.selectByGroupSettings = {
 				</div>
 			</div>
 		</div>
-		<div uib-accordion-group heading="Custom ID property">
-			<div class="row">
-				<div class="col-xs-12">
-					By default, the directive tries to find "id" property for each object to identify it as unique.
-					<br />You can change this behavior and select your own ID property.
-					<br />In this example, you can see that if the ID property is not unique - All items that match the custom ID property will be selected, but the model will contain it as a unique ID (Try to select "Danny" from the list to see it in action).
-					<br />
-					<br />This feature is also useful if your objects comes from MongoDB and have a "_id" property instead of "id".
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h3>Demo</h3>
-					<div class="well">
-						<div>
-							<div ng-dropdown-multiselect options="example3data" selected-model="example3model" extra-settings="example3settings"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h3>The model:</h3>
-					<pre>{{example3model|json}}</pre>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Code</h3>
-					<div hljs>
-// HTML
-<div ng-dropdown-multiselect options="example3data" selected-model="example3model" extra-settings="example3settings"></div>
-
-// JavaScript $scope.example3model = []; $scope.example3data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}, {id: 4, label: "Danny"}]; $scope.example3settings = {displayProp: 'label', idProp: 'label'};
-					</div>
-				</div>
-			</div>
-		</div>
-		<div uib-accordion-group heading="Model Custom Property">
-			<div class="row">
-				<div class="col-xs-12">
-					By default, the model of the selected items will contain the objects with "id" property with the value of the idProp settings.
-					<br />You can modify this by using the externalIdProp in settings!
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h3>Demo</h3>
-					<div class="well">
-						<div>
-							<div ng-dropdown-multiselect options="example4data" selected-model="example4model" extra-settings="example4settings"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h3>The model:</h3>
-					<pre>{{example4model|json}}</pre>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Code</h3>
-					<div hljs>
-// HTML
-<div ng-dropdown-multiselect options="example4data" selected-model="example4model" extra-settings="example4settings"></div>
-
-// JavaScript $scope.example4model = []; $scope.example4data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example4settings = {displayProp: 'label', idProp: 'id', externalIdProp: 'myCustomPropertyForTheObject'};
-					</div>
-				</div>
-			</div>
-		</div>
 		<div uib-accordion-group heading="Custom Button Text">
 			<div class="row">
 				<div class="col-xs-12">
@@ -669,7 +596,7 @@ $scope.selectByGroupSettings = {
 				<div class="col-xs-12">
 					This example shows a demostration of using a pre-setted model.
 					<br />
-					<strong>Note:</strong>The model must be structured as array of objects with "id" property (or whatever you use as custom id).
+					<strong>Note:</strong>The model should have the same objects as in the options array.
 				</div>
 			</div>
 			<div class="row">
@@ -694,41 +621,6 @@ $scope.selectByGroupSettings = {
 <div ng-dropdown-multiselect options="example6data" selected-model="example6model" extra-settings="example6settings"></div>
 
 // JavaScript $scope.example6model = [{id: 1}, {id: 3}]; $scope.example6data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example6settings = {};
-					</div>
-				</div>
-			</div>
-		</div>
-		<div uib-accordion-group heading="Full Object as model">
-			<div class="row">
-				<div class="col-xs-12">
-					This example shows a demostration of using full object as a model.
-					<br />This can be done by settings the "externalIdProp" to empty string.
-					<br />
-					<strong>Note: The object detection and the logic of deciding which object is selected is still uses only the "id" property, so you can even modify the objects in the model without worry.</strong>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-xs-12 col-sm-6">
-					<h3>Demo</h3>
-					<div class="well">
-						<div>
-							<div ng-dropdown-multiselect options="example7data" selected-model="example7model" extra-settings="example7settings"></div>
-						</div>
-					</div>
-				</div>
-				<div class="col-xs-12 col-sm-6">
-					<h3>The model:</h3>
-					<pre>{{example7model|json}}</pre>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<h3>Code</h3>
-					<div hljs>
-// HTML
-<div ng-dropdown-multiselect options="example7data" selected-model="example7model" extra-settings="example7settings"></div>
-
-// JavaScript $scope.example7model = []; $scope.example7data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example7settings = {externalIdProp: ''};
 					</div>
 				</div>
 			</div>
@@ -1019,7 +911,6 @@ $scope.disabledData = [
         <div class="col-xs-12 col-sm-6">
           <h3>The model:</h3>
           <pre>{{selectedToTopModel|json}}</pre>
-          {{selectedToTopSettings}}
         </div>
       </div>
       <div class="row">
@@ -1043,6 +934,49 @@ $scope.selectedToTopSettings = {
         </div>
       </div>
     </div>
+		<div uib-accordion-group heading="Array of strings">
+			<div class="row">
+				<div class="col-xs-12">
+					Example to show that options no longer need to be an object with an id property
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div>
+							<div ng-dropdown-multiselect="" options="stringData" selected-model="stringModel" extra-settings="stringSettings"></div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{stringModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="stringData" selected-model="stringModel" extra-settings="stringSettings"></div>
+
+$scope.stringModel = [];
+$scope.stringData = [
+	'David',
+	'Jhon',
+	'Danny',
+];
+$scope.stringSettings = {
+	template: '{{option}}',
+	smartButtonTextConverter(skip, option) {
+		return option;
+	},
+};
+					</div>
+				</div>
+			</div>
+		</div>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
@@ -1139,18 +1073,6 @@ $scope.selectedToTopSettings = {
 				<td>String</td>
 				<td>label</td>
 				<td>The name of the property that contains the text for the item.</td>
-			</tr>
-			<tr>
-				<td>idProp</td>
-				<td>String</td>
-				<td>id</td>
-				<td>The name of the property that contains the id for the elements.</td>
-			</tr>
-			<tr>
-				<td>externalIdProp</td>
-				<td>String</td>
-				<td>id</td>
-				<td>The name of the property that will use for the selected items model.</td>
 			</tr>
 			<tr>
 				<td>enableSearch</td>
@@ -1282,6 +1204,16 @@ $scope.selectedToTopSettings = {
         <td>false</td>
         <td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
       </tr>
+			<tr>
+				<td>
+					selectedToTop
+				</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>
+					When true will put the selected options at the top of the list
+				</td>
+			</tr>
 		</tbody>
 	</table>
 	<h2>Events</h2>

@@ -22,48 +22,6 @@ function contains(collection, target) {
 	return containsTarget;
 }
 
-function find(collection, properties) {
-	let target;
-
-	collection.some((object) => {
-		let hasAllSameProperties = true;
-		Object.keys(properties).forEach((key) => {
-			if (object[key] !== properties[key]) {
-				hasAllSameProperties = false;
-			}
-		});
-		if (hasAllSameProperties) {
-			target = object;
-			return true;
-		}
-		return false;
-	});
-
-	return target;
-}
-
-function findIndex(collection, properties) {
-	let index = -1;
-	let counter = -1;
-
-	collection.some((object) => {
-		let hasAllSameProperties = true;
-		counter += 1;
-		Object.keys(properties).forEach((key) => {
-			if (object[key] !== properties[key]) {
-				hasAllSameProperties = false;
-			}
-		});
-		if (hasAllSameProperties) {
-			index = counter;
-			return true;
-		}
-		return false;
-	});
-
-	return index;
-}
-
 export default function dropdownMultiselectController(
 		$scope,
 		$element,
@@ -90,8 +48,6 @@ export default function dropdownMultiselectController(
 		scrollableHeight: '300px',
 		closeOnBlur: true,
 		displayProp: 'label',
-		idProp: 'id',
-		externalIdProp: 'id',
 		enableSearch: false,
 		clearSearchOnClose: false,
 		selectionLimit: 0,
@@ -220,8 +176,8 @@ export default function dropdownMultiselectController(
 		}
 	}
 
-	function checkboxClick($event, id) {
-		$scope.setSelectedItem(id, false, true);
+	function checkboxClick($event, option) {
+		$scope.setSelectedItem(option, false, true);
 		$event.stopImmediatePropagation();
 	}
 
@@ -235,22 +191,10 @@ export default function dropdownMultiselectController(
 		$scope.selectedModel.splice(0, $scope.selectedModel.length);
 		$scope.options.forEach((item) => {
 			if (item[$scope.settings.groupBy] === currentGroup) {
-				$scope.setSelectedItem($scope.getPropertyForObject(item, $scope.settings.idProp), false, false);
+				$scope.setSelectedItem(item, false, false);
 			}
 		});
 		$scope.externalEvents.onSelectionChanged();
-	}
-
-	function getFindObj(id) {
-		const findObj = {};
-
-		if ($scope.settings.externalIdProp === '') {
-			findObj[$scope.settings.idProp] = id;
-		} else {
-			findObj[$scope.settings.externalIdProp] = id;
-		}
-
-		return findObj;
 	}
 
 	function getGroupLabel(groupValue) {
@@ -273,9 +217,7 @@ export default function dropdownMultiselectController(
 	}
 
 	function getButtonText() {
-		if ($scope.settings.dynamicTitle && $scope.selectedModel &&
-			($scope.selectedModel.length > 0 || (angular.isObject($scope.selectedModel) &&
-			Object.keys($scope.selectedModel).length > 0))) {
+		if ($scope.settings.dynamicTitle && $scope.selectedModel && $scope.selectedModel.length > 0) {
 			if ($scope.settings.smartButtonMaxItems > 0) {
 				const paddingWidth = 12 * 2;
 				const borderWidth = 1 * 2;
@@ -285,7 +227,7 @@ export default function dropdownMultiselectController(
 				let itemsText = [];
 
 				angular.forEach($scope.options, (optionItem) => {
-					if ($scope.isChecked($scope.getPropertyForObject(optionItem, $scope.settings.idProp))) {
+					if ($scope.isChecked(optionItem)) {
 						const displayText = $scope.getPropertyForObject(optionItem, $scope.settings.displayProp);
 						const converterResponse = $scope.settings.smartButtonTextConverter(displayText, optionItem);
 
@@ -343,7 +285,7 @@ export default function dropdownMultiselectController(
 
 		const searchResult = $filter('filter')($scope.options, $scope.getFilter($scope.input.searchFilter));
 		angular.forEach(searchResult, (value) => {
-			$scope.setSelectedItem(value[$scope.settings.idProp], true, false);
+			$scope.setSelectedItem(value, true, false);
 		});
 		$scope.externalEvents.onSelectionChanged();
 		$scope.selectedGroup = null;
@@ -361,28 +303,19 @@ export default function dropdownMultiselectController(
 		$scope.selectedGroup = null;
 	}
 
-	function setSelectedItem(id, dontRemove = false, fireSelectionChange) {
-		const findObj = getFindObj(id);
-		let finalObj = null;
-
-		if ($scope.settings.externalIdProp === '') {
-			finalObj = find($scope.options, findObj);
-		} else {
-			finalObj = findObj;
-		}
-
-		const exists = findIndex($scope.selectedModel, findObj) !== -1;
+	function setSelectedItem(option, dontRemove = false, fireSelectionChange) {
+		const exists = $scope.selectedModel.indexOf(option) !== -1;
 
 		if (!dontRemove && exists) {
-			$scope.selectedModel.splice(findIndex($scope.selectedModel, findObj), 1);
-			$scope.externalEvents.onItemDeselect(findObj);
+			$scope.selectedModel.splice($scope.selectedModel.indexOf(option), 1);
+			$scope.externalEvents.onItemDeselect(option);
 			if ($scope.settings.closeOnDeselect) {
 				$scope.close();
 			}
 		} else if (!exists && ($scope.settings.selectionLimit === 0 || $scope.selectedModel.length < $scope.settings.selectionLimit)) {
-			$scope.selectedModel.push(finalObj);
+			$scope.selectedModel.push(option);
 			if (fireSelectionChange) {
-				$scope.externalEvents.onItemSelect(finalObj);
+				$scope.externalEvents.onItemSelect(option);
 			}
 			if ($scope.settings.closeOnSelect) {
 				$scope.close();
@@ -392,9 +325,9 @@ export default function dropdownMultiselectController(
 			}
 		} else if ($scope.settings.selectionLimit === 1 && !exists && $scope.selectedModel.length === $scope.settings.selectionLimit) {
 			$scope.selectedModel.splice(0, 1);
-			$scope.selectedModel.push(finalObj);
+			$scope.selectedModel.push(option);
 			if (fireSelectionChange) {
-				$scope.externalEvents.onItemSelect(finalObj);
+				$scope.externalEvents.onItemSelect(option);
 			}
 			if ($scope.settings.closeOnSelect) {
 				$scope.close();
@@ -406,8 +339,8 @@ export default function dropdownMultiselectController(
 		$scope.selectedGroup = null;
 	}
 
-	function isChecked(id) {
-		return findIndex($scope.selectedModel, getFindObj(id)) !== -1;
+	function isChecked(option) {
+		return $scope.selectedModel.indexOf(option) !== -1;
 	}
 
 	function keyDownLink(event) {
@@ -420,7 +353,7 @@ export default function dropdownMultiselectController(
 		if (event.keyCode === 13 || event.keyCode === 32) { // enter
 			event.preventDefault();
 			if (sourceScope.option) {
-				$scope.setSelectedItem($scope.getPropertyForObject(sourceScope.option, $scope.settings.idProp), false, true);
+				$scope.setSelectedItem(sourceScope.option, false, true);
 			} else if (event.target.id === 'deselectAll') {
 				$scope.deselectAll();
 			} else if (event.target.id === 'selectAll') {
@@ -500,7 +433,7 @@ export default function dropdownMultiselectController(
 			if ($scope.settings.selectionLimit === 1 && $scope.settings.enableSearch) {
 				searchResult = $filter('filter')($scope.options, $scope.getFilter(searchFilter));
 				if (searchResult.length === 1) {
-					$scope.setSelectedItem($scope.getPropertyForObject(searchResult[0], $scope.settings.idProp), false, true);
+					$scope.setSelectedItem(searchResult[0], false, true);
 				}
 			} else if ($scope.settings.enableSearch) {
 				$scope.selectAll();
@@ -567,11 +500,10 @@ export default function dropdownMultiselectController(
 			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? 1 : -1;
 		}
 		// then order selected to top
-		if (!$scope.isChecked($scope.getPropertyForObject(v1, $scope.settings.idProp)) &&
-			!$scope.isChecked($scope.getPropertyForObject(v2, $scope.settings.idProp))) {
+		if (!$scope.isChecked(v1) && !$scope.isChecked(v2)) {
 			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? 1 : -1;
 		}
-		if ($scope.isChecked($scope.getPropertyForObject(v1, $scope.settings.idProp))) {
+		if ($scope.isChecked(v1)) {
 			return 1;
 		}
 		return -1;
