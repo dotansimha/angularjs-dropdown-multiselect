@@ -20,15 +20,19 @@ export default class MainController {
 		$scope.testing = false;
 		$scope.testmodel = [];
 		$scope.testdata = [
-			{ id: 1, label: 'David' },
-			{ id: 2, label: 'Jhon' },
-			{ id: 3, label: 'Danny' },
+			'David',
+			'Jhon',
+			'Danny',
 		];
 		$scope.testsettings = {
 			externalIdProp: '',
 			selectionLimit: 1,
 			smartButtonMaxItems: 1,
 			selectedToTop: true,
+			template: '{{option}}',
+			smartButtonTextConverter(skip, option) {
+				return option;
+			},
 		};
 		$scope.testevents = {
 			onSelectionChanged() { // This event is not firing on selection of max limit
@@ -51,24 +55,6 @@ export default class MainController {
 		];
 		$scope.example2settings = { displayProp: 'id' };
 
-
-		$scope.example3model = [];
-		$scope.example3data = [
-			{ id: 1, label: 'David' },
-			{ id: 2, label: 'Jhon' },
-			{ id: 3, label: 'Danny' },
-			{ id: 4, label: 'Danny' },
-		];
-		$scope.example3settings = { displayProp: 'label', idProp: 'label' };
-
-		$scope.example4model = [];
-		$scope.example4data = [
-			{ id: 1, label: 'David' },
-			{ id: 2, label: 'Jhon' },
-			{ id: 3, label: 'Danny' },
-		];
-		$scope.example4settings = { displayProp: 'label', idProp: 'id', externalIdProp: 'myCustomPropertyForTheObject' };
-
 		$scope.example5model = [];
 		$scope.example5data = [
 			{ id: 1, label: 'David' },
@@ -78,11 +64,11 @@ export default class MainController {
 		$scope.example5settings = {};
 		$scope.example5customTexts = { buttonDefaultText: 'Select Users' };
 
-		$scope.example6model = [{ id: 1 }, { id: 3 }];
 		$scope.example6data = [
 			{ id: 1, label: 'David' },
 			{ id: 2, label: 'Jhon' },
 			{ id: 3, label: 'Danny' }];
+		$scope.example6model = [$scope.example6data[0], $scope.example6data[2]];
 		$scope.example6settings = {};
 
 		$scope.example7model = [];
@@ -310,6 +296,19 @@ export default class MainController {
 		];
 		$scope.selectedToTopSettings = {
 			selectedToTop: true,
+		};
+
+		$scope.stringModel = [];
+		$scope.stringData = [
+			'David',
+			'Jhon',
+			'Danny',
+		];
+		$scope.stringSettings = {
+			template: '{{option}}',
+			smartButtonTextConverter(skip, option) {
+				return option;
+			},
 		};
 	}
 }

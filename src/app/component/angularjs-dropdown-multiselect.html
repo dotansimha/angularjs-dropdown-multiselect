@@ -10,7 +10,7 @@
   <ul class="dropdown-menu dropdown-menu-form"
       ng-if="open"
       ng-style="{display: open ? 'block' : 'none', height : settings.scrollable ? settings.scrollableHeight : 'auto', overflow: 'auto' }">
-    <li ng-if="settings.showCheckAll && settings.selectionLimit !== 1">
+    <li ng-if="settings.showCheckAll && settings.selectionLimit === 0">
       <a ng-keydown="keyDownLink($event)"
          data-ng-click="selectAll()"
          tabindex="-1"
@@ -78,53 +78,53 @@
       {{ getGroupLabel(getPropertyForObject(option, settings.groupBy)) }}
     </li>
     <li ng-if="settings.groupBy"
-        ng-class="{'active': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}"
+        ng-class="{'active': isChecked(option) && settings.styleActive}"
         ng-repeat-end
         role="presentation">
       <a ng-keydown="option.disabled || keyDownLink($event)"
          role="menuitem"
          class="option"
          tabindex="-1"
-         ng-click="option.disabled || setSelectedItem(getPropertyForObject(option,settings.idProp), false, true)"
+         ng-click="option.disabled || setSelectedItem(option, false, true)"
          ng-disabled="option.disabled">
         <div ng-if="settings.checkBoxes"
              class="checkbox">
           <label>
             <input class="checkboxInput"
                    type="checkbox"
-                   ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))"
-                   ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" />
+                   ng-click="checkboxClick($event, option)"
+                   ng-checked="isChecked(option)" />
             <span dm-dropdown-static-include="{{settings.template}}"></span>
           </label>
         </div>
         <span ng-if="!settings.checkBoxes"
-              data-ng-class="{'glyphicon glyphicon-ok': isChecked(getPropertyForObject(option,settings.idProp))}">
+              data-ng-class="{'glyphicon glyphicon-ok': isChecked(option)}">
         </span>
         <span dm-dropdown-static-include="{{settings.template}}"></span>
       </a>
     </li>
     <li ng-if="!settings.groupBy"
-        ng-class="{'active': isChecked(getPropertyForObject(option,settings.idProp)) && settings.styleActive}"
+        ng-class="{'active': isChecked(option) && settings.styleActive}"
         role="presentation"
         ng-repeat="option in options | filter:getFilter(input.searchFilter) | orderBy:'':true:orderFunction">
       <a ng-keydown="option.disabled || keyDownLink($event)"
          role="menuitem"
          class="option"
          tabindex="-1"
-         ng-click="option.disabled || setSelectedItem(getPropertyForObject(option,settings.idProp), false, true)"
+         ng-click="option.disabled || setSelectedItem(option, false, true)"
          ng-disabled="option.disabled">
         <div ng-if="settings.checkBoxes"
              class="checkbox">
           <label>
             <input class="checkboxInput"
                    type="checkbox"
-                   ng-click="checkboxClick($event, getPropertyForObject(option,settings.idProp))"
-                   ng-checked="isChecked(getPropertyForObject(option,settings.idProp))" />
+                   ng-click="checkboxClick($event, option)"
+                   ng-checked="isChecked(option)" />
             <span dm-dropdown-static-include="{{settings.template}}"></span>
           </label>
         </div>
         <span ng-if="!settings.checkBoxes"
-              data-ng-class="{'glyphicon glyphicon-ok': isChecked(getPropertyForObject(option,settings.idProp))}">
+              data-ng-class="{'glyphicon glyphicon-ok': isChecked(option)}">
         </span>
         <span ng-if="!settings.checkBoxes"
               dm-dropdown-static-include="{{settings.template}}"></span>
