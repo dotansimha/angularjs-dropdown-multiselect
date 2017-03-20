@@ -1,5 +1,19 @@
 Version numbers correspond to `bower.json` version
 
+# 2.0.0-beta.2
+
+Continuation of the rework of the component. In this version we stop comparing objects by their id property and smiply use reference
+
+## Breaking Changes
+- dropped support for idProp
+- dropped support for externalIdProp
+
+## Features
+- options array can exist out of any type of object
+
+## Bug Fixes
+- check all no longer displayed when selectionLimit is defined
+
 # 2.0.0-beta.1
 
 We've started a rework of the component and are planning to resolve as many issues as possible, this however means that some breaking changes are needed. We've decided to release some beta versions first in which we'll have the freedom to add more breaking changes.
