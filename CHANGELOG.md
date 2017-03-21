@@ -1,5 +1,12 @@
 Version numbers correspond to `bower.json` version
 
+# 2.0.0-beta.3
+
+Small bugFix
+
+## Bug Fixes
+- Infinite loop when width is smaller than "..." in smartButtonText
+
 # 2.0.0-beta.2
 
 Continuation of the rework of the component. In this version we stop comparing objects by their id property and smiply use reference
