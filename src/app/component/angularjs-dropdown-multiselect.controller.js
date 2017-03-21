@@ -245,10 +245,14 @@ export default function dropdownMultiselectController(
 				if ($element[0].offsetWidth === 0) {
 					return result;
 				}
+				if (widthLimit <= textWidth('...')) {
+					return '...';
+				}
 				while (textWidth(result) > widthLimit) {
 					if (itemsText[itemsText.length - 1] !== '...') {
 						itemsText.push('...');
 						result = `${result}...`;
+						index = result.length - 4;
 					}
 					result = result.slice(0, index) + result.slice(index + 1);
 					index -= 1;
