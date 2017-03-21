@@ -1,5 +1,12 @@
 Version numbers correspond to `bower.json` version
 
+#2.0.0-beta.4
+
+Small bugFix
+
+## Bug Fixes
+- orderBy wasn't respecting order in original array #322
+
 # 2.0.0-beta.3
 
 Small bugFix
