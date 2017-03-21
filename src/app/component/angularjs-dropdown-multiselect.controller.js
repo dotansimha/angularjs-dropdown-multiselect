@@ -481,10 +481,10 @@ export default function dropdownMultiselectController(
 
 	function orderFunction(object1, object2) {
 		if (angular.isUndefined(object2)) {
-			return 1;
+			return -1;
 		}
 		if (angular.isUndefined(object1)) {
-			return -1;
+			return 1;
 		}
 		if (object1.type !== 'object' || object2.type !== 'object') {
 			return (object1.index < object2.index) ? -1 : 1;
@@ -501,15 +501,16 @@ export default function dropdownMultiselectController(
 			}
 		}
 		if (!$scope.settings.selectedToTop) {
-			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? 1 : -1;
+			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? -1 : 1;
 		}
 		// then order selected to top
-		if (!$scope.isChecked(v1) && !$scope.isChecked(v2)) {
-			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? 1 : -1;
+		if ((!$scope.isChecked(v1) && !$scope.isChecked(v2)) ||
+			($scope.isChecked(v1) && $scope.isChecked(v2))) {
+			return $scope.options.indexOf(v1) < $scope.options.indexOf(v2) ? -1 : 1;
 		}
 		if ($scope.isChecked(v1)) {
-			return 1;
+			return -1;
 		}
-		return -1;
+		return 1;
 	}
 }
