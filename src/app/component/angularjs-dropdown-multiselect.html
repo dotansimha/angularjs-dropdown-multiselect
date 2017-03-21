@@ -71,7 +71,7 @@
         class="divider">
     </li>
     <li ng-if="settings.groupBy"
-        ng-repeat-start="option in orderedItems = ( options | filter:getFilter(input.searchFilter) | orderBy:'':true:orderFunction)"
+        ng-repeat-start="option in orderedItems = ( options | filter:getFilter(input.searchFilter) | orderBy:'':false:orderFunction)"
         ng-show="getPropertyForObject(option, settings.groupBy) !== getPropertyForObject(orderedItems[$index - 1], settings.groupBy)"
         role="presentation"
         class="dropdown-header">
@@ -106,7 +106,7 @@
     <li ng-if="!settings.groupBy"
         ng-class="{'active': isChecked(option) && settings.styleActive}"
         role="presentation"
-        ng-repeat="option in options | filter:getFilter(input.searchFilter) | orderBy:'':true:orderFunction">
+        ng-repeat="option in options | filter:getFilter(input.searchFilter) | orderBy:'':false:orderFunction">
       <a ng-keydown="option.disabled || keyDownLink($event)"
          role="menuitem"
          class="option"
