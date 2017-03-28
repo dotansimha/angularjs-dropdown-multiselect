@@ -269,7 +269,6 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 						var paddingWidth = 12 * 2,
 								borderWidth = 1 * 2,
 								dropdownIconWidth = 8;
-						var ellipsisWidth = textWidth("...");
 						var widthLimit = $element[0].offsetWidth - paddingWidth - borderWidth - dropdownIconWidth;
 
 						var itemsText = [];
@@ -290,10 +289,9 @@ directiveModule.directive('ngDropdownMultiselect', ['$filter', '$document', '$co
 
 						var result = itemsText.join(', ');
 						var index = result.length - 4;
-						var countLimit = 100;
 						if ($element[0].offsetWidth === 0)
 							return result;
-						while (textWidth(result) > widthLimit) {
+						while (textWidth(result) > widthLimit && index > 0) {
 							if (itemsText[itemsText.length - 1] !== "...") {
 								itemsText.push('...');
 								result = result + "...";
