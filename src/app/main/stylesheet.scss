@@ -395,6 +395,13 @@ footer a:hover {
     	opacity: 0.5;
 		}
 }
+
+.custom-trigger {
+	padding: 0.75em;
+	margin-top: 1.5em;
+	border: 1px solid #ccc;
+	cursor: pointer;
+}
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
  @media only screen and (min-width: 480px) and (max-width: 767px) {
 }
