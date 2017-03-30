@@ -1,6 +1,11 @@
 Version numbers correspond to `bower.json` version
 
-#2.0.0-beta.4
+# 2.0.0-beta.5 & 2.0.0-beta.6
+
+## Features
+- Added support for transcluded custom toggle-dropdown element
+
+# 2.0.0-beta.4
 
 Small bugFix
 

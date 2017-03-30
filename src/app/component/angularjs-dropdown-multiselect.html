@@ -1,6 +1,6 @@
 <div class="multiselect-parent btn-group dropdown-multiselect"
      ng-class="{open: open}">
-     <ng-transclude ng-click="toggleDropdown()">
+     <div ng-transclude="toggleDropdown" ng-click="toggleDropdown()">
       <button ng-disabled="disabled"
               type="button"
               class="dropdown-toggle"
@@ -8,7 +8,7 @@
               >
         {{getButtonText()}}&nbsp;<span class="caret"></span>
       </button>
-    </ng-transclude>
+    </div>
   <ul class="dropdown-menu dropdown-menu-form"
       ng-if="open"
       ng-style="{display: open ? 'block' : 'none', height : settings.scrollable ? settings.scrollableHeight : 'auto', overflow: 'auto' }">
