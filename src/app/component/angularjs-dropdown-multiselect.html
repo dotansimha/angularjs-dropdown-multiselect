@@ -1,12 +1,14 @@
 <div class="multiselect-parent btn-group dropdown-multiselect"
      ng-class="{open: open}">
-  <button ng-disabled="disabled"
-          type="button"
-          class="dropdown-toggle"
-          ng-class="settings.buttonClasses"
-          ng-click="toggleDropdown()">
-    {{getButtonText()}}&nbsp;<span class="caret"></span>
-  </button>
+     <ng-transclude ng-click="toggleDropdown()">
+      <button ng-disabled="disabled"
+              type="button"
+              class="dropdown-toggle"
+              ng-class="settings.buttonClasses"
+              >
+        {{getButtonText()}}&nbsp;<span class="caret"></span>
+      </button>
+    </ng-transclude>
   <ul class="dropdown-menu dropdown-menu-form"
       ng-if="open"
       ng-style="{display: open ? 'block' : 'none', height : settings.scrollable ? settings.scrollableHeight : 'auto', overflow: 'auto' }">
