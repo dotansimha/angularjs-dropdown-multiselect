@@ -310,5 +310,14 @@ export default class MainController {
 				return option;
 			},
 		};
+
+		$scope.transclusionModel = [];
+		$scope.transclusionData = [
+			{ id: 1, label: 'David' },
+			{ id: 2, label: 'Jhon' },
+			{ id: 3, label: 'Danny' },
+		];
+		$scope.transclusionSettings = {
+		};
 	}
 }

@@ -978,6 +978,47 @@ $scope.stringSettings = {
 				</div>
 			</div>
 		</div>
+		<div uib-accordion-group heading="Custom trigger element using transclusion">
+			<div class="row">
+				<div class="col-xs-12">
+					Example to show that you can replace the button with a custom element
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div ng-dropdown-multiselect="" options="transclusionData" selected-model="transclusionModel" extra-settings="transclusionSettings">
+							<span class="custom-trigger">My Custom trigger</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{transclusionModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="transclusionData" selected-model="transclusionModel" extra-settings="transclusionSettings">
+	<span class="custom-trigger">My Custom trigger</span>
+</div>
+
+$scope.transclusionModel = [];
+$scope.transclusionData = [
+	{ id: 1, label: 'David' },
+	{ id: 2, label: 'Jhon' },
+	{ id: 3, label: 'Danny' },
+];
+$scope.transclusionSettings = {
+};
+					</div>
+				</div>
+			</div>
+		</div>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
