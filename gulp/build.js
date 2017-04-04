@@ -100,7 +100,7 @@ gulp.task('build', ['html', 'fonts', 'other']);
 
 gulp.task('conf:component', function(cb) {
 	conf.paths.src = 'src/app/component';
-	conf.paths.dist = 'component';
+	conf.paths.dist = 'dist';
 	conf.paths.template = '**/*.html';
 	conf.paths.index = 'angularjs-dropdown-multiselect.module.js';
 	conf.paths.templateRoot = 'app/component/';
@@ -129,7 +129,7 @@ gulp.task('build:component', ['compile:component'], function() {
 		path.join(conf.paths.tmp, 'partials/templateCacheHtml.js')
 	])
 		.pipe(jsFilter)
-		.pipe(concat({ path: 'component.js'}))
+		.pipe(concat({ path: 'angularjs-dropdown-multiselect.min.js'}))
     .pipe($.sourcemaps.init())
     .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
     .pipe($.sourcemaps.write('maps'))

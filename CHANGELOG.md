@@ -1,5 +1,11 @@
 Version numbers correspond to `bower.json` version
 
+# 2.0.0-beta.7
+
+## Breaking Changes
+- bower.json and package.json main are back to the original dist/angularjs-dropdown-multiselect.min.js
+- Linking directly to the repository was bad practice and is no longer suported
+
 # 2.0.0-beta.5 & 2.0.0-beta.6
 
 ## Features
