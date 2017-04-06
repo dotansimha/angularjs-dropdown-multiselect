@@ -618,7 +618,14 @@ $scope.selectByGroupSettings = {
 // HTML
 <div ng-dropdown-multiselect options="example6data" selected-model="example6model" extra-settings="example6settings"></div>
 
-// JavaScript $scope.example6model = [{id: 1}, {id: 3}]; $scope.example6data = [ {id: 1, label: "David"}, {id: 2, label: "Jhon"}, {id: 3, label: "Danny"}]; $scope.example6settings = {};
+// JavaScript 
+$scope.example6data = [
+  { id: 1, label: 'David' },
+  { id: 2, label: 'Jhon' },
+  { id: 3, label: 'Danny' }
+];
+$scope.example6model = [$scope.example6data[0], $scope.example6data[2]];
+$scope.example6settings = {};
 					</div>
 				</div>
 			</div>
