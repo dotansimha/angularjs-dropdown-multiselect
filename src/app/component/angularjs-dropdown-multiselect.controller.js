@@ -22,6 +22,18 @@ function contains(collection, target) {
 	return containsTarget;
 }
 
+function getIndexByProperty(collection, objectToFind, property) {
+	let index = -1;
+	collection.some((option, ind) => {
+		if (option[property] === objectToFind[property]) {
+			index = ind;
+			return true;
+		}
+		return false;
+	});
+	return index;
+}
+
 export default function dropdownMultiselectController(
 		$scope,
 		$element,
@@ -308,10 +320,18 @@ export default function dropdownMultiselectController(
 	}
 
 	function setSelectedItem(option, dontRemove = false, fireSelectionChange) {
-		const exists = $scope.selectedModel.indexOf(option) !== -1;
+		let exists;
+		let indexOfOption;
+		if (angular.isDefined(settings.idProperty)) {
+			exists = getIndexByProperty($scope.selectedModel, option, settings.idProperty) !== -1;
+			indexOfOption = getIndexByProperty($scope.selectedModel, option, settings.idProperty);
+		} else {
+			exists = $scope.selectedModel.indexOf(option) !== -1;
+			indexOfOption = $scope.selectedModel.indexOf(option);
+		}
 
 		if (!dontRemove && exists) {
-			$scope.selectedModel.splice($scope.selectedModel.indexOf(option), 1);
+			$scope.selectedModel.splice(indexOfOption, 1);
 			$scope.externalEvents.onItemDeselect(option);
 			if ($scope.settings.closeOnDeselect) {
 				$scope.close();
@@ -344,6 +364,9 @@ export default function dropdownMultiselectController(
 	}
 
 	function isChecked(option) {
+		if (angular.isDefined(settings.idProperty)) {
+			return getIndexByProperty($scope.selectedModel, option, settings.idProperty) !== -1;
+		}
 		return $scope.selectedModel.indexOf(option) !== -1;
 	}
 

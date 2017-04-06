@@ -1023,6 +1023,46 @@ $scope.transclusionSettings = {
 				</div>
 			</div>
 		</div>
+		<div uib-accordion-group heading="Compare objects by property instead of by reference">
+			<div class="row">
+				<div class="col-xs-12">
+					When idProperty is set the objects will be compared by that property (that should be unique) instead of by reference.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div ng-dropdown-multiselect="" options="idPropertyData" selected-model="idPropertyModel" extra-settings="idPropertySettings">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{idPropertyModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="idPropertyData" selected-model="idPropertyModel" extra-settings="idPropertySettings">
+</div>
+
+$scope.idPropertyModel = [{ id: 1 }];
+$scope.idPropertyData = [
+	{ id: 1, label: 'David' },
+	{ id: 2, label: 'Jhon' },
+	{ id: 3, label: 'Danny' },
+];
+$scope.idPropertySettings = {
+	idProperty: 'id',
+};
+					</div>
+				</div>
+			</div>
+		</div>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
@@ -1180,14 +1220,14 @@ $scope.transclusionSettings = {
 				<td>btn btn-default</td>
 				<td>The CSS classes that used for setting the style of the button.</td>
 			</tr>
-      <tr>
-        <td>
-          groupBy
-        </td>
-        <td>String</td>
-        <td>undefined</td>
-        <td>The name of the property which you like to group by your options. See grouping example.</td>
-      </tr>
+			<tr>
+				<td>
+					groupBy
+				</td>
+				<td>String</td>
+				<td>undefined</td>
+				<td>The name of the property which you like to group by your options. See grouping example.</td>
+				</tr>
 			<tr>
 				<td>groupByTextProvider</td>
 				<td>Function</td>
@@ -1233,7 +1273,7 @@ $scope.transclusionSettings = {
 			<tr>
 				<td>template</td>
 				<td>String</td>
-				<td>					{ {getPropertyForObject(option, settings.displayProp)} }</td>
+				<td>{ {getPropertyForObject(option, settings.displayProp)} }</td>
 				<td>Can be used to modify the appearance of an option in the list, each option is accessible as option.</td>
 			</tr>
 			<tr>
@@ -1242,14 +1282,14 @@ $scope.transclusionSettings = {
 				<td>undefined</td>
 				<td>Values of the groupby property that you want to be selectable as group</td>
 			</tr>
-      <tr>
-        <td>
-          checkBoxes
-        </td>
-        <td>Boolean</td>
-        <td>false</td>
-        <td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
-      </tr>
+			<tr>
+				<td>
+					checkBoxes
+				</td>
+				<td>Boolean</td>
+				<td>false</td>
+				<td>Indicated if to show a normal dropdown with glyphicons or HTML checkboxes.</td>
+			</tr>
 			<tr>
 				<td>
 					selectedToTop
@@ -1258,6 +1298,16 @@ $scope.transclusionSettings = {
 				<td>false</td>
 				<td>
 					When true will put the selected options at the top of the list
+				</td>
+			</tr>
+			<tr>
+				<td>
+					idProperty
+				</td>
+				<td>string</td>
+				<td>undefined</td>
+				<td>
+					Used to compare by property instead of by reference.
 				</td>
 			</tr>
 		</tbody>
