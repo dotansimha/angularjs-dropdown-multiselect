@@ -17,22 +17,17 @@ export default class MainController {
 	) {
 		'ngInject';
 
-		$scope.testing = false;
-		$scope.testmodel = [];
+		$scope.testing = true;
+		$scope.testmodel = [{ id: 1 }];
 		$scope.testdata = [
-			'David',
-			'Jhon',
-			'Danny',
+			{ id: 1, label: 'David' },
+			{ id: 2, label: 'Jhon' },
+			{ id: 3, label: 'Danny' },
 		];
 		$scope.testsettings = {
-			externalIdProp: '',
 			selectionLimit: 1,
-			smartButtonMaxItems: 1,
 			selectedToTop: true,
-			template: '{{option}}',
-			smartButtonTextConverter(skip, option) {
-				return option;
-			},
+			idProperty: 'id',
 		};
 		$scope.testevents = {
 			onSelectionChanged() { // This event is not firing on selection of max limit
@@ -318,6 +313,16 @@ export default class MainController {
 			{ id: 3, label: 'Danny' },
 		];
 		$scope.transclusionSettings = {
+		};
+
+		$scope.idPropertyModel = [{ id: 1 }];
+		$scope.idPropertyData = [
+			{ id: 1, label: 'David' },
+			{ id: 2, label: 'Jhon' },
+			{ id: 3, label: 'Danny' },
+		];
+		$scope.idPropertySettings = {
+			idProperty: 'id',
 		};
 	}
 }

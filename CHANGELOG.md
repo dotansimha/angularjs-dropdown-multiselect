@@ -1,5 +1,9 @@
 Version numbers correspond to `bower.json` version
 
+# 2.0.0-beta.9
+## Features
+- Added setting idProperty, when set comparison will be done by this property instead of by reference
+
 # 2.0.0-beta.7
 
 ## Breaking Changes
