@@ -119,7 +119,7 @@ gulp.task('compile:component', ['clean:component'], function(cb) {
 	runSequence(['scripts', 'styles', 'partials'], cb);
 });
 
-gulp.task('build:component', ['compile:component'], function() {
+gulp.task('build.component.minified', ['compile:component'], function () {
 	var jsFilter = $.filter('**/*.js', { restore: true });
 	var cssFilter = $.filter('**/*.css', { restore: true });
 
@@ -129,14 +129,35 @@ gulp.task('build:component', ['compile:component'], function() {
 		path.join(conf.paths.tmp, 'partials/templateCacheHtml.js')
 	])
 		.pipe(jsFilter)
-		.pipe(concat({ path: 'angularjs-dropdown-multiselect.min.js'}))
-    .pipe($.sourcemaps.init())
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
-    .pipe($.sourcemaps.write('maps'))
+		.pipe(concat({ path: 'angularjs-dropdown-multiselect.min.js' }))
+		.pipe($.sourcemaps.init())
+		.pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+		.pipe($.sourcemaps.write('maps'))
 		.pipe(jsFilter.restore)
 		.pipe(cssFilter)
 		.pipe($.cssnano())
 		.pipe(cssFilter.restore)
 		.pipe(gulp.dest(path.join(conf.paths.dist, '/')))
-    .pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
+		.pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
 });
+
+gulp.task('build.component', ['compile:component'], function () {
+	var jsFilter = $.filter('**/*.js', { restore: true });
+	var cssFilter = $.filter('**/*.css', { restore: true });
+
+	return gulp.src([
+		path.join(conf.paths.tmp, 'serve/app/index.css'),
+		path.join(conf.paths.tmp, 'serve/app/index.module.js'),
+		path.join(conf.paths.tmp, 'partials/templateCacheHtml.js')
+	])
+		.pipe(jsFilter)
+		.pipe(concat({ path: 'angularjs-dropdown-multiselect.js' }))
+		.pipe(jsFilter.restore)
+		.pipe(cssFilter)
+		.pipe($.cssnano())
+		.pipe(cssFilter.restore)
+		.pipe(gulp.dest(path.join(conf.paths.dist, '/src')))
+		.pipe($.size({ title: path.join(conf.paths.dist, '/'), showFiles: true }));
+});
+
+gulp.task('build:component', ['build.component.minified', 'build.component']);
