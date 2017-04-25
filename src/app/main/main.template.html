@@ -1063,6 +1063,48 @@ $scope.idPropertySettings = {
 				</div>
 			</div>
 		</div>
+		<div uib-accordion-group heading="Button text provider">
+			<div class="row">
+				<div class="col-xs-12">
+					When there is a selection this method will be called with the selection as a parameter. The function is supposed to return the text that you want to display on the button.
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h3>Demo</h3>
+					<div class="well">
+						<div ng-dropdown-multiselect="" options="smartButtonTextProviderData" selected-model="smartButtonTextProviderModel" extra-settings="smartButtonTextProviderSettings">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<h3>The model:</h3>
+					<pre>{{smartButtonTextProviderModel|json}}</pre>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<h3>Code</h3>
+					<div hljs language="javascript">
+// HTML
+<div ng-dropdown-multiselect="" options="idPropertyData" selected-model="idPropertyModel" extra-settings="idPropertySettings">
+</div>
+
+$scope.smartButtonTextProviderModel = [];
+$scope.smartButtonTextProviderData = [
+	{ id: 1, label: 'David' },
+	{ id: 2, label: 'Jhon' },
+	{ id: 3, label: 'Danny' },
+];
+$scope.idPropertySettings = {
+	smartButtonTextProvider(selectionArray) {
+		return selectionArray.length + 2;
+	},
+};
+					</div>
+				</div>
+			</div>
+		</div>
 	</uib-accordion>
 	<h1>Full API Documentation</h1>
 	<h2>Attributes</h2>
