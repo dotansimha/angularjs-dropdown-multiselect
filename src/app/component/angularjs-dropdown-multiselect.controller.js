@@ -230,6 +230,10 @@ export default function dropdownMultiselectController(
 
 	function getButtonText() {
 		if ($scope.settings.dynamicTitle && $scope.selectedModel && $scope.selectedModel.length > 0) {
+			if (angular.isFunction($scope.settings.smartButtonTextProvider)) {
+				return $scope.settings.smartButtonTextProvider($scope.selectedModel);
+			}
+
 			if ($scope.settings.smartButtonMaxItems > 0) {
 				const paddingWidth = 12 * 2;
 				const borderWidth = 1 * 2;

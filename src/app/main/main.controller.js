@@ -324,5 +324,18 @@ export default class MainController {
 		$scope.idPropertySettings = {
 			idProperty: 'id',
 		};
+
+		$scope.smartButtonTextProviderModel = [
+		];
+		$scope.smartButtonTextProviderData = [
+			{ id: 1, label: 'David' },
+			{ id: 2, label: 'Jhon' },
+			{ id: 3, label: 'Danny' },
+		];
+		$scope.smartButtonTextProviderSettings = {
+			smartButtonTextProvider(selectionArray) {
+				return selectionArray.length + 2;
+			},
+		};
 	}
 }
