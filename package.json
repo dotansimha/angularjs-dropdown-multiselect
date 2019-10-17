@@ -50,7 +50,7 @@
 		"karma-ng-html2js-preprocessor": "~0.2.0",
 		"karma-phantomjs-launcher": "~1.0.2",
 		"karma-phantomjs-shim": "~1.4.0",
-		"lodash": "~3.10.1",
+		"lodash": "~4.17.15",
 		"main-bower-files": "~2.9.0",
 		"ng-annotate-loader": "0.0.10",
 		"phantomjs": "~2.1.7",
